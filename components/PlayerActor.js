@@ -1,5 +1,5 @@
-import Mouse from '../controls/Mouse';
-import Component from './Component';
+import Mouse from "../controls/Mouse";
+import Component from "./Component";
 
 class PlayerActor extends Component {
 

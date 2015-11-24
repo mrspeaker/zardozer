@@ -1,12 +1,13 @@
-import State from '../components/State';
-import Health from '../components/Health';
-import Wander from '../components/Wander';
-import MoveTowards from '../components/MoveTowards';
+import State from "../components/State";
+import Health from "../components/Health";
+import Wander from "../components/Wander";
+import MoveTowards from "../components/MoveTowards";
 import Renderer from "./Renderer";
-import HealthRenderer from '../components/HealthRenderer';
-import PlayerActor from '../components/PlayerActor';
-import Spawner from '../components/Spawner';
-import ColorUp from '../components/ColorUp';
+import HealthRenderer from "../components/HealthRenderer";
+import PlayerActor from "../components/PlayerActor";
+import Spawner from "../components/Spawner";
+import ColorUp from "../components/ColorUp";
+import Ager from "../components/Ager";
 
 
 export default {
@@ -18,5 +19,6 @@ export default {
   HealthRenderer,
   PlayerActor,
   Spawner,
-  ColorUp
+  ColorUp,
+  Ager
 };

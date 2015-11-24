@@ -1,5 +1,5 @@
-import Component from './Component';
-import Renderer from './Renderer';
+import Component from "./Component";
+import Renderer from "./Renderer";
 
 class HealthRenderer extends Renderer {
 
@@ -15,10 +15,16 @@ class HealthRenderer extends Renderer {
 
   update () {
     super.update();
-    const amount = this.health.amount;
-    this.dom.textContent = amount > 0 ? Math.floor(amount) : "X";
+    if (this.health) {
+      const amount = this.health.amount;
+      this.dom.textContent = amount > 0 ? Math.floor(amount) : "X";
+    }
   }
 
 }
+
+HealthRenderer.propTypes = {
+  color: "Color"
+};
 
 export default HealthRenderer;

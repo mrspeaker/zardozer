@@ -1,34 +1,40 @@
-import Component from './Component';
+import Component from "./Component";
 
 class Renderer extends Component {
 
-  constructor (color = "#800") {
+  constructor (color = "#800", size = 24) {
     super();
     this.name = "Renderer";
     this.color = color;
-    this._lastColor = color;
+    this.size = size;
+    this._lastColor;
+    this._lastSize;
   }
 
   start () {
     const dom = document.createElement("div");
     dom.style.position = "absolute";
-    dom.style.width = "24px";
-    dom.style.height = "24px";
-    dom.style.backgroundColor = this.color;
-    dom.style.borderRadius = "12px";
     document.body.appendChild(dom);
-
     this.dom = dom;
+
     this.pos = this.getComponent("Position");
   }
 
   update () {
-    if (this._lastColor !== this.color) {
-      this.dom.style.backgroundColor = this.color;
-      this._lastColor = this.color;
+    const {dom, pos, color, size, _lastColor, _lastSize} = this;
+    if (_lastColor !== color) {
+      dom.style.backgroundColor = color;
+      this._lastColor = color;
     }
-    this.dom.style.left = this.pos.x + "px";
-    this.dom.style.top = this.pos.y + "px";
+    if (_lastSize !== size) {
+      dom.style.backgroundColor = color;
+      dom.style.width = size + "px";
+      dom.style.height = size + "px";
+      dom.style.borderRadius = (size / 2) + "px";
+      this._lastSize = size;
+    }
+    dom.style.left = pos.x + "px";
+    dom.style.top = pos.y + "px";
   }
 
   remove () {
@@ -36,5 +42,9 @@ class Renderer extends Component {
   }
 
 }
+
+Renderer.propTypes = {
+  color: "Color"
+};
 
 export default Renderer;

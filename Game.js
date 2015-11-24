@@ -1,7 +1,6 @@
 import GameData from "./GameData";
-import components from "./components/";
-import Mouse from './controls/Mouse';
-import Entity from './entities/Entity';
+import Mouse from "./controls/Mouse";
+import Entities from "./entities/Entities";
 
 export default class {
 
@@ -16,11 +15,19 @@ export default class {
     this.last = 0;
     this.tick = this.tick.bind(this);
     requestAnimationFrame(this.tick);
+
+    // Test serializing an in-game entity
+    requestAnimationFrame(() => {
+      const serialized = Entities.serialize(this.entities[0]);
+      console.log(JSON.stringify(serialized, null, 2));
+      Entities.addComponent(this.entities[0], ["Ager", 10]);
+    });
+
   }
 
   loadScene () {
     GameData.entities
-      .map(data => this.makeEntity(data))
+      .map(data => Entities.make(data))
       .map(e => this.addEntity(e));
   }
 
@@ -29,58 +36,32 @@ export default class {
     this.last = time;
 
     this.update(dt);
+    this.post(dt);
+
     requestAnimationFrame(this.tick);
   }
 
-  makeEntity (data) {
-    const EntityFunc = Function.prototype.bind.call(Entity, null, ...data.args);
-    const entity = new EntityFunc();
-    entity.prefab = data;
-    data.comps.forEach(c => {
-      const CompFunc = Function.prototype.bind.call(components[c[0]], null, ...c.slice(1));
-      entity.addComponent(new CompFunc());
-    });
-    return entity;
-  }
-
-  instanciateAndAdd (e) {
-    const newEntity = this.instanciate(e);
-    this.addEntity(newEntity);
-    return newEntity;
-  }
-
-  instanciate (e) {
-    return this.makeEntity(e.prefab);
-  }
-
-  addEntity (e) {
-    this.entities.push(e);
-    return e;
-  }
-
-  addStart (f) {
-    this._starts.push(f);
-  }
-
   update (dt) {
-    dt /= 1000;
+    dt /= 1000; // Let's work in seconds.
 
     // Do any component start functions.
-    if (this._starts.length) {
-      this._starts = this._starts.filter(f => {
-        f();
-        return false;
-      })
-    }
+    this._starts = this._starts.filter(f => {
+      f();
+      return false;
+    });
 
     this.entities.forEach(e => {
       e.components.forEach(c => {
         c.update(dt);
       });
     });
+
+  }
+
+  post (dt) {
     Mouse.update(dt);
 
-
+    // Do any removal
     this.entities = this.entities.filter(e => {
       if (!e.remove) {
         return true;
@@ -94,7 +75,20 @@ export default class {
     });
   }
 
-  remove (entity) {
+  spawn (e) {
+    return this.addEntity(Entities.instanciate(e));
+  }
+
+  addStart (f) {
+    this._starts.push(f);
+  }
+
+  addEntity (e) {
+    this.entities.push(e);
+    return e;
+  }
+
+  removeEntity (entity) {
     entity.remove = true;
   }
 

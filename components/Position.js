@@ -1,4 +1,4 @@
-import Component from './Component';
+import Component from "./Component";
 
 class Position extends Component {
 
@@ -10,5 +10,10 @@ class Position extends Component {
   }
 
 }
+
+Position.propTypes = {
+  x: "Number",
+  y: "Number"
+};
 
 export default Position;

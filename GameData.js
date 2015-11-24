@@ -3,7 +3,7 @@ const scene = {
       args: ["e1", 50, 150],
       comps: [
         ["State", "BORN"],
-        ["Health", 100, 20],
+        ["Health", 100, 0],
         ["PlayerActor"],
         ["Wander", 2],
         ["MoveTowards", "chaseMe"],

@@ -1,4 +1,4 @@
-import Component from './Component';
+import Component from "./Component";
 import theGame from "../theGame";
 
 class Spawner extends Component {
@@ -22,7 +22,7 @@ class Spawner extends Component {
     this.time += dt;
     if (this.time > this.rate) {
       this.time -= this.rate;
-      const e = theGame.instanciateAndAdd(this.prefab);
+      const e = theGame.spawn(this.prefab);
       // Set the new position near the spawner
       const pos = e.getComponent("Position");
       const x = Math.random() * this.xRange;
@@ -32,5 +32,12 @@ class Spawner extends Component {
     }
   }
 }
+
+Spawner.propTypes = {
+  prefab: "Instance",
+  rate: "Number",
+  xRange: "Number",
+  yRange: "Number"
+};
 
 export default Spawner;

@@ -1,6 +1,5 @@
-import Position from '../components/Position';
-import Renderer from '../components/Renderer';
 import theGame from "../theGame";
+import Position from "../components/Position";
 
 class Entity {
 
@@ -8,8 +7,8 @@ class Entity {
     this.name = name;
     this.components = [];
 
-    // I'm adding Position by default... not sure that's a good idea.
-    // not all enitties need a position (but it could be good for displaying
+    // Adding Position by default... not sure that's a good idea.
+    // not all entities need a position (but it could be good for displaying
     // in a game editor)
     this.addComponent(new Position(x, y));
 
@@ -21,10 +20,11 @@ class Entity {
     comp.entity = this; // Add reference to the component's entity
 
     // If there are start methods on the comp, add it to be run next tick.
+    // this should probably be done by some global marshaller
     if (comp.start) {
       theGame.addStart(comp.start.bind(comp));
     }
-    
+
     return comp;
   }
 

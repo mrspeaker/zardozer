@@ -1,18 +1,18 @@
 import theGame from "../theGame";
-import Component from './Component';
+import Component from "./Component";
 
 class MoveTowards extends Component {
 
   constructor (target, speed = 0.2) {
     super();
-    this.name = "Wander";
-    this.targetName = target;
+    this.name = "MoveTowards";
+    this.target = target;
     this.speed = speed;
   }
 
   start () {
     this.pos = this.getComponent("Position");
-    const targetEntity = theGame.getEntityByName(this.targetName);
+    const targetEntity = theGame.getEntityByName(this.target);
     this.target = targetEntity.getComponent("Position");
   }
 
@@ -25,5 +25,10 @@ class MoveTowards extends Component {
   }
 
 }
+
+MoveTowards.propTypes = {
+  target: "Instance",
+  speed: "Number"
+};
 
 export default MoveTowards;

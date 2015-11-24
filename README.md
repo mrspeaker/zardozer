@@ -11,6 +11,7 @@ Browse at http://localhost:9966
 
 * add to components/
 * add to components/index
+* give propTypes if takes params (used for serializing)
 
 ## Component strucutre:
 
@@ -21,7 +22,7 @@ Get any references to other entities in `Start` with `theGame.getEntityByName(ta
 ## To make an Entity
 
 ```js
-  theGame.makeEntity({
+  Entities.make({
     args: ["entityName", posX, posY],
     comps: [
       ["State", "BORN"],
@@ -38,5 +39,4 @@ Get any references to other entities in `Start` with `theGame.getEntityByName(ta
 
 ### To figure out
 
-* How to spawn prefabs withouth requiring an instance
-* Should be able to edit instances live, and then re-serialize to json
+* How to spawn prefabs without requiring an instance

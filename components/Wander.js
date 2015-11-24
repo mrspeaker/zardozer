@@ -1,4 +1,4 @@
-import Component from './Component';
+import Component from "./Component";
 
 class Wander extends Component {
 
@@ -19,5 +19,9 @@ class Wander extends Component {
   }
 
 }
+
+Wander.propTypes = {
+  speed: "Number"
+};
 
 export default Wander;

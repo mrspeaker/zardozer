@@ -1,5 +1,5 @@
-import theGame from './theGame';
-import $ from 'jQuery';
+import theGame from "./theGame";
+import $ from "jQuery";
 
 $(() => {
   theGame.init();

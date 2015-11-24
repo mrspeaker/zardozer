@@ -1,4 +1,4 @@
-import Component from './Component';
+import Component from "./Component";
 import theGame from "../theGame";
 
 class Health extends Component {
@@ -13,10 +13,15 @@ class Health extends Component {
   update (dt) {
     this.amount -= dt * this.rate;
     if (this.amount < 0) {
-      theGame.remove(this.entity);
+      theGame.removeEntity(this.entity);
     }
   }
 
+}
+
+Health.propTypes = {
+  amount: "Number",
+  rate: "Number"
 }
 
 export default Health;
