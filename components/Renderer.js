@@ -45,7 +45,8 @@ class Renderer extends Component {
 }
 
 Renderer.propTypes = {
-  color: "Color"
+  color: "Color",
+  size: "Number"
 };
 
 export default Renderer;

@@ -8,7 +8,7 @@ const scene = {
         ["Damage", 10],
         ["Wander", 2],
         ["MoveTowards", "chaseMe"],
-        ["HealthRenderer", "#a88"]
+        ["HealthRenderer", "#8a8"]
       ]
     },
     {

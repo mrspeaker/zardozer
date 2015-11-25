@@ -16,7 +16,7 @@ class EntityComponents extends Component {
     if (!components) return null;
 
     return <div>
-      {components.map((c, i) => <EntityComponent key={i} component={c}/>)}
+      {components.map((c, i) => <EntityComponent key={c.name + ":" + i} component={c}/>)}
     </div>;
   }
 }

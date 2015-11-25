@@ -3,8 +3,8 @@ import Renderer from "./Renderer";
 
 class HealthRenderer extends Renderer {
 
-  constructor (color = "#800") {
-    super(color);
+  constructor (color = "#800", size = 24) {
+    super(color, size);
     this.name = "HealthRenderer";
   }
 
@@ -24,7 +24,8 @@ class HealthRenderer extends Renderer {
 }
 
 HealthRenderer.propTypes = {
-  color: "Color"
+  color: "Color",
+  size: "Number"
 };
 
 export default HealthRenderer;

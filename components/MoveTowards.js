@@ -13,15 +13,16 @@ class MoveTowards extends Component {
 
   start () {
     this.pos = this.getComponent("Position");
-    const targetEntity = Env.game.getEntityByName(this.target);
-    this.target = targetEntity.getComponent("Position");
+    this.target = Env.game.getEntityByName(this.target);
+    this.targetPos = this.target.getComponent("Position");
   }
 
   update () {
     if (!this.enabled) { return false; }
-    const dx = this.target.x - this.pos.x;
-    const dy = this.target.y - this.pos.y;
-    const s = this.speed;
+    const {pos, targetPos, speed} = this;
+    const dx = targetPos.x - pos.x;
+    const dy = targetPos.y - pos.y;
+    const s = speed;
     this.pos.x += dx > 0 ? s : -s;
     this.pos.y += dy > 0 ? s : -s;
   }

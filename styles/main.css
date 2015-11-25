@@ -27,10 +27,16 @@ p {
   background: #aaa;
   font-size: 8pt;
 }
+.sidebar button {
+  border: 0;
+  padding: 2px;
+}
+
 .sidebar input[type='text'] {
   padding: 0;
   border: 0;
   font-size:7pt;
+  float: right;
 }
 
 @media screen and (min-width: 600px) {

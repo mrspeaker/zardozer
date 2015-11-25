@@ -27,7 +27,7 @@ const serialize = (e) => {
     if (props) {
       for (let p in props) {
         const type = props[p];
-        const propVal = type === "Instance" ? c[p].entity.name : c[p];
+        const propVal = type === "Instance" ? c[p].name : c[p];
         comp.push(propVal);
       }
     }

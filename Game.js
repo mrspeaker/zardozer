@@ -25,7 +25,7 @@ export default class {
     // Test serializing an in-game entity
     requestAnimationFrame(() => {
       const serialized = Entities.serialize(this.entities[0]);
-      console.log(JSON.stringify(serialized, null, 2));
+      //console.log(JSON.stringify(serialized, null, 2));
       Entities.addComponent(this.entities[0], ["ColorUp", 1]);
     });
 

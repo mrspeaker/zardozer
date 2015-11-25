@@ -31,6 +31,7 @@ class Entity extends Component {
         <strong>{name}</strong>
         <hr/>
         <input type="text" ref="componentDef" defaultValue="['name', 'param1']"/><button onClick={this.onAdd}>add</button>
+        <hr/>
         <EntityComponents components={components} />
     </div>;
   }
