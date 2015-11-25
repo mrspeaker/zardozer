@@ -1,31 +1,24 @@
 import Component from "./Component";
-import Renderer from "./Renderer";
 
-class HealthRenderer extends Renderer {
+class HealthRenderer extends Component {
 
-  constructor (color = "#800", size = 24) {
-    super(color, size);
+  constructor () {
+    super();
     this.name = "HealthRenderer";
   }
 
   start () {
-    super.start();
     this.health = this.getComponent("Health");
+    this.renderer = this.getComponent("Renderer");
   }
 
   update () {
-    super.update();
     if (this.health) {
       const amount = this.health.amount;
-      this.dom.textContent = amount > 0 ? Math.floor(amount) : "X";
+      this.renderer.dom.textContent = amount > 0 ? Math.floor(amount) : "X";
     }
   }
 
 }
-
-HealthRenderer.propTypes = {
-  color: "Color",
-  size: "Number"
-};
 
 export default HealthRenderer;

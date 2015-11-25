@@ -9,19 +9,11 @@ class SideBar extends Component {
 
   constructor () {
     super();
-    this.state = {
-      selected: null
-    }
-  }
-
-  onClick (selected) {
-    this.setState({selected});
   }
 
   render () {
-    const {game} = this.props;
+    const {game, selected} = this.props;
     if (!game) return null;
-    const {selected} = this.state;
 
     const {entities} = game;
 
@@ -31,7 +23,7 @@ class SideBar extends Component {
       <hr />
       <div><strong>Active entities: {entities.length}</strong></div>
       {entities.map((e, i) => {
-        return <div key={i} onClick={() => this.onClick(e)}>{e.name}</div>;
+        return <div key={i} onClick={() => this.props.onSelect(e)}>{e.name} ({e.id})</div>;
       })}
     </div>
   }

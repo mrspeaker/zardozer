@@ -1,6 +1,7 @@
 import React from "react";
 import EntityComponents from "./EntityComponents";
 import Entities from "../entities/Entities";
+import ComponentAdd from "./ComponentAdd";
 
 const {
   Component
@@ -13,9 +14,8 @@ class Entity extends Component {
     this.onAdd = this.onAdd.bind(this);
   }
 
-  onAdd () {
+  onAdd (compDef) {
     const {entity} = this.props;
-    const compDef = this.refs.componentDef.value;
     const parsed = eval(compDef);
     if (parsed instanceof Array) {
       Entities.addComponent(entity, parsed);
@@ -26,11 +26,12 @@ class Entity extends Component {
     const {entity} = this.props;
     if (!entity) return null;
 
-    const {components, name} = entity;
+    const {components, name, id} = entity;
     return <div>
-        <strong>{name}</strong>
+        <strong><input type="text" value={name} /></strong>&nbsp;
+        <span>({id})</span>
         <hr/>
-        <input type="text" ref="componentDef" defaultValue="['name', 'param1']"/><button onClick={this.onAdd}>add</button>
+        <ComponentAdd onAdd={this.onAdd} />
         <hr/>
         <EntityComponents components={components} />
     </div>;

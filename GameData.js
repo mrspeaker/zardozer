@@ -5,10 +5,11 @@ const scene = {
         ["State", "BORN"],
         ["PlayerActor"],
         ["Health", 100, 0],
+        ["HealthRenderer"],
         ["Damage", 10],
         ["Wander", 2],
         ["MoveTowards", "chaseMe"],
-        ["HealthRenderer", "#8a8"]
+        ["Renderer", "#8a8"]
       ]
     },
     {

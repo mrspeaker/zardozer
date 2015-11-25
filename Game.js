@@ -1,7 +1,10 @@
 import GameData from "./GameData";
 import Mouse from "./controls/Mouse";
 import Entities from "./entities/Entities";
+import Entity from "./entities/Entity";
 import Env from "./Env";
+
+let id = 1;
 
 export default class {
 
@@ -98,8 +101,17 @@ export default class {
   }
 
   addEntity (e) {
+    if (!e.id) {
+      e.id = id++;
+    }
     this.entities.push(e);
     return e;
+  }
+
+  addBlankEntity () {
+    const e = new Entity("entity", 50, 50);
+    Entities.addComponent(e, ["Renderer", "#800"]);
+    return this.addEntity(e);
   }
 
   removeEntity (entity) {

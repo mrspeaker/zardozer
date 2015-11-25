@@ -8,7 +8,7 @@ class Input extends Component {
   constructor () {
     super();
     this.state = {
-      val: null,
+      value: null,
       editing: false
     };
     this.onChange = this.onChange.bind(this);
@@ -16,14 +16,15 @@ class Input extends Component {
     this.onBlur = this.onBlur.bind(this);
   }
 
-  onChange (e) {
+  onChange ({target:{value}}) {
     this.setState({
-      val: e.target.value
-    })
+      value
+    });
   }
 
   onBlur () {
-    this.props.onChange(this.state.val);
+    const {value} = this.state;
+    this.props.onChange(value);
 
     this.setState({
       editing: false
@@ -36,17 +37,18 @@ class Input extends Component {
     });
   }
 
-  componentWillReceiveProps (props) {
-    if (!this.state.editing) {
+  componentWillReceiveProps ({value}) {
+    const {editing} = this.state;
+    if (!editing) {
       this.setState({
-        val: props.value
+        value
       });
     }
   }
 
   render () {
-    const {val} = this.state;
-    return <input type="text" value={val} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
+    const {value} = this.state;
+    return <input type="text" value={value} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
   }
 }
 

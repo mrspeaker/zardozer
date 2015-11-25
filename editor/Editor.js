@@ -2,8 +2,10 @@ import React from "react";
 
 import MenuBar from "./MenuBar";
 import GameUI from "./Game";
-import Game from "../Game";
 import SideBar from "./SideBar";
+
+import Game from "../Game";
+import Env from "../Env";
 
 const {
   Component
@@ -15,8 +17,23 @@ class Editor extends Component {
     super();
 
     this.state = {
-      game: null
+      game: null,
+      selected: null,
+      mode: "EDIT"
     }
+
+    this.onAdd = this.onAdd.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+  }
+
+  onAdd () {
+    this.onSelect(Env.game.addBlankEntity());
+  }
+
+  onSelect (selected) {
+    this.setState({
+      selected
+    });
   }
 
   componentDidMount () {
@@ -30,12 +47,12 @@ class Editor extends Component {
   }
 
   render () {
-    const {game} = this.state;
+    const {game, selected} = this.state;
 
     return <div>
-      <MenuBar game={game} />
+      <MenuBar game={game} onAdd={this.onAdd}/>
       <div className="main">
-        <SideBar game={game} />
+        <SideBar game={game} selected={selected} onSelect={this.onSelect} />
         <GameUI game={game} />
       </div>
       <footer className="footer">.</footer>
