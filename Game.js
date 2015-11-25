@@ -29,6 +29,8 @@ export default class {
       Entities.addComponent(this.entities[0], ["ColorUp", 1]);
     });
 
+    Mouse.init();
+
   }
 
   bindEvents() {

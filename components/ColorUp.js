@@ -5,11 +5,14 @@ class ColorUp extends Component {
   constructor (rate = 1) {
     super();
     this.name = "ColorUp";
+    this.enabled = true;
     this.rate = rate;
     this.time = 0;
   }
 
   update (dt) {
+    if (!this.enabled) { return; }
+
     this.time += dt;
     if (this.time > this.rate) {
       this.time -= this.rate;
@@ -22,6 +25,7 @@ class ColorUp extends Component {
 }
 
 ColorUp.propTypes = {
+  enabled: "Boolean",
   rate: "Number"
 };
 

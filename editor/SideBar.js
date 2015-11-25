@@ -16,7 +16,6 @@ class SideBar extends Component {
 
   onClick (selected) {
     this.setState({selected});
-    console.log(selected);
   }
 
   render () {
@@ -30,9 +29,9 @@ class SideBar extends Component {
 
       <Entity entity={selected} />
       <hr />
-      <div>{entities.length}</div>
-      {entities.map(e => {
-        return <div onClick={() => this.onClick(e)}>{e.name}</div>;
+      <div><strong>Active entities: {entities.length}</strong></div>
+      {entities.map((e, i) => {
+        return <div key={i} onClick={() => this.onClick(e)}>{e.name}</div>;
       })}
     </div>
   }

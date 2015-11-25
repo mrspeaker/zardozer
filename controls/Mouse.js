@@ -7,13 +7,15 @@ class Mouse {
     this.down = false;
     this.pressed = false;
     this.released = false;
+  }
 
-    $(document).on("mousedown", () => {
+  init () {
+    $("#game").on("mousedown", () => {
       this.down = true;
       this.pressed = true;
     });
 
-    $(document).on("mouseup", () => {
+    $("#game").on("mouseup", () => {
       this.down = false;
       this.released = true;
     });

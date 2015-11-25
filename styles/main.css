@@ -25,11 +25,12 @@ p {
 
 .sidebar {
   background: #aaa;
+  font-size: 8pt;
 }
-
-.sidebar a {
-  color: #fff;
-  display: block;
+.sidebar input[type='text'] {
+  padding: 0;
+  border: 0;
+  font-size:7pt;
 }
 
 @media screen and (min-width: 600px) {

@@ -6,6 +6,7 @@ class MoveTowards extends Component {
   constructor (target, speed = 0.2) {
     super();
     this.name = "MoveTowards";
+    this.enabled = true;
     this.target = target;
     this.speed = speed;
   }
@@ -17,6 +18,7 @@ class MoveTowards extends Component {
   }
 
   update () {
+    if (!this.enabled) { return false; }
     const dx = this.target.x - this.pos.x;
     const dy = this.target.y - this.pos.y;
     const s = this.speed;
@@ -27,6 +29,7 @@ class MoveTowards extends Component {
 }
 
 MoveTowards.propTypes = {
+  enabled: "Boolean",
   target: "Instance",
   speed: "Number"
 };

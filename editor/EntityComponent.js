@@ -15,10 +15,6 @@ class EntityComponent extends Component {
   }
 
   onClick () {
-    if (this.state.propTypes) {
-      this.setState({propTypes:null});
-      return;
-    }
     const {component} = this.props;
     const {propTypes} = component.constructor;
 
@@ -37,13 +33,28 @@ class EntityComponent extends Component {
         propertiesDef.push([v, propTypes[v]]);
       }
     }
-    const properties = propertiesDef.map(d => {
-      return <div>{d[0]}: <input value={component[d[0]]} /></div>;
+
+    const makeInput = (field, type, val) => {
+      switch (type) {
+      case "Boolean":
+        return <input type="checkbox" defaultChecked={val} onChange={() => component[field] = !component[field]} />
+        break;
+      case "Instance":
+        return <input type="text" value={val.name} onChange={() => {}}/>;
+      default:
+        return <input type="text" value={val} onChange={() => {}}/>;
+      }
+    }
+
+    const properties = propertiesDef.map((d, i) => {
+      return <div key={i}>{d[0]}: {makeInput(d[0], d[1], component[d[0]])}</div>;
     })
 
     return <div onClick={this.onClick}>
       {component.name}
-      {properties}
+      <div style={{paddingLeft:"5px"}}>
+        {properties}
+      </div>
     </div>;
   }
 }
