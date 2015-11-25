@@ -1,4 +1,5 @@
 import Component from "./Component";
+import Env from "../Env";
 
 class Renderer extends Component {
 
@@ -14,7 +15,7 @@ class Renderer extends Component {
   start () {
     const dom = document.createElement("div");
     dom.style.position = "absolute";
-    document.body.appendChild(dom);
+    Env.game.container.appendChild(dom);
     this.dom = dom;
 
     this.pos = this.getComponent("Position");
@@ -38,7 +39,7 @@ class Renderer extends Component {
   }
 
   remove () {
-    document.body.removeChild(this.dom);
+    Env.game.container.removeChild(this.dom);
   }
 
 }

@@ -1,5 +1,5 @@
 import Component from "./Component";
-import theGame from "../theGame";
+import Env from "../Env";
 
 class Health extends Component {
 
@@ -10,10 +10,9 @@ class Health extends Component {
     this.rate = rate;
   }
 
-  update (dt) {
-    this.amount -= dt * this.rate;
+  update () {
     if (this.amount < 0) {
-      theGame.removeEntity(this.entity);
+      Env.game.removeEntity(this.entity);
     }
   }
 

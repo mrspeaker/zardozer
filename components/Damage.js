@@ -1,10 +1,10 @@
 import Component from "./Component";
 
-class Ager extends Component {
+class Damage extends Component {
 
   constructor (rate = 1) {
     super();
-    this.name = "Ager";
+    this.name = "Damage";
     this.rate = rate;
   }
 
@@ -18,8 +18,8 @@ class Ager extends Component {
 
 }
 
-Ager.propTypes = {
+Damage.propTypes = {
   rate: "Number"
 };
 
-export default Ager;
+export default Damage;

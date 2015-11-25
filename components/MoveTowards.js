@@ -1,5 +1,5 @@
-import theGame from "../theGame";
 import Component from "./Component";
+import Env from "../Env";
 
 class MoveTowards extends Component {
 
@@ -12,7 +12,7 @@ class MoveTowards extends Component {
 
   start () {
     this.pos = this.getComponent("Position");
-    const targetEntity = theGame.getEntityByName(this.target);
+    const targetEntity = Env.game.getEntityByName(this.target);
     this.target = targetEntity.getComponent("Position");
   }
 

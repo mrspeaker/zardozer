@@ -1,3 +1,53 @@
 body {
+  margin: 0;
+  padding: 0;
   font-family: helvetica;
+}
+
+p {
+  margin: 0 0 10px 0;
+}
+
+.header, .footer {
+  background: #eee;
+  padding: 2px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content, .sidebar {
+  padding: 10px;
+}
+
+.sidebar {
+  background: #aaa;
+}
+
+.sidebar a {
+  color: #fff;
+  display: block;
+}
+
+@media screen and (min-width: 600px) {
+  .main {
+    flex-direction: row-reverse;
+  }
+
+  #screen {
+    flex: 1;
+    background-color: #999;
+  }
+
+  #game {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+  }
+
+  .sidebar {
+    width: 180px;
+  }
 }

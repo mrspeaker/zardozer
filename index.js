@@ -1,6 +1,8 @@
-import theGame from "./theGame";
-import $ from "jQuery";
+import React from "react";
+import ReactDOM from "react-dom";
+import Editor from "./editor/Editor";
 
-$(() => {
-  theGame.init();
-});
+ReactDOM.render(
+  <Editor />,
+  document.getElementById("container")
+);

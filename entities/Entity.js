@@ -1,4 +1,4 @@
-import theGame from "../theGame";
+import Env from "../Env";
 import Position from "../components/Position";
 
 class Entity {
@@ -22,7 +22,7 @@ class Entity {
     // If there are start methods on the comp, add it to be run next tick.
     // this should probably be done by some global marshaller
     if (comp.start) {
-      theGame.addStart(comp.start.bind(comp));
+      Env.game.addStart(comp.start.bind(comp));
     }
 
     return comp;

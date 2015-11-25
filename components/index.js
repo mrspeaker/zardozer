@@ -7,7 +7,7 @@ import HealthRenderer from "../components/HealthRenderer";
 import PlayerActor from "../components/PlayerActor";
 import Spawner from "../components/Spawner";
 import ColorUp from "../components/ColorUp";
-import Ager from "../components/Ager";
+import Damage from "../components/Damage";
 
 
 export default {
@@ -20,5 +20,5 @@ export default {
   PlayerActor,
   Spawner,
   ColorUp,
-  Ager
+  Damage
 };

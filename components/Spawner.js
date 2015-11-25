@@ -1,5 +1,5 @@
 import Component from "./Component";
-import theGame from "../theGame";
+import Env from "../Env";
 
 class Spawner extends Component {
 
@@ -14,7 +14,7 @@ class Spawner extends Component {
   }
 
   start () {
-    this.prefab = theGame.getEntityByName(this.prefabName);
+    this.prefab = Env.game.getEntityByName(this.prefabName);
     this.pos = this.getComponent("Position");
   }
 
@@ -22,7 +22,7 @@ class Spawner extends Component {
     this.time += dt;
     if (this.time > this.rate) {
       this.time -= this.rate;
-      const e = theGame.spawn(this.prefab);
+      const e = Env.game.spawn(this.prefab);
       // Set the new position near the spawner
       const pos = e.getComponent("Position");
       const x = Math.random() * this.xRange;

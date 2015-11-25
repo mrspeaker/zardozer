@@ -1,6 +1,6 @@
-# Testing unity-style component system
+# Testing a unity-style component system
 
-A simple Unity-style component system for making games. Will try to use it to implement a FallOut Shelter kinda game. Should be able to describe the entire game in JSON (see `GameData.js`).
+A simple Unity-style component system for making games. Will try to use it to implement a FallOut Shelter mobile kinda game. Should be able to describe the entire game in JSON (see `GameData.js`).
 
 * `npm install`
 * `npm start`

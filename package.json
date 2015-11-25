@@ -4,16 +4,20 @@
   "description": "Test of a Unity-style component system",
   "main": "index.js",
   "scripts": {
-    "start": "budo index.js --live -- -t [ babelify --presets [ es2015 ]  ]"
+    "start": "budo index.js --live -- -t [ babelify --presets [ es2015 react ]  ]"
   },
   "keywords": [],
   "author": "Mr Speaker",
   "license": "MIT",
   "dependencies": {
+    "babelify": "^7.2.0",
+    "events": "^1.1.0",
     "jquery": "^2.1.4",
-    "babelify": "^7.2.0"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
     "budo": "^6.0.4"
   }
