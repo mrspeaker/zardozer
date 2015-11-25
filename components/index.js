@@ -8,6 +8,8 @@ import PlayerActor from "../components/PlayerActor";
 import Spawner from "../components/Spawner";
 import ColorUp from "../components/ColorUp";
 import Damage from "../components/Damage";
+import SineX from "../components/SineX";
+import SineY from "../components/SineY";
 
 
 export default {
@@ -20,5 +22,7 @@ export default {
   PlayerActor,
   Spawner,
   ColorUp,
-  Damage
+  Damage,
+  SineX,
+  SineY
 };

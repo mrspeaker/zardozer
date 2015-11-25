@@ -50,3 +50,4 @@ Get any references to other entities in `start` with `Env.game.getEntityByName(t
 * How to spawn prefabs without requiring an instance
 * Clean up creating new components. Too many steps / too manual
 * drag n drop assets (general filesystem access)
+* How to create new games from scratch (moving out game-specific components)
