@@ -3,11 +3,10 @@ import Env from "../Env";
 
 class Health extends Component {
 
-  constructor (amount, rate = 1) {
+  constructor (amount) {
     super();
     this.name = "Health";
     this.amount = amount;
-    this.rate = rate;
   }
 
   update () {
@@ -19,8 +18,7 @@ class Health extends Component {
 }
 
 Health.propTypes = {
-  amount: "Number",
-  rate: "Number"
+  amount: "Number"
 }
 
 export default Health;

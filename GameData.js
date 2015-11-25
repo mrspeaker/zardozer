@@ -4,7 +4,7 @@ const scene = {
       comps: [
         ["State", "BORN"],
         ["PlayerActor"],
-        ["Health", 100, 0],
+        ["Health", 100],
         ["HealthRenderer"],
         ["Damage", 10],
         ["Wander", 2],
@@ -16,7 +16,7 @@ const scene = {
       args: ["spawner", 150, 150],
       comps: [
         ["Renderer", "#222"],
-        ["Spawner", "e1", 0.5, 60, 60]
+        ["Spawner", "e1", 3, 60, 60]
       ]
     },
     {
