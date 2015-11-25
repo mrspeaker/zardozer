@@ -18,7 +18,7 @@ class ColorUp extends Component {
       this.time -= this.rate;
 
       // booo!
-      const rend = this.getComponent("HealthRenderer") || this.getComponent("Renderer");
+      const rend = this.getComponent("Renderer");
       rend.color = "hsl(" + (Math.random() * 360 | 0) + ", 50%, 50%)";
     }
   }
