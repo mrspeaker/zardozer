@@ -1,9 +1,8 @@
-# Testing a unity-style component system
+# Funkity: a unity-style component system
 
-A simple Unity-style component system for making games. Will try to use it to implement a FallOut Shelter mobile kinda game. Should be able to describe the entire game in JSON (see `GameData.js`).
+The begining of a simple Unity-style component system for making games. Will try to use it to implement a FallOut Shelter mobile kinda game. Should be able to describe the entire game in JSON (see `GameData.js`).
 
 <img width="694" alt="simple editor" src="https://cloud.githubusercontent.com/assets/129330/11408642/7aea8bd4-9388-11e5-8453-4a0e765e8932.png">
-
 
 * `npm install`
 * `npm start`
@@ -14,18 +13,21 @@ Browse at http://localhost:9966
 
 * add to components/
 * add to components/index
-* give propTypes if takes params (used for serializing)
+* give propTypes (used for serializing/editor)
 
 ## Component strucutre:
 
-* see components/Component.js
+* start()
+* update(dt)
+* remove()
+* Comp.propTypes
 
-Get any references to other entities in `Start` with `theGame.getEntityByName(targetName)`.
+Get any references to other entities in `start` with `Env.game.getEntityByName(targetName)`.
 
-## To make an Entity
+## Serializing/deserialzing
 
 ```js
-  Entities.make({
+  const entity = Entities.make({
     args: ["entityName", posX, posY],
     comps: [
       ["State", "BORN"],
@@ -39,7 +41,12 @@ Get any references to other entities in `Start` with `theGame.getEntityByName(ta
   });
 ```
 
+```js
+  Entities.serialize(entity);
+```
 
 ### To figure out
 
 * How to spawn prefabs without requiring an instance
+* Clean up creating new components. Too many steps / too manual
+* drag n drop assets (general filesystem access)
