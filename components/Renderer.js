@@ -9,12 +9,13 @@ class Renderer extends Component {
     size: "Number"
   };
 
+  _lastColor;
+  _lastSize;
+
   constructor (color = "#800", size = 24) {
     super();
     this.color = color;
     this.size = size;
-    this._lastColor;
-    this._lastSize;
   }
 
   start () {

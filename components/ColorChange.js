@@ -8,11 +8,12 @@ class ColorChange extends Component {
     rate: "Number"
   };
 
+  time = 0;
+  enabled = true;
+
   constructor (rate = 1) {
     super();
-    this.enabled = true;
     this.rate = rate;
-    this.time = 0;
   }
 
   update (dt) {

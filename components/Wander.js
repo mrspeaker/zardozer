@@ -8,6 +8,7 @@ class Wander extends Component {
     speed: "Number"
   };
 
+
   constructor (speed = 1) {
     super();
     this.enabled = true;

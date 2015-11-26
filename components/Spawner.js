@@ -12,14 +12,15 @@ class Spawner extends Component {
     yRange: "Number"
   };
 
+  enabled = true;
+  time = 0;
+
   constructor (prefab, rate = 2, xRange = 0, yRange = 0) {
     super();
-    this.enabled = true;
     this.prefabName = prefab;
     this.rate = rate;
     this.xRange = xRange;
     this.yRange = yRange;
-    this.time = 0;
   }
 
   start () {

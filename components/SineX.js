@@ -8,11 +8,12 @@ class SineX extends Component {
     amp: "Number"
   };
 
+  time = 0;
+
   constructor (freq = 0.4, amp = 2) {
     super();
     this.freq = freq;
     this.amp = amp;
-    this.time = 0;
   }
 
   update (dt) {
