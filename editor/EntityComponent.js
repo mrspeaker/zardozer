@@ -53,7 +53,7 @@ class EntityComponent extends Component {
       return <div key={i}>{d[0]}: {makeInput(d[0], d[1], component[d[0]])}</div>;
     })
 
-    return <div onClick={this.onClick}>
+    return <div className="entityComponent" onClick={this.onClick}>
       <strong>{enabledBox}{component.name}</strong>
       <div style={{paddingLeft:"5px"}}>
         {properties}

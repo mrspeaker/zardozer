@@ -1,8 +1,8 @@
 # Funkity: a unity-style component system
 
-The begining of a simple Unity-style component system for making games. Will try to use it to implement a FallOut Shelter mobile kinda game. Should be able to describe the entire game in JSON (see `GameData.js`).
+A Unity-style component system and editor for making games.
 
-<img width="694" alt="simple editor" src="https://cloud.githubusercontent.com/assets/129330/11408642/7aea8bd4-9388-11e5-8453-4a0e765e8932.png">
+<img width="719" alt="Funkity game editor" src="https://cloud.githubusercontent.com/assets/129330/11429251/4673657c-9443-11e5-9d61-23224b7daabc.png">
 
 * `npm install`
 * `npm start`

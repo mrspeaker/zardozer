@@ -2,11 +2,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: helvetica;
-  font-size: 10pt;
+  font-size: 8pt;
 }
 
 p {
   margin: 0 0 10px 0;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #666;
 }
 
 .no-select {
@@ -17,13 +23,22 @@ p {
 }
 
 .header, .footer {
-  background: #eee;
+  background: #727272;
   padding: 2px;
+}
+.header {
+  border-bottom: 1px solid #111;
+}
+.footer {
+  border-top: 1px solid #111;
 }
 
 .main {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #505050;
+  border-top: 1px solid #505050;
+  background-color: #393939;
 }
 
 .main-content, .sidebar {
@@ -31,22 +46,29 @@ p {
 }
 
 .sidebar {
-  background: #aaa;
+  background: #727272;
   font-size: 8pt;
+  border-left: 1px solid #444;
 }
 .sidebar > div {
   cursor: pointer;
 }
-.sidebar button {
+button {
   border: 0;
-  padding: 2px;
+  border-radius: 3px;
+  padding: 3px;
+  background-color: #3C3C3C;
+  color: #aaa;
 }
 
-.sidebar input[type='text'] {
-  padding: 0;
+.sidebar input[type='text'], .sidebar select {
+  background-color: #bbb;
+  border-radius: 2px;
+  padding: 0 4px;
   border: 0;
   font-size:7pt;
   float: right;
+  width: 80px
 }
 
 @media screen and (min-width: 600px) {
@@ -56,7 +78,6 @@ p {
 
   #screen {
     flex: 1;
-    background-color: #999;
   }
 
   #game {
@@ -68,4 +89,8 @@ p {
   .sidebar {
     width: 180px;
   }
+}
+
+.entityComponent {
+  padding-bottom:5px;
 }
