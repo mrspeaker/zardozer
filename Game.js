@@ -23,7 +23,7 @@ export default class {
 
     this.bindEvents();
 
-    requestAnimationFrame(this.tick);
+    //requestAnimationFrame(this.tick);
 
     // Test serializing an in-game entity
     requestAnimationFrame(() => {
@@ -53,7 +53,6 @@ export default class {
     this.last = time;
 
     this.update(dt);
-    this.post(dt);
 
     requestAnimationFrame(this.tick);
   }
@@ -72,6 +71,8 @@ export default class {
         c.update(dt);
       });
     });
+
+    this.post(dt);
 
   }
 

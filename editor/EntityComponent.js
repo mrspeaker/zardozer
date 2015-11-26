@@ -37,6 +37,7 @@ class EntityComponent extends Component {
         return <Input value={val} onChange={v => {
           const newVal = type === "Number" ? parseFloat(v, 10) :  v;
           component[field] = newVal;
+          // component.update(1000/60);// TODO: update in EDIT mode
         }} />
       }
     }
