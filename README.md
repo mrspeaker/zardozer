@@ -9,23 +9,21 @@ The begining of a simple Unity-style component system for making games. Will try
 
 Browse at http://localhost:9966
 
-## To create a component
+## Entities
 
-* add to components/
-* add to components/index
+Simple objects, that have a name and a bunch of `components`, and not much else! All state and logic is done by components.
 
-static fields:
+Can make an enitity with `new Entity("name", xpos, ypos)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically. May change that.)
 
-* `static propTypes = {}` (used for serializing/editor)
-  - Number, Boolean, Color, Instance, String
-* `static deps = []`
-  - Names of components to require. Access with `this.deps.CompName`
+Setting an entities `remove` property to `true` will remove it from the game on the next game update tick.
 
-Example:
+## Components
+
+Here's an example component that randomly changes an entity's color every `rate` seconds:
 
 ```js
 class ColorChange extends Component {
-  static deps = ["Renderer"]; // Require Renderer
+  static deps = ["Renderer"]; // Requires Renderer
   static propTypes = {
     rate: "Number"            // One property: a number called "rate"
   };
@@ -44,7 +42,16 @@ class ColorChange extends Component {
 }
 ```
 
-## Component methods:
+To use it in the game, create the file in `/components/` and add it to the `/components/index.js` list. (will try to automate this somehow in the future)
+
+*static fields*
+
+* `static propTypes = {}` (used for serializing/editor)
+  - Number, Boolean, Color, Instance, String
+* `static deps = []`
+  - Names of components to require. Access with `this.deps.CompName`
+
+*lifecycle methods*
 
 * `start ()` // Called before first update tick. Be sure to call super.start();
 * `update (dt)` // Called every frame
@@ -53,7 +60,7 @@ class ColorChange extends Component {
 Get any references to other entities in `start` with `Env.game.getEntityByName(targetName)`.
 (This might be magical-ized)
 
-## Serializing/deserialzing
+## Serializing/deserializing
 
 Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js). To do it manually:
 
@@ -67,7 +74,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
   });
 ```
 
-args is array of `entity name`, `x position`, and `y position` (might get rid of the position requirement later)
+`args` is array of `entity name`, `x position`, and `y position` (might get rid of the position requirement later)
 
 ```js
   Entities.serialize(entity);
@@ -77,7 +84,7 @@ args is array of `entity name`, `x position`, and `y position` (might get rid of
 
 * How to spawn prefabs without requiring an instance
 * drag n drop assets (general filesystem access)
-* How to create new games from scratch (moving out game-specific components)
+* How to create new games from scratch (moving out game-specific components and files)
 * Make instances Env.game.getEntityByName() automagic?
 
 ### TODOs
