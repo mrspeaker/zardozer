@@ -11,7 +11,7 @@ class GameUI extends Component {
   }
 
   render () {
-    return <div id="screen">
+    return <div id="screen" className="no-select">
       <div id="game"></div>
     </div>
   }

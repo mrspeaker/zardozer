@@ -17,7 +17,7 @@ class EntityComponent extends Component {
 
   render () {
     const {component} = this.props;
-    const {propTypes} = component.constructor;
+    const {propTypes, deps} = component.constructor;
 
     let propertiesDef = [];
     if (propTypes) {

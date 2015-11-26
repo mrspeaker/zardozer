@@ -4,7 +4,7 @@
   "description": "Test of a Unity-style component system",
   "main": "index.js",
   "scripts": {
-    "start": "budo index.js --live -- -t [ babelify --presets [ es2015 react ]  ]"
+    "start": "budo index.js --live -- -t [ babelify --presets [ es2015 react ] --plugins [ transform-class-properties ]  ]"
   },
   "keywords": [],
   "author": "Mr Speaker",
@@ -19,6 +19,7 @@
   "devDependencies": {
     "babel-preset-react": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
+    "babel-plugin-transform-class-properties": "^6.2.2",
     "budo": "^6.0.4"
   }
 }

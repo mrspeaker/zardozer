@@ -2,28 +2,24 @@ import Component from "./Component";
 
 class Damage extends Component {
 
+  static deps = ["Health"];
+  static propTypes = {
+    enabled: "Boolean",
+    rate: "Number"
+  };
+
   constructor (rate = 1) {
     super();
-    this.name = "Damage";
     this.enabled = true;
     this.rate = rate;
-  }
-
-  start () {
-    this.target = this.getComponent("Health");
   }
 
   update (dt) {
     if (!this.enabled) { return; }
 
-    this.target.amount -= dt * this.rate;
+    this.deps.Health.amount -= dt * this.rate;
   }
 
 }
-
-Damage.propTypes = {
-  enabled: "Boolean",
-  rate: "Number"
-};
 
 export default Damage;

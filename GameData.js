@@ -3,7 +3,7 @@ const scene = {
       args: ["e1", 50, 150],
       comps: [
         ["State", "BORN"],
-        ["PlayerActor"],
+        ["ClickRegener", 10],
         ["Health", 100],
         ["HealthRenderer"],
         ["Damage", 20],
@@ -25,7 +25,7 @@ const scene = {
         ["Renderer", "#088", 18],
         ["SineX", 0.7, 4],
         ["SineY", 0.4, 2],
-        ["ColorUp"]
+        ["ColorChange"]
       ]
     }
   ]

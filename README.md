@@ -13,33 +13,61 @@ Browse at http://localhost:9966
 
 * add to components/
 * add to components/index
-* give propTypes (used for serializing/editor)
 
-## Component strucutre:
+static fields:
 
-* start()
-* update(dt)
-* remove()
-* Comp.propTypes
+* `static propTypes = {}` (used for serializing/editor)
+  - Number, Boolean, Color, Instance, String
+* `static deps = []`
+  - Names of components to require. Access with `this.deps.CompName`
+
+Example:
+
+```js
+class ColorChange extends Component {
+  static deps = ["Renderer"]; // Require Renderer
+  static propTypes = {
+    rate: "Number"            // One property: a number called "rate"
+  };
+  constructor (rate = 1) {
+    super();
+    this.rate = rate;
+    this.time = 0;
+  }
+  update (dt) {
+    if ((this.time += dt) > this.rate) {
+      this.time -= this.rate;
+      const newColor = "hsl(" + (Math.random() * 360 | 0) + ", 50%, 50%)";
+      this.deps.Renderer.color = newColor;
+    }
+  }
+}
+```
+
+## Component methods:
+
+* `start ()` // Called before first update tick. Be sure to call super.start();
+* `update (dt)` // Called every frame
+* `remove() ` // Called when component removed from entity
 
 Get any references to other entities in `start` with `Env.game.getEntityByName(targetName)`.
+(This might be magical-ized)
 
 ## Serializing/deserialzing
+
+Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js). To do it manually:
 
 ```js
   const entity = Entities.make({
     args: ["entityName", posX, posY],
     comps: [
-      ["State", "BORN"],
-      ["Health", 100, 20],
-      ["PlayerActor"],
-      ["Wander", 2],
-      ["MoveTowards", "e2"],
-      ["HealthRenderer"],
-      ["ColorUp"],
+      ["ColorChange"],
+      ["Renderer"]
     ]
   });
 ```
+
+args is array of `entity name`, `x position`, and `y position` (might get rid of the position requirement later)
 
 ```js
   Entities.serialize(entity);
@@ -48,6 +76,11 @@ Get any references to other entities in `start` with `Env.game.getEntityByName(t
 ### To figure out
 
 * How to spawn prefabs without requiring an instance
-* Clean up creating new components. Too many steps / too manual
 * drag n drop assets (general filesystem access)
 * How to create new games from scratch (moving out game-specific components)
+* Make instances Env.game.getEntityByName() automagic?
+
+### TODOs
+
+* renaming enitites
+* changing entity refs in editor

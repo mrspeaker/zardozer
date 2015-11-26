@@ -2,21 +2,11 @@ import Component from "./Component";
 
 class HealthRenderer extends Component {
 
-  constructor () {
-    super();
-    this.name = "HealthRenderer";
-  }
-
-  start () {
-    this.health = this.getComponent("Health");
-    this.renderer = this.getComponent("Renderer");
-  }
+  static deps = ["Renderer", "Health"];
 
   update () {
-    if (this.health) {
-      const amount = this.health.amount;
-      this.renderer.dom.textContent = amount > 0 ? Math.floor(amount) : "X";
-    }
+    const {Renderer, Health} = this.deps;
+    Renderer.dom.textContent = Math.floor(Health.amount);
   }
 
 }

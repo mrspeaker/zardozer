@@ -3,9 +3,14 @@ import Env from "../Env";
 
 class Renderer extends Component {
 
+  static deps = ["Position"];
+  static propTypes = {
+    color: "Color",
+    size: "Number"
+  };
+
   constructor (color = "#800", size = 24) {
     super();
-    this.name = "Renderer";
     this.color = color;
     this.size = size;
     this._lastColor;
@@ -13,16 +18,17 @@ class Renderer extends Component {
   }
 
   start () {
+    super.start();
     const dom = document.createElement("div");
     dom.style.position = "absolute";
     Env.game.container.appendChild(dom);
     this.dom = dom;
-
-    this.pos = this.getComponent("Position");
   }
 
   update () {
-    const {dom, pos, color, size, _lastColor, _lastSize} = this;
+    const {dom, color, size, _lastColor, _lastSize} = this;
+    const pos = this.deps.Position;
+
     if (_lastColor !== color) {
       dom.style.backgroundColor = color;
       this._lastColor = color;
@@ -43,10 +49,5 @@ class Renderer extends Component {
   }
 
 }
-
-Renderer.propTypes = {
-  color: "Color",
-  size: "Number"
-};
 
 export default Renderer;

@@ -23,13 +23,11 @@ export default class {
 
     this.bindEvents();
 
-    //requestAnimationFrame(this.tick);
-
     // Test serializing an in-game entity
     requestAnimationFrame(() => {
       const serialized = Entities.serialize(this.entities[0]);
       //console.log(JSON.stringify(serialized, null, 2));
-      Entities.addComponent(this.entities[0], ["ColorUp", 1]);
+      Entities.addComponent(this.entities[0], ["ColorChange", 1]);
     });
 
     Mouse.init();
@@ -48,6 +46,10 @@ export default class {
       .map(e => this.addEntity(e));
   }
 
+  start () {
+    //requestAnimationFrame(this.tick);
+  }
+  
   tick (time) {
     const dt = this.last ? time - this.last : 1000 / 60;
     this.last = time;
@@ -93,6 +95,7 @@ export default class {
     });
   }
 
+  // Game specific... move.
   spawn (e) {
     return this.addEntity(Entities.instanciate(e));
   }

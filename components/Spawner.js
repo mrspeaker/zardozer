@@ -3,9 +3,18 @@ import Env from "../Env";
 
 class Spawner extends Component {
 
+  static deps = ["Position"];
+  static propTypes = {
+    enabled: "Boolean",
+    prefab: "Instance",
+    rate: "Number",
+    xRange: "Number",
+    yRange: "Number"
+  };
+
   constructor (prefab, rate = 2, xRange = 0, yRange = 0) {
     super();
-    this.name = "Spawner";
+    this.enabled = true;
     this.prefabName = prefab;
     this.rate = rate;
     this.xRange = xRange;
@@ -14,30 +23,26 @@ class Spawner extends Component {
   }
 
   start () {
+    super.start();
     this.prefab = Env.game.getEntityByName(this.prefabName);
-    this.pos = this.getComponent("Position");
   }
 
   update (dt) {
+    if (!this.enabled) { return; }
+
     this.time += dt;
     if (this.time > this.rate) {
       this.time -= this.rate;
+      const spawnerPos = this.deps.Position;
       const e = Env.game.spawn(this.prefab);
       // Set the new position near the spawner
       const pos = e.getComponent("Position");
       const x = Math.random() * this.xRange;
       const y = Math.random() * this.yRange;
-      pos.x = this.pos.x + (x - this.xRange / 2);
-      pos.y = this.pos.y + (y - this.yRange / 2);
+      pos.x = spawnerPos.x + (x - this.xRange / 2);
+      pos.y = spawnerPos.y + (y - this.yRange / 2);
     }
   }
 }
-
-Spawner.propTypes = {
-  prefab: "Instance",
-  rate: "Number",
-  xRange: "Number",
-  yRange: "Number"
-};
 
 export default Spawner;

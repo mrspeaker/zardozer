@@ -2,9 +2,12 @@ import Component from "./Component";
 
 class State extends Component {
 
+  static propTypes = {
+    state: "String"
+  };
+
   constructor (state) {
     super();
-    this.name = "State";
     this.state = state;
     this.setState(state);
   }
@@ -23,9 +26,5 @@ class State extends Component {
     this.stateTime += dt;
   }
 }
-
-State.propTypes = {
-  state: "String"
-};
 
 export default State;

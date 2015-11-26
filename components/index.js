@@ -4,9 +4,9 @@ import Wander from "../components/Wander";
 import MoveTowards from "../components/MoveTowards";
 import Renderer from "./Renderer";
 import HealthRenderer from "../components/HealthRenderer";
-import PlayerActor from "../components/PlayerActor";
+import ClickRegener from "../components/ClickRegener";
 import Spawner from "../components/Spawner";
-import ColorUp from "../components/ColorUp";
+import ColorChange from "../components/ColorChange";
 import Damage from "../components/Damage";
 import SineX from "../components/SineX";
 import SineY from "../components/SineY";
@@ -19,9 +19,9 @@ export default {
   MoveTowards,
   Renderer,
   HealthRenderer,
-  PlayerActor,
+  ClickRegener,
   Spawner,
-  ColorUp,
+  ColorChange,
   Damage,
   SineX,
   SineY

@@ -3,9 +3,12 @@ import Env from "../Env";
 
 class Health extends Component {
 
+  static propTypes = {
+    amount: "Number"
+  };
+
   constructor (amount) {
     super();
-    this.name = "Health";
     this.amount = amount;
   }
 
@@ -15,10 +18,6 @@ class Health extends Component {
     }
   }
 
-}
-
-Health.propTypes = {
-  amount: "Number"
 }
 
 export default Health;
