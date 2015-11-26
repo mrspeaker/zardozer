@@ -28,12 +28,12 @@ class Entity extends Component {
 
     const {components, name, id} = entity;
     return <div>
-        <strong><input type="text" value={name} /></strong>&nbsp;
-        <span>({id})</span>
-        <hr/>
-        <ComponentAdd onAdd={this.onAdd} />
-        <hr/>
-        <EntityComponents components={components} />
+      <strong>Name:<input type="text" value={name} /></strong>&nbsp;
+      <span>({id})</span>
+      <hr/>
+      <EntityComponents components={components} />
+      <hr/>
+      <ComponentAdd onAdd={this.onAdd} />
     </div>;
   }
 }

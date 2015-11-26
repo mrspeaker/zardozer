@@ -14,7 +14,7 @@ class MenuBar extends Component {
       <span onClick={this.props.onTogglePlay}>{this.props.mode}</span>
       &nbsp;
       <span>
-        <button onClick={this.props.onAdd}>Add</button>
+        <button onClick={this.props.onAdd}>Add Enitity</button>
       </span>
     </header>
   }

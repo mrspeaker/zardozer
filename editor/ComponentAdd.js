@@ -85,7 +85,7 @@ class ComponentAdd extends Component {
       <div>params: {this.state.hint}</div>
       <div style={{clear:"both"}}>
         <input type="text" ref="componentDef" />
-        <button onClick={this.onAdd}>add</button>
+        <button onClick={this.onAdd}>add comp</button>
       </div>
     </div>;
   }
