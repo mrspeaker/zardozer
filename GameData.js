@@ -1,5 +1,12 @@
 const scene = {
   entities: [{
+      args: ["player", 200, 150],
+      comps: [
+        ["State", "BORN"],
+        ["KeyController"],
+        ["Renderer", "transparent", 25, "spaceship1.png"]
+      ]
+    },{
       args: ["e1", 50, 150],
       comps: [
         ["State", "BORN"],

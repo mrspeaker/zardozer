@@ -1,5 +1,6 @@
 import GameData from "./GameData";
 import Mouse from "./controls/Mouse";
+import Keys from "./controls/Keys";
 import Entities from "./entities/Entities";
 import Entity from "./entities/Entity";
 import Env from "./Env";
@@ -27,11 +28,12 @@ export default class {
     requestAnimationFrame(() => {
       const serialized = Entities.serialize(this.entities[0]);
       //console.log(JSON.stringify(serialized, null, 2));
-      Entities.addComponent(this.entities[0], ["ColorChange", 1]);
+      //Entities.addComponent(this.entities[0], ["ColorChange", 1]);
     });
 
+    Keys.init();
     Mouse.init();
-
+    Env.game.container.focus();
   }
 
   bindEvents() {
@@ -47,9 +49,9 @@ export default class {
   }
 
   start () {
-    //requestAnimationFrame(this.tick);
+    requestAnimationFrame(this.tick);
   }
-  
+
   tick (time) {
     const dt = this.last ? time - this.last : 1000 / 60;
     this.last = time;
@@ -79,6 +81,7 @@ export default class {
   }
 
   post (dt) {
+    Keys.update(dt);
     Mouse.update(dt);
 
     // Do any removal

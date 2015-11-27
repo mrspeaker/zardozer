@@ -85,6 +85,7 @@ button {
     position: relative;
     overflow: hidden;
     height: 400px;
+    outline: none;
   }
 
   .sidebar {

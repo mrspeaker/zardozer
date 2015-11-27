@@ -1,3 +1,4 @@
+import KeyController from "../components/KeyController";
 import State from "../components/State";
 import Health from "../components/Health";
 import Wander from "../components/Wander";
@@ -13,6 +14,7 @@ import SineY from "../components/SineY";
 
 
 export default {
+  KeyController,
   State,
   Health,
   Wander,

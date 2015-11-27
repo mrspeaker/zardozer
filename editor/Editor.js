@@ -78,7 +78,7 @@ class Editor extends Component {
         <SideBar game={game} selected={selected} onSelect={this.onSelect} />
         <GameUI game={game} />
       </div>
-      <footer className="footer">.</footer>
+      <footer className="footer">...</footer>
     </div>
   }
 }
