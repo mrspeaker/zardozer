@@ -6,16 +6,19 @@ class Renderer extends Component {
   static deps = ["Position"];
   static propTypes = {
     color: "Color",
-    size: "Number"
+    size: "Number",
+    image: "Image"
   };
 
   _lastColor;
   _lastSize;
+  _lastImage;
 
-  constructor (color = "#800", size = 24) {
+  constructor (color = "#800", size = 24, image) {
     super();
     this.color = color;
     this.size = size;
+    this.image = image;
   }
 
   start () {
@@ -27,7 +30,7 @@ class Renderer extends Component {
   }
 
   update () {
-    const {dom, color, size, _lastColor, _lastSize} = this;
+    const {dom, color, size, image, _lastColor, _lastSize, _lastImage} = this;
     const pos = this.deps.Position;
 
     if (_lastColor !== color) {
@@ -40,6 +43,12 @@ class Renderer extends Component {
       dom.style.height = size + "px";
       dom.style.borderRadius = (size / 2) + "px";
       this._lastSize = size;
+    }
+    if (_lastImage !== image) {
+      if (Env.images.find(i => i === image)) {
+        dom.style.backgroundImage = `url(../assets/images/${image})`;
+      }
+      this._lastImage = image;
     }
     dom.style.left = pos.x + "px";
     dom.style.top = pos.y + "px";

@@ -9,13 +9,11 @@ class MenuBar extends Component {
 
   render () {
     return <header className="header">
-      FallIn: test editor
+      <span>Funkity v0.01.</span>
       &nbsp;
-      <span onClick={this.props.onTogglePlay}>{this.props.mode}</span>
+      <button onClick={this.props.onTogglePlay}>{this.props.mode}</button>
       &nbsp;
-      <span>
-        <button onClick={this.props.onAdd}>Add Enitity</button>
-      </span>
+      <button onClick={this.props.onAdd}>Add Enitity</button>
     </header>
   }
 }

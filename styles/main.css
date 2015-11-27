@@ -24,13 +24,14 @@ hr {
 
 .header, .footer {
   background: #727272;
-  padding: 2px;
+  padding: 4px;
 }
 .header {
   border-bottom: 1px solid #111;
 }
 .footer {
   border-top: 1px solid #111;
+  height: 20px;
 }
 
 .main {
@@ -93,4 +94,7 @@ button {
 
 .entityComponent {
   padding-bottom:5px;
+}
+.entityComponent > div > div {
+  clear: both;
 }

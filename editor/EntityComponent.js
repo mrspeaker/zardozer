@@ -33,6 +33,7 @@ class EntityComponent extends Component {
         break;
       case "Instance":
         return <Input value={val.name} onChange={v => {}} />
+      case "Image":
       default:
         return <Input value={val} onChange={v => {
           const newVal = type === "Number" ? parseFloat(v, 10) :  v;

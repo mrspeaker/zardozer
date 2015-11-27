@@ -9,7 +9,7 @@ const scene = {
         ["Damage", 20],
         ["Wander", 2],
         ["MoveTowards", "chaseMe", 1],
-        ["Renderer", "#8a8"]
+        ["Renderer", "transparent", 25, "spaceMonster1.png"]
       ]
     },
     {

@@ -9,6 +9,20 @@ class SideBar extends Component {
 
   constructor () {
     super();
+    this.state = {
+      tab: "ents"
+    }
+    this.onSelect = this.onSelect.bind(this);
+    this.onEntitySelect = this.onEntitySelect.bind(this);
+  }
+
+  onSelect (tab) {
+    this.setState({tab});
+  }
+
+  onEntitySelect (e) {
+    this.setState({tab:"ent"});
+    this.props.onSelect(e);
   }
 
   render () {
@@ -18,13 +32,17 @@ class SideBar extends Component {
     const {entities} = game;
 
     return <div className="sidebar">
-
-      <Entity entity={selected} />
-      <hr />
-      <div><strong>Active entities: {entities.length}</strong></div>
-      {entities.map((e, i) => {
-        return <div key={i} onClick={() => this.props.onSelect(e)}>{e.name} ({e.id})</div>;
-      })}
+      <div style={{paddingBottom: "5px"}}>
+        <button onClick={() => this.onSelect("ents")}>Entites</button>&nbsp;
+        <button onClick={() => this.onSelect("ent")}>Selected</button>
+      </div>
+      {this.state.tab === "ent" && <Entity entity={selected} />}
+      {this.state.tab === "ents" && <div>
+        <strong>Active entities: {entities.length}</strong>
+        {entities.map((e, i) => {
+          return <div key={i} onClick={() => this.onEntitySelect(e)}>{e.name} ({e.id})</div>;
+        })}
+      </div>}
     </div>
   }
 }
