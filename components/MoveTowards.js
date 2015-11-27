@@ -30,8 +30,9 @@ class MoveTowards extends Component {
     const dx = targetPos.x - pos.x;
     const dy = targetPos.y - pos.y;
     const s = speed;
-    pos.x += dx > 0 ? s : -s;
-    pos.y += dy > 0 ? s : -s;
+    const angle = Math.atan2(dy, dx);
+    pos.x += Math.cos(angle) * s;
+    pos.y += Math.sin(angle) * s;
   }
 
 }
