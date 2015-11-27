@@ -9,6 +9,8 @@ let id = 1;
 
 export default class {
 
+  _doReset = false;
+
   constructor (container) {
     this.entities = [];
     this._starts = [];
@@ -17,11 +19,6 @@ export default class {
   }
 
   init () {
-    this.loadScene();
-
-    this.last = 0;
-    this.tick = this.tick.bind(this);
-
     this.bindEvents();
 
     // Test serializing an in-game entity
@@ -30,9 +27,33 @@ export default class {
       //console.log(JSON.stringify(serialized, null, 2));
     });
 
+    this.tick = this.tick.bind(this);
+
+    this._reset();
+    //this.loadScene();
+
     Keys.init();
     Mouse.init();
     Env.game.container.focus();
+  }
+
+  reset () {
+    this._doReset = true;
+  }
+  _reset () {
+    id = 1;
+    console.log("reseting. entit:", this.entities.length);
+    this.entities = this.entities.filter(e => {
+      e.components = e.components.filter(c => {
+        e.removeComponent(c);
+        return false;
+      });
+      return false;
+    });
+    this._starts = [];
+    this.last = 0;
+    console.log("done:", this.entities.length, this._starts.length);
+    this.loadScene();
   }
 
   bindEvents() {
@@ -45,12 +66,17 @@ export default class {
     GameData.entities
       .map(data => Entities.make(data))
       .map(e => this.addEntity(e));
+    console.log("lod", this.entities.length, GameData.entities);
+  }
+
+  getPrefabByName (name) {
+    const data = GameData.entities.find(e => e.args[0] === name);
+    const entity = Entities.make(data);
+    return entity;
   }
 
   addPrefabByName (name) {
-    const data = GameData.entities.find(e => e.args[0] === name);
-    const entity = Entities.make(data);
-    return this.addEntity(entity);
+    return this.addEntity(this.getPrefabByName(name));
   }
 
   start () {
@@ -122,6 +148,11 @@ export default class {
       });
       return false;
     });
+
+    if (this._doReset) {
+      this._reset();
+      this._doReset = false;
+    }
   }
 
   // Game specific... move.

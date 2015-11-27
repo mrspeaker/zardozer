@@ -25,7 +25,7 @@ class Spawner extends Component {
 
   start () {
     super.start();
-    this.prefab = Env.game.getEntityByName(this.prefabName);
+    this.prefab = Env.game.getPrefabByName(this.prefabName); //Env.game.getEntityByName(this.prefabName);
   }
 
   update (dt) {
