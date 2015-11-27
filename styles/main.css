@@ -47,6 +47,8 @@ hr {
 }
 
 .sidebar {
+  height: 100%;
+  overflow-y: auto;
   background: #727272;
   font-size: 8pt;
   border-left: 1px solid #444;
@@ -54,6 +56,9 @@ hr {
 .sidebar > div {
   cursor: pointer;
 }
+.sidebarContent {
+}
+
 button {
   border: 0;
   border-radius: 3px;
@@ -75,6 +80,7 @@ button {
 @media screen and (min-width: 600px) {
   .main {
     flex-direction: row-reverse;
+    height: 400px;
   }
 
   #screen {
@@ -90,6 +96,7 @@ button {
 
   .sidebar {
     width: 180px;
+
   }
 }
 

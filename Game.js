@@ -48,6 +48,12 @@ export default class {
       .map(e => this.addEntity(e));
   }
 
+  addPrefabByName (name) {
+    const data = GameData.entities.find(e => e.args[0] === name);
+    const entity = Entities.make(data);
+    return this.addEntity(entity);
+  }
+
   start () {
     requestAnimationFrame(this.tick);
   }

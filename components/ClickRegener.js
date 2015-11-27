@@ -3,19 +3,19 @@ import Component from "./Component";
 
 class ClickRegener extends Component {
 
-  static deps = ["Health"];
+  static deps = ["Life"];
   static propTypes = {
     regenAmount: "Number"
   };
 
-  constructor (regenAmount = 10) {
+  constructor (regenAmount = 1) {
     super();
     this.regenAmount = regenAmount;
   }
 
   update () {
     if (Mouse.pressed) {
-      this.deps.Health.amount += this.regenAmount;
+      this.deps.Life.time += this.regenAmount;
     }
   }
 

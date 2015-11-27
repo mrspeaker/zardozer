@@ -36,13 +36,15 @@ class SideBar extends Component {
         <button onClick={() => this.onSelect("ents")}>Entites</button>&nbsp;
         <button onClick={() => this.onSelect("ent")}>Selected</button>
       </div>
-      {this.state.tab === "ent" && <Entity entity={selected} />}
-      {this.state.tab === "ents" && <div>
-        <strong>Active entities: {entities.length}</strong>
-        {entities.map((e, i) => {
-          return <div key={i} onClick={() => this.onEntitySelect(e)}>{e.name} ({e.id})</div>;
-        })}
-      </div>}
+      <div className="sidebarContent">
+        {this.state.tab === "ent" && <Entity entity={selected} />}
+        {this.state.tab === "ents" && <div>
+          <strong>Active entities: {entities.length}</strong>
+          {entities.map((e, i) => {
+            return <div key={i} onClick={() => this.onEntitySelect(e)}>{e.name} ({e.id})</div>;
+          })}
+        </div>}
+      </div>
     </div>
   }
 }

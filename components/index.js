@@ -1,30 +1,29 @@
 import KeyController from "../components/KeyController";
+import KeyShooter from "../components/KeyShooter";
 import State from "../components/State";
-import Health from "../components/Health";
 import Wander from "../components/Wander";
 import MoveTowards from "../components/MoveTowards";
 import Renderer from "./Renderer";
-import HealthRenderer from "../components/HealthRenderer";
+import Life from "../components/Life";
+import LifeRenderer from "../components/LifeRenderer";
 import ClickRegener from "../components/ClickRegener";
 import Spawner from "../components/Spawner";
 import ColorChange from "../components/ColorChange";
-import Damage from "../components/Damage";
-import SineX from "../components/SineX";
-import SineY from "../components/SineY";
-
+import MoveSine from "../components/MoveSine";
+import FlyRight from "../components/FlyRight";
 
 export default {
   KeyController,
+  KeyShooter,
   State,
-  Health,
   Wander,
   MoveTowards,
   Renderer,
-  HealthRenderer,
+  Life,
+  LifeRenderer,
   ClickRegener,
   Spawner,
   ColorChange,
-  Damage,
-  SineX,
-  SineY
+  MoveSine,
+  FlyRight
 };

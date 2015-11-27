@@ -11,8 +11,6 @@ class KeyController extends Component {
   constructor (speed = 2.5) {
     super();
     this.speed = speed;
-
-
   }
 
   update (dt) {
@@ -43,6 +41,7 @@ class KeyController extends Component {
 
     pos.x += xo;
     pos.y += yo;
+
   }
 
 }
