@@ -5,15 +5,18 @@ class KeyController extends Component {
 
   static deps = ["Position"];
   static propTypes = {
+    enabled: "Boolean",
     speed: "Number"
   };
 
   constructor (speed = 2.5) {
     super();
+    this.enabled = true;
     this.speed = speed;
   }
 
   update (dt) {
+    if (!this.enabled) { return; }
     const {speed} = this;
     const pos = this.deps.Position;
     const power = speed * dt * 100;

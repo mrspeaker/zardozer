@@ -28,7 +28,6 @@ export default class {
     requestAnimationFrame(() => {
       const serialized = Entities.serialize(this.entities[0]);
       //console.log(JSON.stringify(serialized, null, 2));
-      //Entities.addComponent(this.entities[0], ["ColorChange", 1]);
     });
 
     Keys.init();

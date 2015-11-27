@@ -5,12 +5,17 @@ import Env from "../Env";
 class KeyShooter extends Component {
 
   static deps = ["Position"];
+  static propTypes = {
+    enabled: "Boolean"
+  };
 
   constructor () {
     super();
+    this.enabled = true;
   }
 
   update (dt) {
+    if (!this.enabled) { return; }
     if (!Keys.isDown(32)) {
       return;
     }
