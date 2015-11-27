@@ -6,27 +6,43 @@ import Env from "../Env";
 class Keys {
 
   keys = {};
+  downKeys = [];
 
-  constructor () {
-
-  }
+  constructor () { }
 
   init () {
     $(Env.game.container).on("keydown", ({which}) => {
-      this.keys[which] = true;
+      if (!this.keys[which]) {
+        this.keys[which] = {};
+      }
+      const k = this.keys[which];
+      k.down = true;
+      k.pressed = true;
+      this.downKeys.push(k);
     });
 
     $(Env.game.container).on("keyup", ({which}) => {
-      this.keys[which] = false;
+      const k = this.keys[which];
+      k.down = false;
     });
   }
 
   isDown (keyCode) {
-    return !!this.keys[keyCode];
+    if (!this.keys[keyCode]) return false;
+    return !!this.keys[keyCode].down;
+  }
+
+  pressed (keyCode) {
+    if (!this.keys[keyCode]) return false;
+    return !!this.keys[keyCode].pressed;
   }
 
   update () {
-
+    // Unset "wasDown" flag
+    this.downKeys = this.downKeys.filter(k => {
+      k.pressed = false;
+      return false;
+    });
   }
 }
 
