@@ -55,7 +55,9 @@ class Renderer extends Component {
   }
 
   remove () {
-    Env.game.container.removeChild(this.dom);
+    if (this.dom) {
+      Env.game.container.removeChild(this.dom);
+    }
   }
 
 }

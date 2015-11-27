@@ -81,6 +81,27 @@ export default class {
       });
     });
 
+    // Naive collisions... check everything, tell everyone.
+    for (let i = 0; i < this.entities.length - 1; i++) {
+      const a = this.entities[i];
+      for (let j = i + 1; j < this.entities.length; j++) {
+        const b = this.entities[j];
+        const aPos = a.getComponent("Position");
+        const bPos = b.getComponent("Position");
+        const dx = aPos.x - bPos.x;
+        const dy = aPos.y - bPos.y;
+
+        if (Math.sqrt(dx * dx + dy * dy) < 12) {
+          a.components.forEach(c => {
+            c.onCollision(b);
+          });
+          b.components.forEach(c => {
+            c.onCollision(a);
+          });
+        }
+      }
+    }
+
     this.post(dt);
 
   }

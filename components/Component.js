@@ -22,6 +22,8 @@ class Component {
 
   remove () {}
 
+  onCollision () {}
+
   // Helper for getting other components on entity
   getComponent (name) {
     return !this.entity ? null : this.entity.getComponent(name);

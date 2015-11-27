@@ -20,6 +20,13 @@ class FlyRight extends Component {
     this.deps.Position.x += speed * dt * 100;
   }
 
+  onCollision (e) {
+    if (e.name === "ghost") {
+      e.remove = true;
+      this.entity.remove = true;
+    }
+  }
+
 }
 
 export default FlyRight;
