@@ -23,6 +23,7 @@ class Keys {
 
     $(Env.game.container).on("keyup", ({which}) => {
       const k = this.keys[which];
+      if (!k) { return; }
       k.down = false;
     });
   }

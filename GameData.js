@@ -40,12 +40,12 @@ const scene = {
       args: ["spawnerBoss", 150, 150],
       comps: [
         //["Damage", 10],
-        ["Spawner", "spawner", 2.33, 30, 30],
+        ["Spawner", "spawner", 2.4, 30, 30],
         ["Renderer", "#088", 18],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],
         ["MoveSine", "y", 0.4, 2],
-        ["ColorChange"]
+        ["ColorChange", 2.4]
       ]
     }
   ]

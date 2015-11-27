@@ -41,8 +41,6 @@ export default class {
     this._doReset = true;
   }
   _reset () {
-    id = 1;
-    console.log("reseting. entit:", this.entities.length);
     this.entities = this.entities.filter(e => {
       e.components = e.components.filter(c => {
         e.removeComponent(c);
@@ -52,7 +50,8 @@ export default class {
     });
     this._starts = [];
     this.last = 0;
-    console.log("done:", this.entities.length, this._starts.length);
+    id = 1;
+    
     this.loadScene();
   }
 
@@ -66,7 +65,6 @@ export default class {
     GameData.entities
       .map(data => Entities.make(data))
       .map(e => this.addEntity(e));
-    console.log("lod", this.entities.length, GameData.entities);
   }
 
   getPrefabByName (name) {
