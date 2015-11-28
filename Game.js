@@ -72,7 +72,7 @@ export default class {
   }
 
   getPrefabByName (name) {
-    const data = GameData.entities.find(e => e.args[0] === name);
+    const data = GameData.entities.find(e => e.name === name);
     const entity = Entities.make(data);
     return entity;
   }

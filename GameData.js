@@ -1,23 +1,26 @@
 const scene = {
   entities: [{
-      args: ["player", 200, 150],
+      name: "player",
+      pos: [200, 150, 32, 24],
       comps: [
         ["KeyController"],
         ["KeyShooter", 0.15],
         ["Player"],
-        ["Renderer", "transparent", 25, "spaceship1.png"]
+        ["Renderer", "transparent", "spaceship1.png"]
       ]
     },
     {
-      args: ["bullet", 0, -20],
+      name: "bullet",
+      pos: [0, -20, 15, 15],
       comps: [
         ["FlyRight"],
         ["Life", 2],
-        ["Renderer", "#ff0", 4]
+        ["Renderer", "#ff0"]
       ]
     },
     {
-      args: ["ghost", 50, 150],
+      name: "ghost",
+      pos: [50, 150, 24, 24],
       comps: [
         ["ClickRegener", 10],
         ["Damage"],
@@ -25,11 +28,12 @@ const scene = {
         ["LifeRenderer"],
         ["Wander", 2],
         ["MoveTowards", "player", 1],
-        ["Renderer", "transparent", 25, "spaceMonster1.png"]
+        ["Renderer", "transparent", "spaceMonster1.png"]
       ]
     },
     {
-      args: ["spawner", 150, 150],
+      name: "spawner",
+      pos: [150, 150, 32, 32],
       comps: [
         ["Damage", 5],
         ["Renderer", "#222"],
@@ -37,11 +41,12 @@ const scene = {
       ]
     },
     {
-      args: ["spawnerBoss", 150, 50],
+      name: "spawnerBoss",
+      pos: [150, 50, 24, 24],
       comps: [
         //["Damage", 10],
         ["Spawner", "spawner", 2.4, 30, 30],
-        ["Renderer", "#088", 18],
+        ["Renderer", "#088"],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],
         ["MoveSine", "y", 0.4, 2],

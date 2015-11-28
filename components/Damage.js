@@ -18,7 +18,7 @@ class Damage extends Component {
 
   onCollision (e) {
     if (!this.enabled) { return; }
-    if (e.prefab.args[0] === this.hitBy) {
+    if (e.prefab.name === this.hitBy) {
       Env.game.removeEntity(e);
       if (this.hits-- <=0) {
         Env.game.removeEntity(this.entity);

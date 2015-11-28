@@ -32,7 +32,10 @@ class EntityComponent extends Component {
   onChooseImage (e, field) {
     const img = e.target.getAttribute("data-img");
     if (img) {
-      this.state.imagePickerCallback(img);
+      const {naturalWidth, naturalHeight} = e.target;
+      this.state.imagePickerCallback(img, naturalWidth, naturalHeight);
+    } else {
+      this.state.imagePickerCallback(null);
     }
     this.toggleImageDialog(null);
   }
@@ -58,7 +61,24 @@ class EntityComponent extends Component {
         return <Input value={val.name} onChange={v => {}} />
       case "Image":
         return <span>
-          <button onClick={() => this.toggleImageDialog((img) => component[field] = img)}>select</button>
+          <button onClick={() => this.toggleImageDialog((img, w, h) => {
+              component[field] = img ? img : "";
+              const rend = component.getComponent("Renderer");
+              if (rend) {
+                // If no img, set a background color. If img, remove background color.
+                if (img) {
+                  rend.color = "transparent";
+                } else {
+                  rend.color = `hsl(${Math.random() * 360|0}, 50%, 50%)`;
+                }
+              }
+              const pos = component.getComponent("Position");
+              if (pos) {
+                // Set new dimensions... do automatic?
+                pos.w = w;
+                pos.h = h;
+              }
+            })}>select</button>
           <Input value={val} onChange={v => {}} />
         </span>
       default:

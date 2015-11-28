@@ -19,7 +19,7 @@ Browse at http://localhost:9966
 
 Entities are simple objects that have a `name` and a bunch of `components`, and not much else! All state and logic is done by components.
 
-Can make an entity with `new Entity("name", xpos, ypos)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically. May change that.)
+Can make an entity with `new Entity("name", x, y, w, h)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically - also, position also includes `w` and `h` dimensions. May change that.)
 
 Setting an entities `remove` property to `true` will remove it from the game on the next game update tick.
 
@@ -72,7 +72,8 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 ```js
   const entity = Entities.make({
-    args: ["entityName", posX, posY],
+    name: "entityName"
+    pos: [100, 100, 32, 32],
     comps: [
       ["ColorChange"],
       ["Renderer"]
@@ -80,7 +81,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
   });
 ```
 
-`args` is array of `entity name`, `x position`, and `y position` (might get rid of the position requirement later)
+`name` is the name for the entity. Must be unique (gets appended with ID if not). `pos` is an array of `x position`, and `y position`, `width`, and `height` (might get rid of the position requirement later)
 
 ```js
   Entities.serialize(entity);

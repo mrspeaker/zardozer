@@ -28,8 +28,8 @@ class SideBar extends Component {
 
     return <div className="sidebar">
       <div className="mainTabs" style={{paddingBottom: "5px"}}>
-        <button className={tab === "ents" ? "tabOui" : "tabNon"} onClick={() => this.onSelectTab("ents")}>Entities</button>
-        <button className={tab === "ent" ? "tabOui" : "tabNon"} onClick={() => this.onSelectTab("ent")}>Selected</button>
+        <button title="List all active entities" className={tab === "ents" ? "tabOui" : "tabNon"} onClick={() => this.onSelectTab("ents")}>Entities</button>
+        <button title="Show selected entity details" className={tab === "ent" ? "tabOui" : "tabNon"} onClick={() => this.onSelectTab("ent")}>Selected</button>
       </div>
       <div className="sidebarContent">
         {tab === "ent" && <Entity entity={selected} />}

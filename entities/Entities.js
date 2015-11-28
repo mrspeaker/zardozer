@@ -2,7 +2,7 @@ import Entity from "./Entity";
 import components from "../components/";
 
 const make = (data) => {
-  const EntityFunc = Function.prototype.bind.call(Entity, null, ...data.args);
+  const EntityFunc = Function.prototype.bind.call(Entity, null, data.name, ...data.pos);
   const entity = new EntityFunc();
   entity.prefab = data;
   data.comps.forEach(c => addComponent(entity, c));
@@ -16,8 +16,8 @@ const addComponent = (e, comp) => {
 
 const serialize = (e) => {
   const {name} = e;
-  const {x, y} = e.getComponent("Position");
-  const args = [name, x | 0, y | 0];
+  const {x, y, w, h} = e.getComponent("Position");
+  const pos = [x | 0, y | 0, w, h];
   const comps = e.components.reduce((ac, c) => {
     if (c.name === "Position") {
       return ac;
@@ -34,7 +34,7 @@ const serialize = (e) => {
     return [...ac, comp];
   }, []);
 
-  return {args, comps};
+  return {name, pos, comps};
 }
 
 const instanciate = (e) => make(e.prefab);

@@ -11,11 +11,11 @@ class MenuBar extends Component {
     return <header className="header">
       <span>Funkity v0.01.</span>
       &nbsp;
-      <button onClick={this.props.onTogglePlay}>{this.props.mode}</button>
+      <button title="toggle Play/Edit (Enter)" onClick={this.props.onTogglePlay}>{this.props.mode}</button>
       &nbsp;
-      <button onClick={this.props.onAdd}>Add Entity</button>
+      <button title="create new entity at 50,50" onClick={this.props.onAdd}>Add Entity</button>
       &nbsp;
-      <button onClick={this.props.onNewGame}>New Game</button>
+      <button title="create a new game" onClick={this.props.onNewGame}>New Game</button>
     </header>
   }
 }
