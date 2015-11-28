@@ -182,6 +182,10 @@ export default class {
     if (!e.id) {
       e.id = id++;
     }
+    const sameName = this.entities.find(e2 => e2.name === e.name);
+    if (sameName) {
+      e.name += "-" + e.id;
+    }
     this.entities.push(e);
     return e;
   }

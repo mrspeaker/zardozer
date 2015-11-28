@@ -4,7 +4,7 @@ import Env from "../Env";
 class Player extends Component {
 
   onCollision (e) {
-    if (e.name === "ghost") {
+    if (e.prefab.args[0] === "ghost") {
       Env.game.removeEntity(e);
       Env.game.removeEntity(this.entity);
       Env.game.reset();
