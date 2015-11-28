@@ -9,11 +9,17 @@ A Unity-style component system and editor for making games.
 
 Browse at http://localhost:9966
 
+
+* `Enter` toggles PLAY and EDIT modes.
+* Click on entity name in sidebar to edit
+* Add components to an entity in the sidebar (dodgy at the moment)
+* `New game` clears all the entitites. Not much point at the moment - no saving!
+
 ## Entities
 
 Entities are simple objects that have a `name` and a bunch of `components`, and not much else! All state and logic is done by components.
 
-Can make an enitity with `new Entity("name", xpos, ypos)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically. May change that.)
+Can make an entity with `new Entity("name", xpos, ypos)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically. May change that.)
 
 Setting an entities `remove` property to `true` will remove it from the game on the next game update tick.
 
@@ -83,17 +89,25 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 ### To figure out
 
 * How to spawn prefabs without requiring an instance
-* drag n drop assets (general filesystem access)
-* How to create new games from scratch (moving out game-specific components and files)
+* drag n drop assets (general filesystem access (or at least base64 encode))
+* Create new games from scratch (moving out game-specific components and files)
 * Make instances Env.game.getEntityByName() automagic?
+* how to organise components (allow a tree)
 
 ### TODOs
 
+* restart with edits (don't lose new etc)
+* dump game to json / allow import from json / localstorage
 * renaming enitites
 * changing entity refs in editor
+* scene graph for entities
+* integrate pixi.js
+* select/move entities with mouse in edit mode.
 
 ### Ideas
 
 * should be very easy to add images/sprite sheets/atlases
 * some kind of animation system
-* integrate some free sources automatically (like unity asset store)
+* edit pixels directly in the game
+* integrate some free sources automatically (search/itegrate imgs/spritesheets directly)
+* proxy the brower localstorage sqlite db?!

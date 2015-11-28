@@ -13,9 +13,9 @@ class MenuBar extends Component {
       &nbsp;
       <button onClick={this.props.onTogglePlay}>{this.props.mode}</button>
       &nbsp;
-      <button onClick={this.props.onAdd}>Add Enitity</button>
+      <button onClick={this.props.onAdd}>Add Entity</button>
       &nbsp;
-      <button onClick={this.props.onNewGame}>New Game</button>        
+      <button onClick={this.props.onNewGame}>New Game</button>
     </header>
   }
 }

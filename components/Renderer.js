@@ -12,13 +12,13 @@ class Renderer extends Component {
 
   _lastColor;
   _lastSize;
-  _lastImage;
+  _lastImage = null;
 
   constructor (color = "#800", size = 24, image) {
     super();
     this.color = color;
     this.size = size;
-    this.image = image;
+    this.image = image ? image : "";
   }
 
   start () {
@@ -45,7 +45,6 @@ class Renderer extends Component {
       dom.style.backgroundColor = color;
       dom.style.width = size + "px";
       dom.style.height = size + "px";
-      dom.style.borderRadius = (size / 2) + "px";
       this._lastSize = size;
     }
     if (_lastImage !== image) {
@@ -53,6 +52,8 @@ class Renderer extends Component {
         dom.style.backgroundImage = `url(../assets/images/${image})`;
       }
       this._lastImage = image;
+      // Circl-y if no image.
+      dom.style.borderRadius = image === "" ? (size / 2) + "px" : 0;
     }
     dom.style.left = pos.x + "px";
     dom.style.top = pos.y + "px";
