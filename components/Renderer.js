@@ -30,7 +30,7 @@ class Renderer extends Component {
 
   update () {
     const {dom, color, image, _lastColor, _lastImage, _lastW, _lastH} = this;
-    const {x, y, w, h} = this.deps.Position;
+    const {x, y, w, h, z} = this.deps.Position;
 
     if (!dom) {
       console.warn("no dom", this.entity);
@@ -45,6 +45,7 @@ class Renderer extends Component {
       dom.style.height = h + "px";
       this._lastW = w;
       this._lastH = h;
+      dom.style.zIndex = z;
     }
     if (_lastImage !== image) {
       if (!image) {

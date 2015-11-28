@@ -34,14 +34,14 @@ class Spawner extends Component {
     this.time += dt;
     if (this.time > this.rate) {
       this.time -= this.rate;
-      const spawnerPos = this.deps.Position;
+      const {x, y, w, h} = this.deps.Position;
       const e = Env.game.spawn(this.prefab);
       // Set the new position near the spawner
       const pos = e.getComponent("Position");
-      const x = Math.random() * this.xRange;
-      const y = Math.random() * this.yRange;
-      pos.x = spawnerPos.x + (x - this.xRange / 2);
-      pos.y = spawnerPos.y + (y - this.yRange / 2);
+      const xo = Math.random() * w;
+      const yo = Math.random() * h;
+      pos.x = x + xo - (pos.w / 2);
+      pos.y = y + yo - (pos.h / 2);
     }
   }
 }

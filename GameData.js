@@ -1,7 +1,7 @@
 const scene = {
   entities: [{
       name: "player",
-      pos: [50, 150, 67, 94],
+      pos: [50, 150, 67, 94, 10],
       comps: [
         ["KeyController"],
         ["KeyShooter", 0.15],
@@ -11,7 +11,7 @@ const scene = {
     },
     {
       name: "bullet",
-      pos: [0, -20, 15, 15],
+      pos: [0, -20, 15, 15, 6],
       comps: [
         ["FlyRight"],
         ["Life", 2],
@@ -20,7 +20,7 @@ const scene = {
     },
     {
       name: "ghost",
-      pos: [320, 160, 69, 71],
+      pos: [320, 160, 69, 71, 5],
       comps: [
         ["ClickRegener", 10],
         ["Damage"],
@@ -33,7 +33,7 @@ const scene = {
     },
     {
       name: "spawner",
-      pos: [290, 120, 32, 32],
+      pos: [290, 120, 64, 64, 1],
       comps: [
         ["Damage", 5],
         ["Renderer", "#222"],
@@ -42,7 +42,7 @@ const scene = {
     },
     {
       name: "spawnerBoss",
-      pos: [150, 50, 70, 70],
+      pos: [150, 50, 70, 70, 11],
       comps: [
         //["Damage", 10],
         ["Spawner", "spawner", 2.4, 30, 30],

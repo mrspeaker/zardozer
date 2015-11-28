@@ -3,14 +3,14 @@ import Position from "../components/Position";
 
 class Entity {
 
-  constructor (name, x = 0, y = 0, w = 32, h = 32) {
+  constructor (name, x = 0, y = 0, w = 32, h = 32, z = 5) {
     this.name = name;
     this.components = [];
 
     // Adding Position by default... not sure that's a good idea.
     // not all entities need a position (but it could be good for displaying
     // in a game editor)
-    this.addComponent(new Position(x, y, w, h));
+    this.addComponent(new Position(x, y, w, h, z));
 
     this.remove = false;
   }
