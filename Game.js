@@ -109,6 +109,7 @@ export default class {
       });
     });
 
+    // TODO: smarter collisions, move outta here.
     // Naive collisions... check everything, tell everyone.
     for (let i = 0; i < this.entities.length - 1; i++) {
       const a = this.entities[i];
@@ -116,10 +117,11 @@ export default class {
         const b = this.entities[j];
         const aPos = a.getComponent("Position");
         const bPos = b.getComponent("Position");
-        const dx = aPos.x - bPos.x;
-        const dy = aPos.y - bPos.y;
 
-        if (Math.sqrt(dx * dx + dy * dy) < 12) {
+        if (aPos.x + aPos.w >= bPos.x &&
+          aPos.x <= bPos.x + bPos.w &&
+          aPos.y + aPos.h >= bPos.y &&
+          aPos.y <= bPos.y + bPos.h) {
           a.components.forEach(c => {
             c.onCollision(b);
           });
