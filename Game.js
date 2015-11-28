@@ -10,6 +10,7 @@ let id = 1;
 export default class {
 
   _doReset = false;
+  _reloadOnReset = true;
 
   constructor (container) {
     this.entities = [];
@@ -37,8 +38,9 @@ export default class {
     Env.game.container.focus();
   }
 
-  reset () {
+  reset (reload = true) {
     this._doReset = true;
+    this._reloadOnReset = reload;
   }
   _reset () {
     this.entities = this.entities.filter(e => {
@@ -51,8 +53,10 @@ export default class {
     this._starts = [];
     this.last = 0;
     id = 1;
-    
-    this.loadScene();
+
+    if (this._reloadOnReset) {
+      this.loadScene();
+    }
   }
 
   bindEvents() {
@@ -151,6 +155,18 @@ export default class {
       this._reset();
       this._doReset = false;
     }
+  }
+
+  renderOnlyUpdate () {
+    // Just visual refresh, for editor.
+    // Don't know a nice way to do this... mark render-only components somehow?
+    this.entities.forEach(e => {
+      e.components.forEach(c => {
+        if (c.name.indexOf("enderer") > -1) {
+          c.update(0);
+        }
+      });
+    });
   }
 
   // Game specific... move.

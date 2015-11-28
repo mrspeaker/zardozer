@@ -33,6 +33,10 @@ class Renderer extends Component {
     const {dom, color, size, image, _lastColor, _lastSize, _lastImage} = this;
     const pos = this.deps.Position;
 
+    if (!dom) {
+      console.warn("no dom", this.entity);
+      return;
+    }
     if (_lastColor !== color) {
       dom.style.backgroundColor = color;
       this._lastColor = color;

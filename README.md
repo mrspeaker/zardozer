@@ -2,7 +2,7 @@
 
 A Unity-style component system and editor for making games.
 
-<img width="719" alt="Funkity game editor" src="https://cloud.githubusercontent.com/assets/129330/11429251/4673657c-9443-11e5-9d61-23224b7daabc.png">
+<img width="808" alt="v0.01.2" src="https://cloud.githubusercontent.com/assets/129330/11452809/004ae194-95c2-11e5-9741-80370669ba62.png">
 
 * `npm install`
 * `npm start`
@@ -11,7 +11,7 @@ Browse at http://localhost:9966
 
 ## Entities
 
-Simple objects, that have a name and a bunch of `components`, and not much else! All state and logic is done by components.
+Entities are simple objects that have a `name` and a bunch of `components`, and not much else! All state and logic is done by components.
 
 Can make an enitity with `new Entity("name", xpos, ypos)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically. May change that.)
 
@@ -91,3 +91,9 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 * renaming enitites
 * changing entity refs in editor
+
+### Ideas
+
+* should be very easy to add images/sprite sheets/atlases
+* some kind of animation system
+* integrate some free sources automatically (like unity asset store)

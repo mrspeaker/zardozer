@@ -77,6 +77,22 @@ button {
   width: 80px
 }
 
+.mainTabs button:focus {
+  outline: none;
+}
+.sidebar button.tabOui {
+    background-color: #555;
+}
+.mainTabs button:first-child {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.mainTabs button:not(:first-child) {
+  border-radius: 0;
+}
+.sidebar button.tabNon {
+}
+
 @media screen and (min-width: 600px) {
   .main {
     flex-direction: row-reverse;
@@ -105,4 +121,22 @@ button {
 }
 .entityComponent > div > div {
   clear: both;
+}
+
+.dialog {
+  position: absolute;
+  left: 200px;
+  top: 40px;
+  width: 400px;
+  height: 300px;
+  background-color: rgba(0,0,0,0.5);
+  border:2px solid #000;
+  color: #999;
+  z-index: 99;
+}
+
+.imgGrid > img {
+  width: 32px;
+  height: 32px;
+  border:1px solid red;
 }

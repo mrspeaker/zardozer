@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./Input";
+import ImagePicker from "./ImagePicker";
 
 const {
   Component
@@ -9,15 +10,37 @@ class EntityComponent extends Component {
 
   constructor () {
     super();
+
+    this.state = {
+      showImagePicker: false,
+      imagePickerCallback: null
+    };
     this.onClick = this.onClick.bind(this);
+    this.onChooseImage = this.onChooseImage.bind(this);
   }
 
-  onClick () {
+  onClick () {}
+
+  toggleImageDialog (cb) {
+    const show = !this.state.showImagePicker
+    this.setState({
+      showImagePicker: show,
+      imagePickerCallback: show ? cb : null
+    });
+  }
+
+  onChooseImage (e, field) {
+    const img = e.target.getAttribute("data-img");
+    if (img) {
+      this.state.imagePickerCallback(img);
+    }
+    this.toggleImageDialog(null);
   }
 
   render () {
     const {component} = this.props;
     const {propTypes, deps} = component.constructor;
+    const {showImagePicker} = this.state;
 
     let propertiesDef = [];
     if (propTypes) {
@@ -34,6 +57,10 @@ class EntityComponent extends Component {
       case "Instance":
         return <Input value={val.name} onChange={v => {}} />
       case "Image":
+        return <span>
+          <button onClick={() => this.toggleImageDialog((img) => component[field] = img)}>select</button>
+          <Input value={val} onChange={v => {}} />
+        </span>
       default:
         return <Input value={val} onChange={v => {
           const newVal = type === "Number" ? parseFloat(v, 10) :  v;
@@ -59,6 +86,7 @@ class EntityComponent extends Component {
       <div style={{paddingLeft:"5px"}}>
         {properties}
       </div>
+      {showImagePicker && <ImagePicker onChoose={this.onChooseImage} />}
     </div>;
   }
 }

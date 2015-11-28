@@ -30,11 +30,12 @@ class SideBar extends Component {
     if (!game) return null;
 
     const {entities} = game;
+    const {tab} = this.state;
 
     return <div className="sidebar">
-      <div style={{paddingBottom: "5px"}}>
-        <button onClick={() => this.onSelect("ents")}>Entites</button>&nbsp;
-        <button onClick={() => this.onSelect("ent")}>Selected</button>
+      <div className="mainTabs" style={{paddingBottom: "5px"}}>
+        <button className={tab === "ents" ? "tabOui" : "tabNon"} onClick={() => this.onSelect("ents")}>Entities</button>
+        <button className={tab === "ent" ? "tabOui" : "tabNon"} onClick={() => this.onSelect("ent")}>Selected</button>
       </div>
       <div className="sidebarContent">
         {this.state.tab === "ent" && <Entity entity={selected} />}

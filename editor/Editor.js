@@ -29,12 +29,21 @@ class Editor extends Component {
 
     this.tick = this.tick.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
+    this.onNewGame = this.onNewGame.bind(this);
+
   }
 
   onTogglePlay () {
     this.setState({
       mode: this.state.mode === "PLAY" ? "EDIT" : "PLAY"
     });
+    if (this.state.mode === "EDIT") {
+      Env.game.container.focus();
+    }
+  }
+
+  onNewGame () {
+    Env.game.reset(false);
   }
 
   tick (time) {
@@ -43,6 +52,8 @@ class Editor extends Component {
 
     if (this.state.mode === "PLAY") {
       this.state.game.update(dt);
+    } else {
+      this.state.game.renderOnlyUpdate();
     }
     requestAnimationFrame(this.tick);
   }
@@ -73,7 +84,7 @@ class Editor extends Component {
     const {game, selected, mode} = this.state;
 
     return <div>
-      <MenuBar game={game} onAdd={this.onAdd} mode={mode} onTogglePlay={this.onTogglePlay}/>
+      <MenuBar game={game} onAdd={this.onAdd} mode={mode === "PLAY" ? "Pause" : "Play"} onNewGame={this.onNewGame} onTogglePlay={this.onTogglePlay}/>
       <div className="main">
         <SideBar game={game} selected={selected} onSelect={this.onSelect} />
         <GameUI game={game} />

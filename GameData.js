@@ -37,7 +37,7 @@ const scene = {
       ]
     },
     {
-      args: ["spawnerBoss", 150, 150],
+      args: ["spawnerBoss", 150, 50],
       comps: [
         //["Damage", 10],
         ["Spawner", "spawner", 2.4, 30, 30],
