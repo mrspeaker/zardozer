@@ -53,7 +53,7 @@ To use it in the game, create the file in `/components/` and add it to the `/com
 *static fields*
 
 * `static propTypes = {}` (used for serializing/editor)
-  - Number, Boolean, Color, Instance, String
+  - Number, Boolean, Color, Instance, String, Image
 * `static deps = []`
   - Names of components to require. Access with `this.deps.CompName`
 
@@ -62,6 +62,7 @@ To use it in the game, create the file in `/components/` and add it to the `/com
 * `start ()` // Called before first update tick. Be sure to call super.start();
 * `update (dt)` // Called every frame
 * `remove() ` // Called when component removed from entity
+* `onCollision(entity)` Called when component collides with another
 
 Get any references to other entities in `start` with `Env.game.getEntityByName(targetName)`.
 (This might be magical-ized).
