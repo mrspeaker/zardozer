@@ -64,7 +64,7 @@ To use it in the game, create the file in `/components/` and add it to the `/com
 * `remove() ` // Called when component removed from entity
 
 Get any references to other entities in `start` with `Env.game.getEntityByName(targetName)`.
-(This might be magical-ized)
+(This might be magical-ized).
 
 ## Serializing/deserializing
 
@@ -89,10 +89,10 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 ### To figure out
 
-* How to spawn prefabs without requiring an instance
+* Figure out "game" API (getEntityByName, spawn etc...)
 * drag n drop assets (general filesystem access (or at least base64 encode))
 * Create new games from scratch (moving out game-specific components and files)
-* Make instances Env.game.getEntityByName() automagic?
+* Make instances Env.game.getEntityByName() automagic? General instance handling.
 * how to organise components (allow a tree)
 
 ### TODOs
@@ -104,6 +104,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 * scene graph for entities
 * integrate pixi.js
 * select/move entities with mouse in edit mode.
+* duplicating "Add Entity"'s (crashes atm)
 
 ### Ideas
 
@@ -111,4 +112,4 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 * some kind of animation system
 * edit pixels directly in the game
 * integrate some free sources automatically (search/itegrate imgs/spritesheets directly)
-* proxy the brower localstorage sqlite db?!
+* proxy the brower localstorage sqlite db?! crazy.
