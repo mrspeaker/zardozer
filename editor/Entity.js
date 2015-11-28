@@ -34,6 +34,8 @@ class Entity extends Component {
       <EntityComponents components={components} />
       <hr/>
       <ComponentAdd onAdd={this.onAdd} />
+      <br/>
+      <button onClick={this.props.onDuplicate}>Duplicate</button>
     </div>;
   }
 }

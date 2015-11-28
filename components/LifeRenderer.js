@@ -6,6 +6,7 @@ class LifeRenderer extends Component {
 
   update () {
     const {Renderer, Life} = this.deps;
+    if (!Renderer) { return; }
     Renderer.dom.textContent = Math.floor(Life.time * 10);
   }
 

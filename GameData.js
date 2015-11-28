@@ -1,12 +1,12 @@
 const scene = {
   entities: [{
       name: "player",
-      pos: [200, 150, 32, 24],
+      pos: [200, 150, 67, 94],
       comps: [
         ["KeyController"],
         ["KeyShooter", 0.15],
         ["Player"],
-        ["Renderer", "transparent", "spaceship1.png"]
+        ["Renderer", "transparent", "p1_jump.png"]
       ]
     },
     {
@@ -20,7 +20,7 @@ const scene = {
     },
     {
       name: "ghost",
-      pos: [50, 150, 24, 24],
+      pos: [50, 150, 69, 71],
       comps: [
         ["ClickRegener", 10],
         ["Damage"],
@@ -28,7 +28,7 @@ const scene = {
         ["LifeRenderer"],
         ["Wander", 2],
         ["MoveTowards", "player", 1],
-        ["Renderer", "transparent", "spaceMonster1.png"]
+        ["Renderer", "transparent", "p3_duck.png"]
       ]
     },
     {
@@ -42,15 +42,15 @@ const scene = {
     },
     {
       name: "spawnerBoss",
-      pos: [150, 50, 24, 24],
+      pos: [150, 50, 70, 70],
       comps: [
         //["Damage", 10],
         ["Spawner", "spawner", 2.4, 30, 30],
-        ["Renderer", "#088"],
+        ["Renderer", "", "tochLit.png"],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],
         ["MoveSine", "y", 0.4, 2],
-        ["ColorChange", 2.4]
+        //["ColorChange", 2.4]
       ]
     }
   ]

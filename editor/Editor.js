@@ -72,18 +72,13 @@ class Editor extends Component {
       this.state.game.update(dt);
     } else {
       this.state.game.renderOnlyUpdate();
-      Keys.update();
     }
     requestAnimationFrame(this.tick);
   }
 
+  //TODO: rename to onAddNew
   onAdd () {
     this.onSelect(Env.game.addBlankEntity());
-    if (this.state.mode === "EDIT") {
-      // NOpe: should just run the _start functions.
-      // else it ticks everything one frame.
-      this.state.game.update(0);
-    };
   }
 
   onSelect (selected) {

@@ -10,6 +10,8 @@ class KeyShooter extends Component {
     repeat: "Number"
   };
 
+  direction = 1;
+
   constructor (repeat = 0.1) {
     super();
     this.time = 0;
@@ -24,10 +26,16 @@ class KeyShooter extends Component {
       return;
     }
 
+    if (Keys.isDown(37)) { this.direction = -1; }
+    if (Keys.isDown(39)) { this.direction = 1; }
+
     this.time = 0;
     const pos = this.deps.Position;
     const b = Env.game.addPrefabByName("bullet");
     const bPos = b.getComponent("Position");
+    const bFly = b.getComponent("FlyRight");
+    bFly.speed = 5 * this.direction;
+    
     // TODO: offset should be option.
     bPos.x = pos.x + 17;
     bPos.y = pos.y + 9;

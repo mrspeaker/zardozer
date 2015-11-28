@@ -15,6 +15,7 @@ export default class {
   constructor (container) {
     this.entities = [];
     this._starts = [];
+    this._entitiesToAdd = [];
     this.container = container;
     Env.game = this;
   }
@@ -97,6 +98,12 @@ export default class {
   update (dt) {
     dt /= 1000; // Let's work in seconds.
 
+    // Do any adds
+    this._entitiesToAdd = this._entitiesToAdd.filter(e => {
+      this.entities.push(e);
+      return false;
+    });
+
     // Do any component start functions.
     this._starts = this._starts.filter(f => {
       f();
@@ -113,11 +120,10 @@ export default class {
     // Naive collisions... check everything, tell everyone.
     for (let i = 0; i < this.entities.length - 1; i++) {
       const a = this.entities[i];
+      const aPos = a.getComponent("Position");
       for (let j = i + 1; j < this.entities.length; j++) {
         const b = this.entities[j];
-        const aPos = a.getComponent("Position");
         const bPos = b.getComponent("Position");
-
         if (aPos.x + aPos.w >= bPos.x &&
           aPos.x <= bPos.x + bPos.w &&
           aPos.y + aPos.h >= bPos.y &&
@@ -161,6 +167,19 @@ export default class {
 
   renderOnlyUpdate () {
     // Just visual refresh, for editor.
+
+    // Do any adds
+    this._entitiesToAdd = this._entitiesToAdd.filter(e => {
+      this.entities.push(e);
+      return false;
+    });
+
+    // Do any component start functions.
+    this._starts = this._starts.filter(f => {
+      f();
+      return false;
+    });
+
     // Don't know a nice way to do this... mark render-only components somehow?
     this.entities.forEach(e => {
       e.components.forEach(c => {
@@ -169,6 +188,8 @@ export default class {
         }
       });
     });
+
+    this.post(0);
   }
 
   // Game specific... move.
@@ -188,7 +209,7 @@ export default class {
     if (sameName) {
       e.name += "-" + e.id;
     }
-    this.entities.push(e);
+    this._entitiesToAdd.push(e);
     return e;
   }
 
