@@ -37,7 +37,15 @@ const serialize = (e) => {
   return {name, pos, comps};
 }
 
-const instanciate = (e) => make(e.prefab);
+const instanciate = (e) => {
+  if (!e.prefab) {
+    // console.log("no prefab");
+    // i think this is hack - shouldn't use prefabs - just serialize?
+    // oooor, there is two types... prefabs and instances.
+    e.prefab = serialize(e);
+  }
+  return make(e.prefab);
+};
 
 export default {
   make,
