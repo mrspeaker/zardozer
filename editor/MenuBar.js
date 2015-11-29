@@ -9,7 +9,7 @@ class MenuBar extends Component {
 
   render () {
     return <header className="header">
-      <span>Funkity v0.01.</span>
+      <span>Zardozer v0.01.</span>
       &nbsp;
       <button title="toggle Play/Edit (Enter)" onClick={this.props.onTogglePlay}>{this.props.mode}</button>
       &nbsp;

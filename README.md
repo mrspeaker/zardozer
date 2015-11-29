@@ -1,10 +1,10 @@
-# Funkity: a Unity-style component system
+# Zardozer: a Unity-style component system
 
 > Rough rough rough. This is pre-pre-alpha! Just testin' some Ideas.
 
-Funkity is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/funkity/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/funkity/blob/master/game/scene1.js).
+Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/zardozer/blob/master/game/scene1.js).
 
-<img width="817" alt="funkity v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11458374/993da3b2-968c-11e5-8e7e-efea1f7a187d.png">
+<img width="817" alt="Zardozer v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11458374/993da3b2-968c-11e5-8e7e-efea1f7a187d.png">
 
 * `npm install`
 * `npm start`

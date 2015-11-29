@@ -2912,7 +2912,7 @@ var MenuBar = (function (_Component) {
         _react2.default.createElement(
           "span",
           null,
-          "Funkity v0.01."
+          "Zardozer v0.01."
         ),
         " ",
         _react2.default.createElement(
