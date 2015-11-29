@@ -1,6 +1,6 @@
 # Funkity: a unity-style component system
 
-A Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/funkity/tree/master/components). You attach these to entities - and the hooking-up is defined via JSON. The intro demo game is defined in [game/scene1.js](https://github.com/mrspeaker/funkity/blob/master/game/scene1.js).
+A Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/funkity/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game is defined in [game/scene1.js](https://github.com/mrspeaker/funkity/blob/master/game/scene1.js).
 
 <img width="817" alt="funkity v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11458374/993da3b2-968c-11e5-8e7e-efea1f7a187d.png">
 
