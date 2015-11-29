@@ -16,17 +16,18 @@ class Renderer extends Component {
   _lastImage = null;
   _lastEnabled;
 
-  constructor (color = "#800", image) {
+  constructor (color = "#800", image, shadow = false) {
     super();
     this.enabled = true;
     this.color = color;
     this.image = image ? image : "";
+    this.shadow = shadow;
   }
 
   start () {
     super.start();
     const dom = document.createElement("div");
-    dom.className = "entity";
+    dom.className = "entity" + (this.shadow ? " entityWithShadow" : "");
     dom.style.position = "absolute";
     dom.setAttribute("data-entity", this.entity.name);
     Env.game.container.appendChild(dom);
@@ -68,6 +69,7 @@ class Renderer extends Component {
     }
     dom.style.left = x + "px";
     dom.style.top = y + "px";
+
   }
 
   remove () {

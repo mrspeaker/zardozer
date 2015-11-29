@@ -7,7 +7,7 @@ export default {
         ["KeyController"],
         ["KeyShooter", 0.15],
         ["Player"],
-        ["Renderer", "transparent", "p1_jump.png"]
+        ["Renderer", "", "p1_jump.png", true]
       ]
     },
     {
@@ -16,7 +16,7 @@ export default {
       comps: [
         ["FlyRight"],
         ["Life", 2],
-        ["Renderer", "#ffff00"]
+        ["Renderer", "#ffff00", "", true]
       ]
     },
     {
@@ -29,30 +29,33 @@ export default {
         ["LifeRenderer"],
         ["Wander", 2],
         ["MoveTowards", "player", 1],
-        ["Renderer", "transparent", "p3_duck.png"]
+        ["Renderer", "", "p3_duck.png", true]
       ]
     },
+    // Ghost spawner
     {
       name: "spawner",
       pos: [290, 120, 32, 32, 1],
       comps: [
         ["Damage", 6],
-        ["Renderer", "#222222"],
+        ["Renderer", "#222222", "", true],
         ["Spawner", "ghost", 0.9, 1]
       ]
     },
+    // Flying boss spawner-dropper
     {
       name: "spawnerBoss",
       pos: [150, 50, 70, 70, 11],
       comps: [
         ["Spawner", "spawner", 1.9],
-        ["Renderer", "", "tochLit.png"],
+        ["Renderer", "", "tochLit.png", true],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],
         ["MoveSine", "y", 0.4, 2],
         ["MoveTowards", "player", 1]
       ]
     },
+    // Tile prefabs.
     {
       name: "box1",
       pos:[0, -70, 70, 70, 0],
@@ -74,6 +77,7 @@ export default {
         ["Renderer", "", "snowCenter.png"]
       ]
     },
+    // Background - uses the box prefabs to make a grid
     {
       name: "level",
       pos:[0, 0, 770, 420, 0],

@@ -16,6 +16,8 @@ Browse at http://localhost:9966
 * `delete` removes current selection
 * `New game` clears all the entitites. Not much point at the moment - no saving!
 
+In this system, game logic is implemented in [components](https://github.com/mrspeaker/funkity/tree/master/components). You attach these to entities - and the hooking-up is defined via JSON. The intro demo game is defined in [game/scene1.js](https://github.com/mrspeaker/funkity/blob/master/game/scene1.js).
+
 ## Entities
 
 Entities are the "things" in your game. They don't have any data or logic inside them - they are just a container for `components` which maintain all the state and do all the work.
