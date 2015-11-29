@@ -3,26 +3,27 @@ import Env from "../Env";
 
 class GridIt extends Component {
 
+  // TODO: how to handle arrays
   static propTypes = {
-    prefab: "Instance",
-    prefab2: "Instance"
+    prefabs: "Array<Instance>",
   };
 
-  constructor (prefab, prefab2) {
+  constructor (prefabs) {
     super();
-    this.prefabName = prefab;
-    this.prefabName2 = prefab2;
+    this.prefabNames = prefabs;
   }
 
   start () {
     super.start();
-    const prefab = Env.game.getPrefabByName(this.prefabName);
-    const pos = prefab.getComponent("Position");
-    const {x, y, w, h} = pos;
-    for (let j = 0; j < 6; j++) {
-      for (let i = 0; i < 11; i++) {
-        const name = Math.random() < 0.3 ? this.prefabName : this.prefabName2;
-        Env.game.spawn(Env.game.getPrefabByName(name), i * w, j * h);
+    this.prefabs = this.prefabNames.map(Env.game.getPrefabByName);
+    const {x, y, w, h} = this.getComponent("Position");
+    const {w:tileW, h:tileH} = this.prefabs[0].getComponent("Position");
+    const xTiles = w / tileW | 0;
+    const yTiles = h / tileH | 0;
+    for (let j = 0; j < yTiles; j++) {
+      for (let i = 0; i < xTiles; i++) {
+        const prefab = this.prefabs[Math.random() * this.prefabs.length | 0];
+        Env.game.spawn(prefab, x + (i * tileW), y + (j * tileH));
       }
     }
   }

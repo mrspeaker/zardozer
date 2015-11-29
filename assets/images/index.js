@@ -2,9 +2,8 @@
 export default [
   "boxEmpty.png",
   "castleCenter.png",
-  "dirtCenter.png",
+  "snowCenter.png",
   "grass.png",
-  "grassCenter.png",
   "grassHalf.png",
   "index.js",
   "ladder_mid.png",

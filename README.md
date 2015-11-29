@@ -18,15 +18,19 @@ Browse at http://localhost:9966
 
 ## Entities
 
-Entities are simple objects that have a `name` and a bunch of `components`, and not much else! All state and logic is done by components.
+Entities are the "things" in your game. They don't have any data or logic inside them - they are just a container for `components` which maintain all the state and do all the work.
 
-Can make an entity with `new Entity("name", x, y, w, h)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically - also, position also includes `w` and `h` dimensions. May change that.)
+Ok, they have a *tiny* bit of data in them: a `name`, and `id` (internal use), and a `remove` flag.
+
+Most entities are added via the editor, but up can make an entity with `new Entity("name", x, y, w, h, zIndex)` or with the helper below for deserializing from data. (The `Position` component is currently added automatically - also, position also includes `w` and `h` dimensions. May change that.)
 
 Setting an entities `remove` property to `true` will remove it from the game on the next game update tick.
 
+Entities also have a few helper methods: `addComponent` to add a new component, `removeComponent` to remove an existing one, and `getComponent` to find a component by name.
+
 ## Components
 
-Here's an example component that randomly changes an entity's color every `rate` seconds:
+Components maintain state and perform logic on that state. They can also interact with other components that are on the same entity. Here's an example component that randomly changes an entity's color every `rate` seconds:
 
 ```js
 class ColorChange extends Component {
@@ -92,20 +96,20 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 ### To figure out
 
 * Figure out "game" API (getEntityByName, spawn etc...)
-* drag n drop assets (general filesystem access (or at least base64 encode))
 * Create new games from scratch (moving out game-specific components and files)
-* Make instances Env.game.getEntityByName() automagic? General instance handling.
+* drag n drop assets (general filesystem access (or at least base64 encode))
+* Make instances Env.game.getEntityByName() automagic? General "instance vs prefab" handling.
 * how to organise components (allow a tree)
 
 ### TODOs
 
-* restart with edits (don't lose new etc)
+* Array params... how should they work in editor?
+* restart with edits (don't lose new etc). Needs a "stop" not just "pause".
 * dump game to json / allow import from json / localstorage
-* renaming enitites
+* renaming enitities
 * changing entity refs in editor
 * scene graph for entities
 * integrate pixi.js
-* select/move entities with mouse in edit mode.
 
 ### Ideas
 

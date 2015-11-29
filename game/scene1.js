@@ -1,4 +1,5 @@
-const scene = {
+export default {
+  name: "scene 1",
   entities: [{
       name: "player",
       pos: [50, 150, 67, 94, 10],
@@ -35,16 +36,16 @@ const scene = {
       name: "spawner",
       pos: [290, 120, 32, 32, 1],
       comps: [
-        ["Damage", 5],
+        ["Damage", 6],
         ["Renderer", "#222222"],
-        ["Spawner", "ghost", 2]
+        ["Spawner", "ghost", 0.9, 1]
       ]
     },
     {
       name: "spawnerBoss",
       pos: [150, 50, 70, 70, 11],
       comps: [
-        ["Spawner", "spawner", 2.4],
+        ["Spawner", "spawner", 1.9],
         ["Renderer", "", "tochLit.png"],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],
@@ -56,24 +57,29 @@ const scene = {
       name: "box1",
       pos:[0, -70, 70, 70, 0],
       comps: [
-        ["Renderer", "", "liquidWater.png"]
+        ["Renderer", "", "castleCenter.png"]
       ]
     },
     {
       name: "box2",
       pos:[70, -70, 70, 70, 0],
       comps: [
-        ["Renderer", "", "grassCenter.png"]
+        ["Renderer", "", "sandCenter.png"]
+      ]
+    },
+    {
+      name: "box3",
+      pos:[140, -70, 70, 70, 0],
+      comps: [
+        ["Renderer", "", "snowCenter.png"]
       ]
     },
     {
       name: "level",
-      pos:[0, 0, 100, 100, 0],
+      pos:[0, 0, 770, 420, 0],
       comps: [
-        ["GridIt", "box1", "box2"]
+        ["GridIt", ["box1", "box2", "box3"], 11, 6],
       ]
     }
   ]
 };
-
-export default scene;

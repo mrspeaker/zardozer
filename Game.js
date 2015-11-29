@@ -7,7 +7,7 @@ import GameData from "./game/scene1";
 
 let id = 1;
 
-export default class {
+class Game {
 
   _doReset = false;
   _reloadOnReset = true;
@@ -244,3 +244,5 @@ export default class {
   }
 
 }
+
+export default Game;

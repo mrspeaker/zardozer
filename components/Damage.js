@@ -20,7 +20,7 @@ class Damage extends Component {
     if (!this.enabled) { return; }
     if (e.prefab.name === this.hitBy) {
       Env.game.removeEntity(e);
-      if (this.hits-- <=0) {
+      if (--this.hits <=0) {
         Env.game.removeEntity(this.entity);
       }
     }
