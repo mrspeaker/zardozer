@@ -29,6 +29,7 @@ class Editor extends Component {
     this.last = 0;
 
     this.onAdd = this.onAdd.bind(this);
+    this.onDuplicate = this.onDuplicate.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onSelectTab = this.onSelectTab.bind(this);
 
@@ -121,14 +122,32 @@ class Editor extends Component {
     if (this.state.mode === "PLAY") {
       this.state.game.update(dt);
     } else {
+      this.handleKeys();
       this.state.game.renderOnlyUpdate();
     }
     requestAnimationFrame(this.tick);
   }
 
+  handleKeys () {
+    if (Keys.pressed(68)) {
+      this.onDuplicate();
+    }
+  }
+
   //TODO: rename to onAddNew
   onAdd () {
     this.onSelect(Env.game.addBlankEntity());
+  }
+
+  onDuplicate () {
+    const {game, selected} = this.state;
+    const newEntity = game.spawn(selected);
+    const newPos = newEntity.getComponent("Position");
+    const pos = selected.getComponent("Position");
+    newPos.x = pos.x + pos.w;
+    newPos.y = pos.y - (pos.h / 2) | 0;
+
+    this.onSelect(newEntity);
   }
 
   onSelect (selected) {
@@ -162,7 +181,7 @@ class Editor extends Component {
     return <div>
       <MenuBar game={game} onAdd={this.onAdd} mode={mode === "PLAY" ? "Pause" : "Play"} onNewGame={this.onNewGame} onTogglePlay={this.onTogglePlay}/>
       <div className="main">
-        <SideBar game={game} selected={selected}  onSelect={this.onSelect} tab={sidebarTab} onSelectTab={this.onSelectTab} />
+        <SideBar game={game} selected={selected} onDuplicate={this.onDuplicate} onSelect={this.onSelect} tab={sidebarTab} onSelectTab={this.onSelectTab} />
         <GameUI game={game} />
       </div>
       <footer className="footer">...</footer>

@@ -58,6 +58,7 @@ class EntityComponent extends Component {
         return <input type="checkbox" checked={val} onChange={() => component[field] = !component[field]} />
         break;
       case "Instance":
+        if (!val) return null;
         return <Input value={val.name} onChange={v => {}} />
       /*
       // html5 picker doesn't handle alpha or non-present attrib.

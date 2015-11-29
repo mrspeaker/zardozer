@@ -10,20 +10,10 @@ class SideBar extends Component {
   constructor () {
     super();
     this.onEntitySelect = this.onEntitySelect.bind(this);
-    this.onDuplicate = this.onDuplicate.bind(this);
   }
 
   onSelectTab (tab) {
     this.props.onSelectTab(tab);
-  }
-
-  onDuplicate (a) {
-    const {game, selected} = this.props;
-    const newEntity = game.spawn(selected);
-    const newPos = newEntity.getComponent("Position");
-    const pos = selected.getComponent("Position");
-    newPos.x = pos.x + pos.w;
-    newPos.y = pos.y - (pos.h / 2) | 0;
   }
 
   onEntitySelect (e) {
@@ -42,7 +32,7 @@ class SideBar extends Component {
         <button title="Show selected entity details" className={tab === "ent" ? "tabOui" : "tabNon"} onClick={() => this.onSelectTab("ent")}>Selected</button>
       </div>
       <div className="sidebarContent">
-        {tab === "ent" && <Entity entity={selected} onDuplicate={this.onDuplicate} />}
+        {tab === "ent" && <Entity entity={selected} onDuplicate={this.props.onDuplicate} />}
         {tab === "ents" && <div>
           <strong>Active entities: {entities.length}</strong>
           {entities.map((e, i) => {

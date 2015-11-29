@@ -35,7 +35,7 @@ class Entity extends Component {
       <hr/>
       <ComponentAdd onAdd={this.onAdd} />
       <br/>
-      <button onClick={this.props.onDuplicate}>Duplicate</button>
+      <button title="Duplicate selected entityt (d)" onClick={this.props.onDuplicate}>Duplicate</button>
     </div>;
   }
 }
