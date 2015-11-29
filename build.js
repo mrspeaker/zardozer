@@ -1380,7 +1380,7 @@ var Renderer = (function (_Component) {
         } else if (_Env2.default.images.find(function (i) {
           return i === image;
         })) {
-          dom.style.backgroundImage = "url(../assets/images/" + image + ")";
+          dom.style.backgroundImage = "url(./assets/images/" + image + ")";
         }
         this._lastImage = image;
         // Circl-y if no image.
@@ -2716,7 +2716,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _images = require("../assets/images");
+var _images = require("./assets/images");
 
 var _images2 = _interopRequireDefault(_images);
 
@@ -2761,7 +2761,7 @@ var ImagePicker = (function (_Component) {
           "div",
           { className: "imgGrid" },
           _images2.default.map(function (i) {
-            return _react2.default.createElement("img", { "data-img": i, onClick: _this2.props.onChoose, src: "../assets/images/" + i });
+            return _react2.default.createElement("img", { "data-img": i, onClick: _this2.props.onChoose, src: "./assets/images/" + i });
           })
         )
       );
@@ -2773,7 +2773,7 @@ var ImagePicker = (function (_Component) {
 
 exports.default = ImagePicker;
 
-},{"../assets/images":3,"react":199}],32:[function(require,module,exports){
+},{"./assets/images":3,"react":199}],32:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31735,7 +31735,7 @@ module.exports = performanceNow;
  *
  * @providesModule shallowEqual
  * @typechecks
- * 
+ *
  */
 
 'use strict';
