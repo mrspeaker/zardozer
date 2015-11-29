@@ -77,6 +77,12 @@ button {
   width: 80px
 }
 
+.sidebar input[type='color'] {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
 .mainTabs button:focus {
   outline: none;
 }

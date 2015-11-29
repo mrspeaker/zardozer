@@ -11,11 +11,11 @@ const scene = {
     },
     {
       name: "bullet",
-      pos: [0, -20, 15, 15, 6],
+      pos: [0, -20, 18, 18, 6],
       comps: [
         ["FlyRight"],
         ["Life", 2],
-        ["Renderer", "#ff0"]
+        ["Renderer", "#ffff00"]
       ]
     },
     {
@@ -33,11 +33,11 @@ const scene = {
     },
     {
       name: "spawner",
-      pos: [290, 120, 64, 64, 1],
+      pos: [290, 120, 32, 32, 1],
       comps: [
         ["Damage", 5],
-        ["Renderer", "#222"],
-        ["Spawner", "ghost", 2, 10, 10]
+        ["Renderer", "#222222"],
+        ["Spawner", "ghost", 2]
       ]
     },
     {
@@ -45,7 +45,7 @@ const scene = {
       pos: [150, 50, 70, 70, 11],
       comps: [
         //["Damage", 10],
-        ["Spawner", "spawner", 2.4, 30, 30],
+        ["Spawner", "spawner", 2.4],
         ["Renderer", "", "tochLit.png"],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],

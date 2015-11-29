@@ -214,8 +214,8 @@ export default class {
   }
 
   addBlankEntity () {
-    const e = new Entity("entity", 50, 50);
-    Entities.addComponent(e, ["Renderer", "#800"]);
+    const e = new Entity("entity", 50, 50, 69, 71, 5);
+    Entities.addComponent(e, ["Renderer", "", "p3_duck.png"]);
     return this.addEntity(e);
   }
 

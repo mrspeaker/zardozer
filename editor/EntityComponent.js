@@ -59,6 +59,10 @@ class EntityComponent extends Component {
         break;
       case "Instance":
         return <Input value={val.name} onChange={v => {}} />
+      case "Color":
+        return <input value={val} type="color" onChange={v => {
+          component[field] = v.target.value;
+        }}/>
       case "Image":
         return <span>
           <button onClick={() => this.toggleImageDialog((img, w, h) => {
@@ -85,7 +89,6 @@ class EntityComponent extends Component {
         return <Input value={val} onChange={v => {
           const newVal = type === "Number" ? parseFloat(v, 10) :  v;
           component[field] = newVal;
-          // component.update(1000/60);// TODO: update in EDIT mode
         }} />
       }
     }
