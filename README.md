@@ -2,7 +2,7 @@
 
 A Unity-style component system and editor for making games.
 
-<img width="797" alt="Funkity v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11454506/f931288e-95fb-11e5-9812-55b981952f26.png">
+<img width="817" alt="funkity v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11458374/993da3b2-968c-11e5-8e7e-efea1f7a187d.png">
 
 * `npm install`
 * `npm start`
