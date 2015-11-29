@@ -6,7 +6,7 @@
 
 Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/Zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/Zardozer/blob/master/game/scene1.js).
 
-<img width="817" alt="Zardozer v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11458374/993da3b2-968c-11e5-8e7e-efea1f7a187d.png">
+<img width="710" alt="Zardozer v0.01.4" src="https://cloud.githubusercontent.com/assets/129330/11459631/de48f45e-96a8-11e5-9fe5-f7b00fe57075.png">
 
 * `npm install`
 * `npm start`
