@@ -44,13 +44,12 @@ const scene = {
       name: "spawnerBoss",
       pos: [150, 50, 70, 70, 11],
       comps: [
-        //["Damage", 10],
         ["Spawner", "spawner", 2.4],
         ["Renderer", "", "tochLit.png"],
         ["MoveSine", "x", 0.7, 4],
         ["MoveSine", "y", 0.3, 2],
         ["MoveSine", "y", 0.4, 2],
-        //["ColorChange", 2.4]
+        ["MoveTowards", "player", 1]
       ]
     },
     {

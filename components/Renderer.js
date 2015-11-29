@@ -37,8 +37,8 @@ class Renderer extends Component {
     const {dom, color, image, enabled, _lastColor, _lastImage, _lastEnabled, _lastW, _lastH} = this;
     const pos = this.deps.Position;
 
-    if (!dom || !pos) {
-      //console.warn("no dom", this.entity);
+    if (!dom) {
+      console.warn("no dom", this.entity);
       return;
     }
     const {x, y, w, h, z} = pos;

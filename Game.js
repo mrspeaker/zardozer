@@ -1,9 +1,9 @@
-import GameData from "./GameData";
 import Mouse from "./controls/Mouse";
 import Keys from "./controls/Keys";
 import Entities from "./entities/Entities";
 import Entity from "./entities/Entity";
 import Env from "./Env";
+import GameData from "./game/scene1";
 
 let id = 1;
 
@@ -12,12 +12,14 @@ export default class {
   _doReset = false;
   _reloadOnReset = true;
 
-  constructor (container) {
+  // TODO: was adding gamedata as param instead of import...
+  constructor (container, gameData) {
     this.entities = [];
     this._starts = [];
     this._nextStarts = [];
     this._entitiesToAdd = [];
     this.container = container;
+    this.gameData = gameData;
     Env.game = this;
   }
 
@@ -200,7 +202,10 @@ export default class {
     this.post(0);
   }
 
-  // Game specific... move.
+  addStart (f) {
+    this._nextStarts.push(f);
+  }
+
   spawn (e, x, y) {
     const ent = this.addEntity(Entities.instanciate(e));
     if (x !== null) {
@@ -209,10 +214,6 @@ export default class {
       pos.y = y;
     }
     return ent;
-  }
-
-  addStart (f) {
-    this._nextStarts.push(f);
   }
 
   addEntity (e) {
@@ -228,7 +229,7 @@ export default class {
   }
 
   addBlankEntity () {
-    // Should use helper method!
+    // Should use helper method / data style. Always force this?
     const e = new Entity("entity", 50, 50, 69, 71, 5);
     Entities.addComponent(e, ["Renderer", "", "p3_duck.png"]);
     return this.addEntity(e);
