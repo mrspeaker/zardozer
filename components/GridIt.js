@@ -15,7 +15,7 @@ class GridIt extends Component {
 
   start () {
     super.start();
-    this.prefabs = this.prefabNames.map(Env.game.getPrefabByName);
+    this.prefabs = this.prefabNames.map(p => Env.game.getPrefabByName(p));
     const {x, y, w, h} = this.getComponent("Position");
     const {w:tileW, h:tileH} = this.prefabs[0].getComponent("Position");
     const xTiles = w / tileW | 0;

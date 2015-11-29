@@ -8,12 +8,15 @@ import SideBar from "./SideBar";
 import Game from "../Game";
 import Env from "../Env";
 import Keys from "../controls/Keys";
+import GameData from "../game/demoGame";
 
 const {
   Component
 } = React;
 
 class Editor extends Component {
+
+  lastTime = 0;
 
   constructor () {
     super();
@@ -26,16 +29,14 @@ class Editor extends Component {
       mouseDown: false
     }
 
-    this.last = 0;
-
-    this.onAdd = this.onAdd.bind(this);
+    this.tick = this.tick.bind(this);
+    this.onNewGame = this.onNewGame.bind(this);
+    this.onTogglePlay = this.onTogglePlay.bind(this);
+    this.onAddNewEntity = this.onAddNewEntity.bind(this);
     this.onDuplicate = this.onDuplicate.bind(this);
-    this.onSelect = this.onSelect.bind(this);
+    this.onSelectEntity = this.onSelectEntity.bind(this);
     this.onSelectTab = this.onSelectTab.bind(this);
 
-    this.tick = this.tick.bind(this);
-    this.onTogglePlay = this.onTogglePlay.bind(this);
-    this.onNewGame = this.onNewGame.bind(this);
     this.onEntityDown = this.onEntityDown.bind(this);
     this.onEntityDrag = this.onEntityDrag.bind(this);
     this.onEntityUp = this.onEntityUp.bind(this);
@@ -45,7 +46,21 @@ class Editor extends Component {
       this.state.game.update(0);
       this.onTogglePlay();
     });
+  }
+  
+  componentDidMount () {
+    this.createGame();
+    setInterval(() => {
+      this.forceUpdate();
+    }, 500);
 
+    requestAnimationFrame(this.tick);
+  }
+
+  createGame () {
+    const game = new Game(document.querySelector("#game"));
+    game.init(GameData.scenes[GameData.initial]);
+    this.setState({game});
   }
 
   onTogglePlay () {
@@ -77,7 +92,7 @@ class Editor extends Component {
   }
 
   onEntityDown (e) {
-    this.onSelect(Env.game.getEntityByName(e.target.getAttribute("data-entity")));
+    this.onSelectEntity(Env.game.getEntityByName(e.target.getAttribute("data-entity")));
     this.setState({
       mouseDown: true
     })
@@ -111,8 +126,8 @@ class Editor extends Component {
   }
 
   tick (time) {
-    const dt = this.last ? time - this.last : 1000 / 60;
-    this.last = time;
+    const dt = this.lastTime ? time - this.lastTime : 1000 / 60;
+    this.lastTime = time;
 
     // Enter to toggle play mode.
     if (Keys.pressed(13)) {
@@ -120,10 +135,11 @@ class Editor extends Component {
     }
 
     if (this.state.mode === "PLAY") {
+      // Normal game tick.
       this.state.game.update(dt);
     } else {
       this.handleKeys();
-      this.state.game.renderOnlyUpdate();
+      this.state.game.updateRenderOnly(dt);
     }
     requestAnimationFrame(this.tick);
   }
@@ -141,9 +157,8 @@ class Editor extends Component {
     }
   }
 
-  //TODO: rename to onAddNew
-  onAdd () {
-    this.onSelect(Env.game.addBlankEntity());
+  onAddNewEntity () {
+    this.onSelectEntity(Env.game.addBlankEntity());
   }
 
   onDuplicate () {
@@ -154,10 +169,10 @@ class Editor extends Component {
     newPos.x = pos.x + pos.w;
     newPos.y = pos.y - (pos.h / 2) | 0;
 
-    this.onSelect(newEntity);
+    this.onSelectEntity(newEntity);
   }
 
-  onSelect (selected) {
+  onSelectEntity (selected) {
     this.setState({
       selected,
       sidebarTab: "ent"
@@ -170,27 +185,28 @@ class Editor extends Component {
     });
   }
 
-  componentDidMount () {
-    const game = new Game(document.querySelector("#game"));
-    game.init();
-    this.setState({game});
-
-    setInterval(() => {
-      this.forceUpdate();
-    }, 1000);
-
-    requestAnimationFrame(this.tick);
-  }
-
   render () {
     const {game, selected, mode, sidebarTab} = this.state;
 
     return <div>
-      <MenuBar game={game} onAdd={this.onAdd} mode={mode === "PLAY" ? "Pause" : "Play"} onNewGame={this.onNewGame} onTogglePlay={this.onTogglePlay}/>
+      <MenuBar
+        game={game}
+        mode={mode === "PLAY" ? "Pause" : "Play"}
+        onNewGame={this.onNewGame}
+        onTogglePlay={this.onTogglePlay}
+        onAddNewEntity={this.onAddNewEntity} />
+
       <div className="main">
-        <SideBar game={game} selected={selected} onDuplicate={this.onDuplicate} onSelect={this.onSelect} tab={sidebarTab} onSelectTab={this.onSelectTab} />
+        <SideBar
+          game={game}
+          selected={selected}
+          tab={sidebarTab}
+          onDuplicate={this.onDuplicate}
+          onSelect={this.onSelectEntity}
+          onSelectTab={this.onSelectTab} />
         <GameUI game={game} />
       </div>
+
       <footer className="footer">...</footer>
     </div>
   }

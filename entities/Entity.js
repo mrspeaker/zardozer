@@ -23,7 +23,7 @@ class Entity {
     // If there are start methods on the comp, add it to be run next tick.
     // this should probably be done by some global marshaller
     if (comp.start) {
-      Env.game.addStart(comp.start.bind(comp));
+      Env.game.addStartFunction(comp.start.bind(comp));
     }
 
     return comp;
