@@ -1,6 +1,6 @@
 # Funkity: a Unity-style component system
 
-> Rough rough rough. This is pre-alpha-alpha! Just testin' some Ideas
+> Rough rough rough. This is pre-pre-alpha! Just testin' some Ideas.
 
 Funkity is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/funkity/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/funkity/blob/master/game/scene1.js).
 
@@ -12,10 +12,10 @@ Funkity is a Unity-style component system and editor for making games. In this s
 Browse at http://localhost:9966
 
 * `Enter` toggles PLAY and EDIT modes.
-* Click/drag entity... edit in sidebar
-* Add components to an entity in the sidebar (dodgy at the moment)
-* `d` duplicates current selection
+* Click and drag entities... Edit them in sidebar (try toggling components on/off)
+* `d` duplicates current selection (try duplicating "player")
 * `delete` removes current selection
+* Add components to an entity in the sidebar (dodgy at the moment: need to manually add params)
 * `New game` clears all the entitites. Not much point at the moment - no saving!
 
 ## Entities

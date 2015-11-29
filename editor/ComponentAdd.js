@@ -76,7 +76,7 @@ class ComponentAdd extends Component {
       comps.push(val);
     }
     return <div>
-      comp: <select onChange={this.onChange} value={this.state.selected}>
+      component: <select onChange={this.onChange} value={this.state.selected}>
         <option value="">--</option>
         {comps.map(c => {
           return <option value={c}>{c}</option>
