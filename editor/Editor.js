@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 
 import MenuBar from "./MenuBar";
 import GameUI from "./Game";
@@ -20,7 +21,7 @@ class Editor extends Component {
     this.state = {
       game: null,
       selected: null,
-      mode: "EDIT",
+      mode: "PLAY",
       sidebarTab: "ents",
     }
 
@@ -33,10 +34,12 @@ class Editor extends Component {
     this.tick = this.tick.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
+    this.onEditorEntityClick = this.onEditorEntityClick.bind(this);
 
     // Hack: tick one frame of game to start in edit mode.
     requestAnimationFrame(() => {
       this.state.game.update(0);
+      this.onTogglePlay();
     });
 
   }
@@ -49,7 +52,16 @@ class Editor extends Component {
     // Focus game (for key access)
     if (mode === "PLAY") {
       Env.game.container.focus();
+      // add event listeners
+      $(Env.game.container).off("click", ".entity", this.onEditorEntityClick);
+    } else {
+      // remove even listererens
+      $(Env.game.container).on("click", ".entity", this.onEditorEntityClick);
     }
+  }
+
+  onEditorEntityClick (e) {
+    this.onSelect(Env.game.getEntityByName(e.target.getAttribute("data-entity")));
   }
 
   onNewGame () {

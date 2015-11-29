@@ -23,7 +23,9 @@ class Renderer extends Component {
   start () {
     super.start();
     const dom = document.createElement("div");
+    dom.className = "entity";
     dom.style.position = "absolute";
+    dom.setAttribute("data-entity", this.entity.name);
     Env.game.container.appendChild(dom);
     this.dom = dom;
   }
