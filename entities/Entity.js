@@ -6,6 +6,7 @@ class Entity {
   constructor (name, x = 0, y = 0, w = 32, h = 32, z = 5) {
     this.name = name;
     this.components = [];
+    this.prefab = {};
 
     // Adding Position by default... not sure that's a good idea.
     // not all entities need a position (but it could be good for displaying

@@ -108,7 +108,7 @@ export default class {
 
     this._starts = this._nextStarts.slice();
     this._nextStarts = [];
-    
+
     // Do any component start functions.
     this._starts = this._starts.filter(f => {
       f();
@@ -228,6 +228,7 @@ export default class {
   }
 
   addBlankEntity () {
+    // Should use helper method!
     const e = new Entity("entity", 50, 50, 69, 71, 5);
     Entities.addComponent(e, ["Renderer", "", "p3_duck.png"]);
     return this.addEntity(e);

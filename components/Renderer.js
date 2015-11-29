@@ -5,6 +5,7 @@ class Renderer extends Component {
 
   static deps = ["Position"];
   static propTypes = {
+    enabled: "Boolean",
     color: "Color",
     image: "Image"
   };
@@ -13,9 +14,11 @@ class Renderer extends Component {
   _lastW;
   _lastH;
   _lastImage = null;
+  _lastEnabled;
 
   constructor (color = "#800", image) {
     super();
+    this.enabled = true;
     this.color = color;
     this.image = image ? image : "";
   }
@@ -31,7 +34,7 @@ class Renderer extends Component {
   }
 
   update () {
-    const {dom, color, image, _lastColor, _lastImage, _lastW, _lastH} = this;
+    const {dom, color, image, enabled, _lastColor, _lastImage, _lastEnabled, _lastW, _lastH} = this;
     const pos = this.deps.Position;
 
     if (!dom || !pos) {
@@ -59,6 +62,9 @@ class Renderer extends Component {
       this._lastImage = image;
       // Circl-y if no image.
       dom.style.borderRadius = image === "" ? (w / 2) + "px" : 0;
+    }
+    if (_lastEnabled != enabled) {
+      dom.style.display = enabled ? "block" : "none";
     }
     dom.style.left = x + "px";
     dom.style.top = y + "px";
