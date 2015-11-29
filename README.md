@@ -106,7 +106,6 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 * scene graph for entities
 * integrate pixi.js
 * select/move entities with mouse in edit mode.
-* duplicating "Add Entity"'s (crashes atm)
 
 ### Ideas
 

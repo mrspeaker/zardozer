@@ -13,6 +13,7 @@ import ColorChange from "../components/ColorChange";
 import MoveSine from "../components/MoveSine";
 import FlyRight from "../components/FlyRight";
 import Player from "../components/Player";
+import GridIt from "../components/GridIt";
 
 export default {
   KeyController,
@@ -29,5 +30,6 @@ export default {
   ColorChange,
   MoveSine,
   FlyRight,
-  Player
+  Player,
+  GridIt
 };

@@ -52,6 +52,27 @@ const scene = {
         ["MoveSine", "y", 0.4, 2],
         //["ColorChange", 2.4]
       ]
+    },
+    {
+      name: "box1",
+      pos:[0, -70, 70, 70, 0],
+      comps: [
+        ["Renderer", "", "liquidWater.png"]
+      ]
+    },
+    {
+      name: "box2",
+      pos:[70, -70, 70, 70, 0],
+      comps: [
+        ["Renderer", "", "grassCenter.png"]
+      ]
+    },
+    {
+      name: "level",
+      pos:[0, 0, 100, 100, 0],
+      comps: [
+        ["GridIt", "box1", "box2"]
+      ]
     }
   ]
 };

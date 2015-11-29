@@ -15,6 +15,7 @@ export default class {
   constructor (container) {
     this.entities = [];
     this._starts = [];
+    this._nextStarts = [];
     this._entitiesToAdd = [];
     this.container = container;
     Env.game = this;
@@ -52,6 +53,7 @@ export default class {
       return false;
     });
     this._starts = [];
+    this._nextStarts = [];
     this.last = 0;
     id = 1;
 
@@ -104,6 +106,9 @@ export default class {
       return false;
     });
 
+    this._starts = this._nextStarts.slice();
+    this._nextStarts = [];
+    
     // Do any component start functions.
     this._starts = this._starts.filter(f => {
       f();
@@ -174,6 +179,9 @@ export default class {
       return false;
     });
 
+    this._starts = this._nextStarts.slice();
+    this._nextStarts = [];
+
     // Do any component start functions.
     this._starts = this._starts.filter(f => {
       f();
@@ -193,12 +201,18 @@ export default class {
   }
 
   // Game specific... move.
-  spawn (e) {
-    return this.addEntity(Entities.instanciate(e));
+  spawn (e, x, y) {
+    const ent = this.addEntity(Entities.instanciate(e));
+    if (x !== null) {
+      const pos = ent.getComponent("Position");
+      pos.x = x;
+      pos.y = y;
+    }
+    return ent;
   }
 
   addStart (f) {
-    this._starts.push(f);
+    this._nextStarts.push(f);
   }
 
   addEntity (e) {
