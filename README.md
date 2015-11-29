@@ -2,7 +2,7 @@
 
 > Rough rough rough. This is pre-pre-alpha! Just testin' some Ideas.
 
-* Try the **[Zardozer demo](https://mrspeaker.github.io/Zardozer/)** in your browser. (Hit "enter" to toggle play/edit mode. Drag things around in edit mode).
+* Try the **[Zardozer demo](https://mrspeaker.github.io/zardozer/)** in your browser. (Hit "enter" to toggle play/edit mode. Drag things around in edit mode).
 
 Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/Zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/Zardozer/blob/master/game/scene1.js).
 
