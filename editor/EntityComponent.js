@@ -59,10 +59,13 @@ class EntityComponent extends Component {
         break;
       case "Instance":
         return <Input value={val.name} onChange={v => {}} />
+      /*
+      // html5 picker doesn't handle alpha or non-present attrib.
       case "Color":
         return <input value={val} type="color" onChange={v => {
           component[field] = v.target.value;
         }}/>
+      */
       case "Image":
         return <span>
           <button onClick={() => this.toggleImageDialog((img, w, h) => {

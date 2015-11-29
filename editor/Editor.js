@@ -23,6 +23,7 @@ class Editor extends Component {
       selected: null,
       mode: "PLAY",
       sidebarTab: "ents",
+      mouseDown: false
     }
 
     this.last = 0;
@@ -34,7 +35,9 @@ class Editor extends Component {
     this.tick = this.tick.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
-    this.onEditorEntityClick = this.onEditorEntityClick.bind(this);
+    this.onEntityDown = this.onEntityDown.bind(this);
+    this.onEntityDrag = this.onEntityDrag.bind(this);
+    this.onEntityUp = this.onEntityUp.bind(this);
 
     // Hack: tick one frame of game to start in edit mode.
     requestAnimationFrame(() => {
@@ -52,16 +55,51 @@ class Editor extends Component {
     // Focus game (for key access)
     if (mode === "PLAY") {
       Env.game.container.focus();
-      // add event listeners
-      $(Env.game.container).off("click", ".entity", this.onEditorEntityClick);
+      this.removeDragHandlers();
     } else {
-      // remove even listererens
-      $(Env.game.container).on("click", ".entity", this.onEditorEntityClick);
+      this.addDragHandlers();
     }
   }
 
-  onEditorEntityClick (e) {
+  addDragHandlers () {
+    $(Env.game.container)
+      .on("mousedown", ".entity", this.onEntityDown)
+      .on("mousemove", this.onEntityDrag)
+      .on("mouseup", this.onEntityUp);
+  }
+
+  removeDragHandlers () {
+    $(Env.game.container)
+      .off("mousedown", ".entity", this.onEntityDown)
+      .off("mousemove", this.onEntityDrag)
+      .off("mouseup", this.onEntityUp);
+  }
+
+  onEntityDown (e) {
     this.onSelect(Env.game.getEntityByName(e.target.getAttribute("data-entity")));
+    this.setState({
+      mouseDown: true
+    })
+  }
+
+  onEntityUp (e) {
+    this.setState({
+      mouseDown: false
+    })
+  }
+
+  onEntityDrag (e) {
+    const {selected, mouseDown} = this.state;
+    if (!selected || !mouseDown) {
+      return;
+    }
+    const pos = selected.getComponent("Position");
+    if (!pos) {
+      return;
+    }
+
+    pos.x = e.clientX - (pos.w / 2);
+    pos.y = e.clientY - (pos.h);
   }
 
   onNewGame () {
