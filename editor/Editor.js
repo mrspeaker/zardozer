@@ -132,6 +132,13 @@ class Editor extends Component {
     if (Keys.pressed(68)) {
       this.onDuplicate();
     }
+
+    if (Keys.pressed(8)) {
+      const {game, selected} = this.state;
+      if (game && selected ) {
+        game.removeEntity(selected);
+      }
+    }
   }
 
   //TODO: rename to onAddNew

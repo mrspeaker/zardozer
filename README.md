@@ -9,10 +9,11 @@ A Unity-style component system and editor for making games.
 
 Browse at http://localhost:9966
 
-
 * `Enter` toggles PLAY and EDIT modes.
-* Click on entity name in sidebar to edit
+* Click/drag entity... edit in sidebar
 * Add components to an entity in the sidebar (dodgy at the moment)
+* `d` duplicates current selection
+* `delete` removes current selection
 * `New game` clears all the entitites. Not much point at the moment - no saving!
 
 ## Entities

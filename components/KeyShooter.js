@@ -35,10 +35,10 @@ class KeyShooter extends Component {
     const bPos = b.getComponent("Position");
     const bFly = b.getComponent("FlyRight");
     bFly.speed = 5 * this.direction;
-    
+
     // TODO: offset should be option.
-    bPos.x = pos.x + 17;
-    bPos.y = pos.y + 9;
+    bPos.x = pos.x + (this.direction * ((pos.w / 2) - bPos.w));
+    bPos.y = pos.y + (pos.h / 2) - (bPos.h / 2);
   }
 
 }

@@ -11,7 +11,12 @@ class Keys {
   constructor () { }
 
   init () {
-    $(Env.game.container).on("keydown", ({which}) => {
+    $(Env.game.container).on("keydown", e => {
+      const {which} = e;
+      if (which === 8) {
+        e.preventDefault();
+      }
+
       if (!this.keys[which]) {
         this.keys[which] = {};
       }
