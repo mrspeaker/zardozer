@@ -108,14 +108,13 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 ### TODOs
 
+* fix react warnings
 * Array params... how should they work in editor?
 * "Pause" shouldn't affect serialized state.
 * dump game to json / allow import from json / localstorage
-* renaming enitities
 * changing entity refs in editor
 * scene graph for entities
 * integrate pixi.js
-* duplicating "add entity" entity crash
 
 ### Ideas
 
@@ -124,3 +123,4 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 * edit pixels directly in the game
 * integrate some free sources automatically (search/itegrate imgs/spritesheets directly)
 * proxy the brower localstorage sqlite db?! crazy.
+--- or provide in app editor + image editor and download zip (jszip) file that unzips into project

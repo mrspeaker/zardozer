@@ -6,10 +6,6 @@ const {
 
 class GameUI extends Component {
 
-  constructor () {
-    super();
-  }
-
   render () {
     return <div id="screen" className="no-select">
       <div id="game" tabIndex="1"></div>
