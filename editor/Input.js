@@ -48,7 +48,7 @@ class Input extends Component {
 
   render () {
     const {value} = this.state;
-    return <input type="text" value={value} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
+    return <input type="text" value={value} onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />;
   }
 }
 

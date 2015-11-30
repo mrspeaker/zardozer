@@ -27,7 +27,7 @@ class Editor extends Component {
       mode: "PLAY",
       sidebarTab: "ents",
       mouseDown: false
-    }
+    };
 
     this.tick = this.tick.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
@@ -112,13 +112,13 @@ class Editor extends Component {
     this.onSelectEntity(Env.game.getEntityByName(e.target.getAttribute("data-entity")));
     this.setState({
       mouseDown: true
-    })
+    });
   }
 
-  onEntityUp (e) {
+  onEntityUp () {
     this.setState({
       mouseDown: false
-    })
+    });
   }
 
   onEntityDrag (e) {
@@ -200,7 +200,7 @@ class Editor extends Component {
       name,
       pos: [x, y, w, h, z],
       comps
-    }
+    };
   }
 
   serializeComponent (c) {
@@ -279,7 +279,7 @@ class Editor extends Component {
       </div>
 
       <footer className="footer">...</footer>
-    </div>
+    </div>;
   }
 }
 

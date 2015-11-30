@@ -22,14 +22,14 @@ class EntityComponent extends Component {
   onClick () {}
 
   toggleImageDialog (cb) {
-    const show = !this.state.showImagePicker
+    const show = !this.state.showImagePicker;
     this.setState({
       showImagePicker: show,
       imagePickerCallback: show ? cb : null
     });
   }
 
-  onChooseImage (e, field) {
+  onChooseImage (e) {
     const img = e.target.getAttribute("data-img");
     if (img) {
       const {naturalWidth, naturalHeight} = e.target;
@@ -42,7 +42,7 @@ class EntityComponent extends Component {
 
   render () {
     const {component} = this.props;
-    const {propTypes, deps} = component.constructor;
+    const {propTypes} = component.constructor;
     const {showImagePicker} = this.state;
 
     let propertiesDef = [];
@@ -55,11 +55,11 @@ class EntityComponent extends Component {
     const makeInput = (field, type, val) => {
       switch (type) {
       case "Boolean":
-        return <input type="checkbox" checked={val} onChange={() => component[field] = !component[field]} />
-        break;
+        return <input type="checkbox" checked={val} onChange={() =>
+          component[field] = !component[field]} />;
       case "Instance":
         if (!val) return null;
-        return <Input value={val.name} onChange={v => {}} />
+        return <Input value={val.name} onChange={() => {}} />;
       /*
       // html5 picker doesn't handle alpha or non-present attrib.
       case "Color":
@@ -70,32 +70,32 @@ class EntityComponent extends Component {
       case "Image":
         return <span>
           <button onClick={() => this.toggleImageDialog((img, w, h) => {
-              component[field] = img ? img : "";
-              const rend = component.getComponent("Renderer");
-              if (rend) {
-                // If no img, set a background color. If img, remove background color.
-                if (img) {
-                  rend.color = "transparent";
-                } else {
-                  rend.color = `hsl(${Math.random() * 360|0}, 50%, 50%)`;
-                }
+            component[field] = img ? img : "";
+            const rend = component.getComponent("Renderer");
+            if (rend) {
+              // If no img, set a background color. If img, remove background color.
+              if (img) {
+                rend.color = "transparent";
+              } else {
+                rend.color = `hsl(${Math.random() * 360|0}, 50%, 50%)`;
               }
-              const pos = component.getComponent("Position");
-              if (pos) {
-                // Set new dimensions... do automatic?
-                pos.w = w;
-                pos.h = h;
-              }
-            })}>select</button>
-          <Input value={val} onChange={v => {}} />
-        </span>
+            }
+            const pos = component.getComponent("Position");
+            if (pos) {
+              // Set new dimensions... do automatic?
+              pos.w = w;
+              pos.h = h;
+            }
+          })}>select</button>
+          <Input value={val} onChange={() => {}} />;
+        </span>;
       default:
         return <Input value={val} onChange={v => {
           const newVal = type === "Number" ? parseFloat(v, 10) :  v;
           component[field] = newVal;
-        }} />
+        }} />;
       }
-    }
+    };
 
     const hasEnabled = propertiesDef.find(p => p[0] === "enabled");
     let enabledBox = null;
@@ -106,7 +106,7 @@ class EntityComponent extends Component {
 
     const properties = propertiesDef.map((d, i) => {
       return <div key={i}>{d[0]}: {makeInput(d[0], d[1], component[d[0]])}</div>;
-    })
+    });
 
     return <div className="entityComponent" onClick={this.onClick}>
       <strong>{enabledBox}{component.name}</strong>

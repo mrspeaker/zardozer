@@ -19,7 +19,7 @@ class MenuBar extends Component {
       <button title="create new entity at 50,50" onClick={this.props.onAddNewEntity}>Add Entity</button>
       &nbsp;
       <button title="create a new game" onClick={this.props.onNewGame}>New Game</button>
-    </header>
+    </header>;
   }
 }
 

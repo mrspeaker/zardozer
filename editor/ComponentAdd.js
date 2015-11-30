@@ -12,7 +12,7 @@ class ComponentAdd extends Component {
     this.state = {
       selected: "",
       hint: ""
-    }
+    };
     this.onChange = this.onChange.bind(this);
     this.onAdd = this.onAdd.bind(this);
   }
@@ -48,7 +48,7 @@ class ComponentAdd extends Component {
         args.push(`'e1'`);
       }
       else if (p === "Number") {
-        args.push(`1`)
+        args.push(`1`);
       }
       else if (p === "Boolean") {
         args.push(true);
@@ -79,7 +79,7 @@ class ComponentAdd extends Component {
       component: <select onChange={this.onChange} value={this.state.selected}>
         <option value="">--</option>
         {comps.map(c => {
-          return <option value={c}>{c}</option>
+          return <option value={c}>{c}</option>;
         })}
       </select>
       <div>params: {this.state.hint}</div>

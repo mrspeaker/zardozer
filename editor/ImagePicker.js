@@ -19,7 +19,7 @@ class ImagePicker extends Component {
           return <img data-img={i} onClick={this.props.onChoose} src={"../assets/images/" + i} />;
         })}
       </div>
-    </div>
+    </div>;
   }
 }
 

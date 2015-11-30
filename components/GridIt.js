@@ -5,7 +5,7 @@ class GridIt extends Component {
 
   // TODO: how to handle arrays
   static propTypes = {
-    prefabs: "Array<Instance>",
+    prefabs: "Array<Instance>"
   };
 
   constructor (prefabs) {

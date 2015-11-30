@@ -10,7 +10,7 @@ const make = (data, needsSerializing = false) => {
   }
   data.comps.forEach(c => addComponent(entity, c));
   return entity;
-}
+};
 
 const addComponent = (e, comp) => {
   const CompFunc = Function.prototype.bind.call(components[comp[0]], null, ...comp.slice(1));
@@ -39,7 +39,7 @@ const serialize = (e) => {
     return [...ac, comp];
   }, []);
   return {name, pos, comps};
-}
+};
 
 const instanciate = (e) => {
   if (!e.prefab) {
@@ -56,4 +56,4 @@ export default {
   serialize,
   addComponent,
   instanciate
-}
+};
