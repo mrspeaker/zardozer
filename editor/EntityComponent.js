@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "./Input";
 import ImagePicker from "./ImagePicker";
+import Env from "../Env";
 
 const {
   Component
@@ -58,8 +59,19 @@ class EntityComponent extends Component {
         return <input type="checkbox" checked={val} onChange={() =>
           component[field] = !component[field]} />;
       case "Instance":
-        if (!val) return null;
-        return <Input value={val.name} onChange={() => {}} />;
+        if (!val) {
+          console.log("what nonsense is this?");
+          return null;
+        }
+        return <Input value={val.name} onChange={v => {
+          const e = Env.game.getEntityByName(v);
+          if (e) {
+            component[field] = Env.game.getEntityByName(v);
+          }
+          else {
+            console.log("Entity not found:", v);
+          }
+        }} />;
       /*
       // html5 picker doesn't handle alpha or non-present attrib.
       case "Color":

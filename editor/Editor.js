@@ -65,32 +65,44 @@ class Editor extends Component {
   }
 
   onTogglePlay () {
-    const mode = this.state.mode === "PLAY" ? "EDIT" : "PLAY";
-    this.setState({
-      mode
-    });
-    // Focus game (for key access)
-    if (mode === "PLAY") {
+    const curMode = this.state.mode;
+
+    if (curMode === "EDIT") {
+      this.setState({
+        mode: "PLAY"
+      });
+      this.removeDragHandlers();
       this.serializeLevel(); //- for saving edits
       Env.game.container.focus();
-      this.removeDragHandlers();
-    } else {
-      this.addDragHandlers();
+    }
+
+    else if (curMode === "PLAY" || curMode === "PAUSE") {
+      this.setState({
+        mode: "EDIT"
+      });
+      if (curMode !== "PAUSE") { // don't double-add if paused->stop
+        this.addDragHandlers();
+      }
       Env.game.reset(true); //- for saving edits (reset)
     }
+
   }
 
   onPausePlay () {
-    const mode = this.state.mode === "PLAY" ? "EDIT" : "PLAY";
-    this.setState({
-      mode
-    });
-    // Focus game (for key access)
-    if (mode === "PLAY") {
-      Env.game.container.focus();
-      this.removeDragHandlers();
-    } else {
+    const curMode = this.state.mode;
+
+    if (curMode === "PLAY") {
+      this.setState({
+        mode: "PAUSE"
+      });
       this.addDragHandlers();
+    }
+    else if (curMode === "PAUSE") {
+      this.setState({
+        mode: "PLAY"
+      });
+      this.removeDragHandlers();
+      Env.game.container.focus();
     }
   }
 
@@ -261,7 +273,7 @@ class Editor extends Component {
     return <div>
       <MenuBar
         game={game}
-        mode={mode === "PLAY" ? "Edit" : "Play"}
+        mode={mode}
         onNewGame={this.onNewGame}
         onTogglePlay={this.onTogglePlay}
         onPausePlay={this.onPausePlay}
