@@ -4,7 +4,7 @@
 
 * Try the **[Zardozer demo](https://mrspeaker.github.io/zardozer/)** in your browser. (Hit "enter" to toggle play/edit mode. Drag things around in edit mode).
 
-Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/Zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/Zardozer/blob/master/game/scene1.js).
+Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/Zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/demoGame.js](https://github.com/mrspeaker/zardozer/blob/master/game/demoGame.js).
 
 [<img width="710" alt="Zardozer v0.01.4" src="https://cloud.githubusercontent.com/assets/129330/11459631/de48f45e-96a8-11e5-9fe5-f7b00fe57075.png">](https://mrspeaker.github.io/zardozer/)
 
