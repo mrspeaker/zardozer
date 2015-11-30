@@ -32,6 +32,7 @@ class Editor extends Component {
     this.tick = this.tick.bind(this);
     this.onNewGame = this.onNewGame.bind(this);
     this.onTogglePlay = this.onTogglePlay.bind(this);
+    this.onPausePlay = this.onPausePlay.bind(this);
     this.onAddNewEntity = this.onAddNewEntity.bind(this);
     this.onDuplicate = this.onDuplicate.bind(this);
     this.onSelectEntity = this.onSelectEntity.bind(this);
@@ -76,6 +77,20 @@ class Editor extends Component {
     } else {
       this.addDragHandlers();
       Env.game.reset(true); //- for saving edits (reset)
+    }
+  }
+
+  onPausePlay () {
+    const mode = this.state.mode === "PLAY" ? "EDIT" : "PLAY";
+    this.setState({
+      mode
+    });
+    // Focus game (for key access)
+    if (mode === "PLAY") {
+      Env.game.container.focus();
+      this.removeDragHandlers();
+    } else {
+      this.addDragHandlers();
     }
   }
 
@@ -135,6 +150,11 @@ class Editor extends Component {
     if (Keys.pressed(13)) {
       this.onTogglePlay();
     }
+
+    if (Keys.pressed(80)) {
+      this.onPausePlay();
+    }
+
 
     if (this.state.mode === "PLAY") {
       // Normal game tick.
@@ -241,9 +261,10 @@ class Editor extends Component {
     return <div>
       <MenuBar
         game={game}
-        mode={mode === "PLAY" ? "Pause" : "Play"}
+        mode={mode === "PLAY" ? "Edit" : "Play"}
         onNewGame={this.onNewGame}
         onTogglePlay={this.onTogglePlay}
+        onPausePlay={this.onPausePlay}
         onAddNewEntity={this.onAddNewEntity} />
 
       <div className="main">

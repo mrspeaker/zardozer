@@ -17,10 +17,11 @@ const addComponent = (e, comp) => {
   e.addComponent(new CompFunc());
 };
 
+// Duplicated codeish - same is done in editor.serialzieEntity!
 const serialize = (e) => {
   const {name} = e;
-  const {x, y, w, h} = e.getComponent("Position");
-  const pos = [x | 0, y | 0, w, h];
+  const {x, y, w, h, z} = e.getComponent("Position");
+  const pos = [x | 0, y | 0, w, h, z];
   const comps = e.components.reduce((ac, c) => {
     if (c.name === "Position") {
       return ac;
@@ -29,6 +30,7 @@ const serialize = (e) => {
     const props = c.constructor.propTypes;
     if (props) {
       for (let p in props) {
+        if (p === "enabled") { continue; }
         const type = props[p];
         const propVal = type === "Instance" ? c[p].name : c[p];
         comp.push(propVal);
@@ -36,7 +38,6 @@ const serialize = (e) => {
     }
     return [...ac, comp];
   }, []);
-
   return {name, pos, comps};
 }
 

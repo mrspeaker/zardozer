@@ -109,12 +109,13 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 ### TODOs
 
 * Array params... how should they work in editor?
-* restart with edits (don't lose new etc). Needs a "stop" not just "pause".
+* "Pause" shouldn't affect serialized state.
 * dump game to json / allow import from json / localstorage
 * renaming enitities
 * changing entity refs in editor
 * scene graph for entities
 * integrate pixi.js
+* duplicating "add entity" entity crash
 
 ### Ideas
 
