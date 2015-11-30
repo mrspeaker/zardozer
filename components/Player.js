@@ -15,6 +15,7 @@ class Player extends Component {
 
   onCollision (e) {
     if (!this.enabled) { return; }
+    // TODO: should be passed in (Array<Instance>)
     if (e.prefab.name === "ghost") {
       Env.game.removeEntity(e);
       Env.game.removeEntity(this.entity);

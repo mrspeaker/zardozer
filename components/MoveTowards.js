@@ -1,5 +1,4 @@
 import Component from "./Component";
-import Env from "../Env";
 
 class MoveTowards extends Component {
 
@@ -17,9 +16,8 @@ class MoveTowards extends Component {
     this.speed = speed;
   }
 
-  start () {
-    super.start();
-    this.target = Env.game.getEntityByName(this.target);
+  updatePrefab (fieldName, entityName) {
+    super.updatePrefab (fieldName, entityName);
     this.targetPos = this.target.getComponent("Position");
   }
 

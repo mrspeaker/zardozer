@@ -9,7 +9,7 @@ export default {
         pos: [50, 150, 67, 94, 10],
         comps: [
           ["KeyController"],
-          ["KeyShooter", 0.15],
+          ["KeyShooter", "bullet", 0.15],
           ["Player"],
           ["Renderer", "", "p1_jump.png", true]
         ]

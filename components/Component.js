@@ -1,7 +1,9 @@
+import Env from "../Env";
+
 class Component {
 
   static propTypes = {};
-  static deps = []; // Maybe... meta deps for checking other comps exist
+  static deps = []; // Meta deps for checking other comps exist
 
   constructor () {
     this.name = this.constructor.name; // hmm, probably can avoid this.
@@ -10,12 +12,17 @@ class Component {
   }
 
   start () {
-    this.constructor.deps.forEach(d => {
+    const {constructor} = this;
+    constructor.deps.forEach(d => {
       this.deps[d] = this.getComponent(d);
     });
 
-    // Fetch `Instance`s automatic?
-    //this.target = Env.game.getEntityByName(this.target);
+    // Fetch `Instance`s automatically
+    for (let v in constructor.propTypes) {
+      if (constructor.propTypes[v] === "Instance") {
+        this.updatePrefab(v, this[v]);
+      }
+    }
   }
 
   update () {}
@@ -23,6 +30,10 @@ class Component {
   remove () {}
 
   onCollision () {}
+
+  updatePrefab (fieldName, entityName) {
+    this[fieldName] = Env.game.getEntityByName(entityName);
+  }
 
   // Helper for getting other components on entity
   getComponent (name) {

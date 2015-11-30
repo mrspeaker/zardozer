@@ -13,7 +13,7 @@ Zardozer is a Unity-style component system and editor for making games. In this 
 
 Browse at http://localhost:9966
 
-* `Enter` toggles PLAY and EDIT modes.
+* `Enter` toggles PLAY and STOP modes. `p` pauses/resumes
 * Click and drag entities... Edit them in sidebar (try toggling components on/off)
 * `d` duplicates current selection (try duplicating "player")
 * `delete` removes current selection
@@ -72,6 +72,7 @@ To use it in the game, create the file in `/components/` and add it to the `/com
 * `update (dt)` // Called every frame
 * `remove() ` // Called when component removed from entity
 * `onCollision(entity)` Called when component collides with another
+* `updatePrefab(fieldName, entityName)` Updates an prefab instance. Called automatically for any proptypes of `Instance` and any time changed in the editor.
 
 Get any references to other entities in `start` with `Env.game.getEntityByName(targetName)`.
 (This might be magical-ized).
@@ -103,16 +104,13 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 * Create new games from scratch (moving out game-specific components and files)
 * - how to split core components & game specific
 * drag n drop assets (general filesystem access (or at least base64 encode))
-* Make instances Env.game.getEntityByName() automagic? General "instance vs prefab" handling.
 * how to organise components (allow a tree)
 
 ### TODOs
 
 * fix react warnings
 * Array params... how should they work in editor?
-* "Pause" shouldn't affect serialized state.
 * dump game to json / allow import from json / localstorage
-* changing entity refs in editor
 * scene graph for entities
 * integrate pixi.js
 
