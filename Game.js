@@ -3,50 +3,43 @@ import Keys from "./controls/Keys";
 import Entities from "./entities/Entities";
 import Entity from "./entities/Entity";
 import Env from "./Env";
-import GameData from "./game/scene1";
-
-let id = 1;
 
 class Game {
 
-  _doReset = false;
-  _reloadOnReset = true;
+  _resetGame = false;
+  _resetDoesReload = true;
 
-  // TODO: was adding gamedata as param instead of import...
-  constructor (container, gameData) {
-    this.entities = [];
-    this._starts = [];
-    this._nextStarts = [];
-    this._entitiesToAdd = [];
-    this.container = container;
-    this.gameData = gameData;
+  entities;
+  entitiesToAdd;
+  componentStarts;
+  componentStartsToAdd;
+
+  entityId = 1;
+  lastTime = 0;
+
+  constructor (container) {
     Env.game = this;
+
+    this.container = container;
+    this.entities = [];
+    this.tick = this.tick.bind(this);
   }
 
-  init () {
-    this.bindEvents();
-
-    // Test serializing an in-game entity
-    requestAnimationFrame(() => {
-      const serialized = Entities.serialize(this.entities[0]);
-      //console.log(JSON.stringify(serialized, null, 2));
-    });
-
-    this.tick = this.tick.bind(this);
+  init (gameData) {
+    this.gameData = gameData;
 
     this._reset();
-    //this.loadScene();
-
     Keys.init();
     Mouse.init();
     Env.game.container.focus();
   }
 
   reset (reload = true) {
-    this._doReset = true;
-    this._reloadOnReset = reload;
+    this._resetGame = true;
+    this._resetDoesReload = reload;
   }
   _reset () {
+    // Remove all entities and components
     this.entities = this.entities.filter(e => {
       e.components = e.components.filter(c => {
         e.removeComponent(c);
@@ -54,36 +47,22 @@ class Game {
       });
       return false;
     });
-    this._starts = [];
-    this._nextStarts = [];
-    this.last = 0;
-    id = 1;
 
-    if (this._reloadOnReset) {
-      this.loadScene();
+    this.entitiesToAdd = [];
+    this.componentStarts = [];
+    this.componentStartsToAdd = [];
+    this.lastTime = 0;
+    this.entityId = 1;
+
+    if (this._resetDoesReload) {
+      this.loadScene(this.gameData);
     }
   }
 
-  bindEvents() {
-    Env.events.on("AddEntity", (e) => {
-      console.log("will add", e)
-    })
-  }
-
-  loadScene () {
-    GameData.entities
-      .map(data => Entities.make(data))
+  loadScene (data) {
+    data.entities
+      .map(data => Entities.make(data, true))
       .map(e => this.addEntity(e));
-  }
-
-  getPrefabByName (name) {
-    const data = GameData.entities.find(e => e.name === name);
-    const entity = Entities.make(data);
-    return entity;
-  }
-
-  addPrefabByName (name) {
-    return this.addEntity(this.getPrefabByName(name));
   }
 
   start () {
@@ -91,8 +70,8 @@ class Game {
   }
 
   tick (time) {
-    const dt = this.last ? time - this.last : 1000 / 60;
-    this.last = time;
+    const dt = this.lastTime ? time - this.lastTime : 1000 / 60;
+    this.lastTime = time;
 
     this.update(dt);
 
@@ -102,28 +81,85 @@ class Game {
   update (dt) {
     dt /= 1000; // Let's work in seconds.
 
-    // Do any adds
-    this._entitiesToAdd = this._entitiesToAdd.filter(e => {
+    // Add any new entities
+    this.entitiesToAdd = this.entitiesToAdd.filter(e => {
       this.entities.push(e);
       return false;
     });
 
-    this._starts = this._nextStarts.slice();
-    this._nextStarts = [];
+    this.runComponentStarts();
 
-    // Do any component start functions.
-    this._starts = this._starts.filter(f => {
-      f();
-      return false;
-    });
-
+    // Update all entity's components
     this.entities.forEach(e => {
       e.components.forEach(c => {
         c.update(dt);
       });
     });
 
-    // TODO: smarter collisions, move outta here.
+    this.checkCollisions();
+    this.updatePost(dt);
+
+  }
+
+  // Just visual refresh, for editor.
+  updateRenderOnly (dt) {
+
+    // Do any Entity adds
+    this.entitiesToAdd = this.entitiesToAdd.filter(e => {
+      this.entities.push(e);
+      return false;
+    });
+
+    this.runComponentStarts();
+
+    // Don't know a nice way to do this... mark render-only components somehow?
+    this.entities.forEach(e => {
+      e.components.forEach(c => {
+        if (c.name.indexOf("enderer") > -1) {
+          c.update(dt);
+        }
+      });
+    });
+
+    this.updatePost(dt);
+  }
+
+  updatePost (dt) {
+    Keys.update(dt);
+    Mouse.update(dt);
+
+    // Do any entity removal
+    this.entities = this.entities.filter(e => {
+      if (!e.remove) {
+        return true;
+      }
+      // Remove the components
+      e.components = e.components.filter(c => {
+        e.removeComponent(c);
+        return false;
+      });
+      return false;
+    });
+
+    if (this._resetGame) {
+      this._resetGame = false;
+      this._reset();
+    }
+  }
+
+  runComponentStarts () {
+    this.componentStarts = this.componentStartsToAdd.slice();
+    this.componentStartsToAdd = []; // start functions can add new start functions
+
+    // Execute component Start functions.
+    this.componentStarts = this.componentStarts.filter(f => {
+      f();
+      return false;
+    });
+  }
+
+  checkCollisions () {
+    // TODO: smarter collisions. Collision layers
     // Naive collisions... check everything, tell everyone.
     for (let i = 0; i < this.entities.length - 1; i++) {
       const a = this.entities[i];
@@ -144,88 +180,46 @@ class Game {
         }
       }
     }
-
-    this.post(dt);
-
   }
 
-  post (dt) {
-    Keys.update(dt);
-    Mouse.update(dt);
-
-    // Do any removal
-    this.entities = this.entities.filter(e => {
-      if (!e.remove) {
-        return true;
-      }
-      // Remove the components
-      e.components = e.components.filter(c => {
-        e.removeComponent(c);
-        return false;
-      });
-      return false;
-    });
-
-    if (this._doReset) {
-      this._reset();
-      this._doReset = false;
-    }
+  getEntityByName (name) {
+    return this.entities.find(e => e.name === name);
   }
 
-  renderOnlyUpdate () {
-    // Just visual refresh, for editor.
-
-    // Do any adds
-    this._entitiesToAdd = this._entitiesToAdd.filter(e => {
-      this.entities.push(e);
-      return false;
-    });
-
-    this._starts = this._nextStarts.slice();
-    this._nextStarts = [];
-
-    // Do any component start functions.
-    this._starts = this._starts.filter(f => {
-      f();
-      return false;
-    });
-
-    // Don't know a nice way to do this... mark render-only components somehow?
-    this.entities.forEach(e => {
-      e.components.forEach(c => {
-        if (c.name.indexOf("enderer") > -1) {
-          c.update(0);
-        }
-      });
-    });
-
-    this.post(0);
-  }
-
-  addStart (f) {
-    this._nextStarts.push(f);
-  }
-
-  spawn (e, x, y) {
-    const ent = this.addEntity(Entities.instanciate(e));
-    if (x !== null) {
-      const pos = ent.getComponent("Position");
-      pos.x = x;
-      pos.y = y;
-    }
-    return ent;
-  }
-
-  addEntity (e) {
-    if (!e.id) {
-      e.id = id++;
-    }
-    const sameName = this.entities.find(e2 => e2.name === e.name);
-    if (sameName) {
-      e.name += "-" + e.id;
-    }
-    this._entitiesToAdd.push(e);
+  positionEntity (e, x, y) {
+    if (x === null) { return; }
+    const pos = e.getComponent("Position");
+    pos.x = x;
+    pos.y = y;
     return e;
+  }
+
+  // Called from Entity constructor to push component start functions
+  addStartFunction (f) {
+    this.componentStartsToAdd.push(f);
+  }
+
+  createPrefabFromName (name) {
+    const data = this.gameData.entities.find(e => e.name === name);
+    const entity = Entities.make(data);
+    return entity;
+  }
+
+  // Used in components to create from game data (see KeyShooter -> "bullet")
+  addPrefabFromName (name, x, y) {
+    const entity = this.createPrefabFromName(name);
+    return this.positionEntity(
+      this.addEntity(entity),
+      x,
+      y);
+  }
+
+  addPrefabFromInstance (e, x, y) {
+    const entity = Entities.instanciate(e);
+    return this.positionEntity(
+      this.addEntity(entity),
+      x,
+      y);
   }
 
   addBlankEntity () {
@@ -235,12 +229,20 @@ class Game {
     return this.addEntity(e);
   }
 
-  removeEntity (entity) {
-    entity.remove = true;
+  addEntity (e) {
+    if (!e.id) {
+      e.id = this.entityId++;
+    }
+    const sameName = this.entities.find(e2 => e2.name === e.name);
+    if (sameName) {
+      e.name += "-" + e.id;
+    }
+    this.entitiesToAdd.push(e);
+    return e;
   }
 
-  getEntityByName (name) {
-    return this.entities.find(e => e.name === name);
+  removeEntity (entity) {
+    entity.remove = true;
   }
 
 }

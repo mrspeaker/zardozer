@@ -31,7 +31,7 @@ class KeyShooter extends Component {
 
     this.time = 0;
     const pos = this.deps.Position;
-    const b = Env.game.addPrefabByName("bullet");
+    const b = Env.game.addPrefabFromName("bullet");
     const bPos = b.getComponent("Position");
     const bFly = b.getComponent("FlyRight");
     bFly.speed = 5 * this.direction;

@@ -15,7 +15,7 @@ class GridIt extends Component {
 
   start () {
     super.start();
-    this.prefabs = this.prefabNames.map(Env.game.getPrefabByName);
+    this.prefabs = this.prefabNames.map(p => Env.game.createPrefabFromName(p));
     const {x, y, w, h} = this.getComponent("Position");
     const {w:tileW, h:tileH} = this.prefabs[0].getComponent("Position");
     const xTiles = w / tileW | 0;
@@ -23,7 +23,8 @@ class GridIt extends Component {
     for (let j = 0; j < yTiles; j++) {
       for (let i = 0; i < xTiles; i++) {
         const prefab = this.prefabs[Math.random() * this.prefabs.length | 0];
-        Env.game.spawn(prefab, x + (i * tileW), y + (j * tileH));
+        // Could do this by name, not instance! What's better?
+        Env.game.addPrefabFromInstance(prefab, x + (i * tileW), y + (j * tileH));
       }
     }
   }

@@ -2,9 +2,11 @@
 
 > Rough rough rough. This is pre-pre-alpha! Just testin' some Ideas.
 
-Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/zardozer/blob/master/game/scene1.js).
+* Try the **[Zardozer demo](https://mrspeaker.github.io/zardozer/)** in your browser. (Hit "enter" to toggle play/edit mode. Drag things around in edit mode).
 
-<img width="817" alt="Zardozer v0.01.3" src="https://cloud.githubusercontent.com/assets/129330/11458374/993da3b2-968c-11e5-8e7e-efea1f7a187d.png">
+Zardozer is a Unity-style component system and editor for making games. In this system, game logic is implemented in [components](https://github.com/mrspeaker/Zardozer/tree/master/components). You attach these to dumb "entities" - and the hooking-up is defined via JSON. The intro demo game was made in the editor, and generated the json defined in [game/scene1.js](https://github.com/mrspeaker/Zardozer/blob/master/game/scene1.js).
+
+[<img width="710" alt="Zardozer v0.01.4" src="https://cloud.githubusercontent.com/assets/129330/11459631/de48f45e-96a8-11e5-9fe5-f7b00fe57075.png">](https://mrspeaker.github.io/zardozer/)
 
 * `npm install`
 * `npm start`
@@ -99,6 +101,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 * Figure out "game" API (getEntityByName, spawn etc...)
 * Create new games from scratch (moving out game-specific components and files)
+* - how to split core components & game specific
 * drag n drop assets (general filesystem access (or at least base64 encode))
 * Make instances Env.game.getEntityByName() automagic? General "instance vs prefab" handling.
 * how to organise components (allow a tree)
@@ -106,12 +109,13 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 ### TODOs
 
 * Array params... how should they work in editor?
-* restart with edits (don't lose new etc). Needs a "stop" not just "pause".
+* "Pause" shouldn't affect serialized state.
 * dump game to json / allow import from json / localstorage
 * renaming enitities
 * changing entity refs in editor
 * scene graph for entities
 * integrate pixi.js
+* duplicating "add entity" entity crash
 
 ### Ideas
 
