@@ -22,6 +22,8 @@ class Entity {
 
     // If there are start methods on the comp, add it to be run next tick.
     // this should probably be done by some global marshaller
+    // In fact... perhaps Game should hold all components directly - this would
+    // allow for optimization for collisions, for example.
     if (comp.start) {
       Env.game.addStartFunction(comp.start.bind(comp));
     }

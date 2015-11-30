@@ -47,7 +47,7 @@ class Editor extends Component {
       this.onTogglePlay();
     });
   }
-  
+
   componentDidMount () {
     this.createGame();
     setInterval(() => {
@@ -70,10 +70,12 @@ class Editor extends Component {
     });
     // Focus game (for key access)
     if (mode === "PLAY") {
+      this.serializeLevel(); //- for saving edits
       Env.game.container.focus();
       this.removeDragHandlers();
     } else {
       this.addDragHandlers();
+      Env.game.reset(true); //- for saving edits (reset)
     }
   }
 
@@ -157,13 +159,61 @@ class Editor extends Component {
     }
   }
 
+  // Turns the entity tree into json
+  serializeLevel () {
+    const game = Env.game;
+    const {entities} = game;
+    const serializeable = entities.filter(e => e.serialize);
+    const serializedData = serializeable.map(e => this.serializeEntity(e));
+    GameData.scenes["scene 1"].entities = serializedData;
+  }
+
+  serializeEntity (e) {
+    const {name, components} = e;
+    const pos = e.getComponent("Position");
+    const {x, y, w, h, z} = pos;
+    const comps = components
+      .filter(c => c.name !== "Position")
+      .map(c => this.serializeComponent(c));
+
+    return {
+      name,
+      pos: [x, y, w, h, z],
+      comps
+    }
+  }
+
+  serializeComponent (c) {
+    const {name} = c;
+    const {propTypes} = c.constructor;
+    const res = [name];
+    for (let val in propTypes) {
+      if (val === "enabled") { continue; }
+      const type = propTypes[val];
+      if (type === "Instance") {
+        res.push(c[val].name);
+      } else {
+        // HACK! just handle's gridit case of array of instances... recurse this!
+        if (typeof c[val] === "object") {
+          res.push(c[val].map(v => v.name));
+        } else {
+          res.push(c[val]);
+        }
+      }
+    }
+    return res;
+  }
+
   onAddNewEntity () {
-    this.onSelectEntity(Env.game.addBlankEntity());
+    const ent = Env.game.addBlankEntity();
+    ent.serialize = true; //TODO: better seriealize=true!
+    this.onSelectEntity(ent);
   }
 
   onDuplicate () {
     const {game, selected} = this.state;
-    const newEntity = game.spawn(selected);
+    const newEntity = game.addPrefabFromInstance(selected);
+    newEntity.serialize = true; //TODO: better seriealize=true!
     const newPos = newEntity.getComponent("Position");
     const pos = selected.getComponent("Position");
     newPos.x = pos.x + pos.w;

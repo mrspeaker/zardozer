@@ -7,7 +7,8 @@ class Renderer extends Component {
   static propTypes = {
     enabled: "Boolean",
     color: "Color",
-    image: "Image"
+    image: "Image",
+    shadow: "Boolean"
   };
 
   _lastColor;

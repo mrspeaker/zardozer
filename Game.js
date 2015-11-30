@@ -11,8 +11,8 @@ class Game {
 
   entities;
   entitiesToAdd;
-  startFunctions;
-  startFunctionsToAdd;
+  componentStarts;
+  componentStartsToAdd;
 
   entityId = 1;
   lastTime = 0;
@@ -49,8 +49,8 @@ class Game {
     });
 
     this.entitiesToAdd = [];
-    this.startFunctions = [];
-    this.startFunctionsToAdd = [];
+    this.componentStarts = [];
+    this.componentStartsToAdd = [];
     this.lastTime = 0;
     this.entityId = 1;
 
@@ -61,18 +61,8 @@ class Game {
 
   loadScene (data) {
     data.entities
-      .map(data => Entities.make(data))
+      .map(data => Entities.make(data, true))
       .map(e => this.addEntity(e));
-  }
-
-  getPrefabByName (name) {
-    const data = this.gameData.entities.find(e => e.name === name);
-    const entity = Entities.make(data);
-    return entity;
-  }
-
-  addPrefabByName (name) {
-    return this.addEntity(this.getPrefabByName(name));
   }
 
   start () {
@@ -97,7 +87,7 @@ class Game {
       return false;
     });
 
-    this.runStartFunctions();
+    this.runComponentStarts();
 
     // Update all entity's components
     this.entities.forEach(e => {
@@ -120,7 +110,7 @@ class Game {
       return false;
     });
 
-    this.runStartFunctions();
+    this.runComponentStarts();
 
     // Don't know a nice way to do this... mark render-only components somehow?
     this.entities.forEach(e => {
@@ -157,12 +147,12 @@ class Game {
     }
   }
 
-  runStartFunctions () {
-    this.startFunctions = this.startFunctionsToAdd.slice();
-    this.startFunctionsToAdd = []; // start functions can add new start functions
+  runComponentStarts () {
+    this.componentStarts = this.componentStartsToAdd.slice();
+    this.componentStartsToAdd = []; // start functions can add new start functions
 
     // Execute component Start functions.
-    this.startFunctions = this.startFunctions.filter(f => {
+    this.componentStarts = this.componentStarts.filter(f => {
       f();
       return false;
     });
@@ -192,18 +182,51 @@ class Game {
     }
   }
 
-  addStartFunction (f) {
-    this.startFunctionsToAdd.push(f);
+  getEntityByName (name) {
+    return this.entities.find(e => e.name === name);
   }
 
-  spawn (e, x, y) {
-    const ent = this.addEntity(Entities.instanciate(e));
-    if (x !== null) {
-      const pos = ent.getComponent("Position");
-      pos.x = x;
-      pos.y = y;
-    }
-    return ent;
+  positionEntity (e, x, y) {
+    if (x === null) { return; }
+    const pos = e.getComponent("Position");
+    pos.x = x;
+    pos.y = y;
+    return e;
+  }
+
+  // Called from Entity constructor to push component start functions
+  addStartFunction (f) {
+    this.componentStartsToAdd.push(f);
+  }
+
+  createPrefabFromName (name) {
+    const data = this.gameData.entities.find(e => e.name === name);
+    const entity = Entities.make(data);
+    return entity;
+  }
+
+  // Used in components to create from game data (see KeyShooter -> "bullet")
+  addPrefabFromName (name, x, y) {
+    const entity = this.createPrefabFromName(name);
+    return this.positionEntity(
+      this.addEntity(entity),
+      x,
+      y);
+  }
+
+  addPrefabFromInstance (e, x, y) {
+    const entity = Entities.instanciate(e);
+    return this.positionEntity(
+      this.addEntity(entity),
+      x,
+      y);
+  }
+
+  addBlankEntity () {
+    // Should use helper method / data style. Always force this?
+    const e = new Entity("entity", 50, 50, 69, 71, 5);
+    Entities.addComponent(e, ["Renderer", "", "p3_duck.png"]);
+    return this.addEntity(e);
   }
 
   addEntity (e) {
@@ -218,19 +241,8 @@ class Game {
     return e;
   }
 
-  addBlankEntity () {
-    // Should use helper method / data style. Always force this?
-    const e = new Entity("entity", 50, 50, 69, 71, 5);
-    Entities.addComponent(e, ["Renderer", "", "p3_duck.png"]);
-    return this.addEntity(e);
-  }
-
   removeEntity (entity) {
     entity.remove = true;
-  }
-
-  getEntityByName (name) {
-    return this.entities.find(e => e.name === name);
   }
 
 }

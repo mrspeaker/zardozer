@@ -101,6 +101,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 * Figure out "game" API (getEntityByName, spawn etc...)
 * Create new games from scratch (moving out game-specific components and files)
+* - how to split core components & game specific
 * drag n drop assets (general filesystem access (or at least base64 encode))
 * Make instances Env.game.getEntityByName() automagic? General "instance vs prefab" handling.
 * how to organise components (allow a tree)

@@ -1,10 +1,13 @@
 import Entity from "./Entity";
 import components from "../components/";
 
-const make = (data) => {
+const make = (data, needsSerializing = false) => {
   const EntityFunc = Function.prototype.bind.call(Entity, null, data.name, ...data.pos);
   const entity = new EntityFunc();
   entity.prefab = data;
+  if (needsSerializing) {
+    entity.serialize = true;
+  }
   data.comps.forEach(c => addComponent(entity, c));
   return entity;
 }

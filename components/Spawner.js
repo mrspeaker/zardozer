@@ -24,7 +24,7 @@ class Spawner extends Component {
 
   start () {
     super.start();
-    this.prefab = Env.game.getPrefabByName(this.prefabName);
+    this.prefab = Env.game.createPrefabFromName(this.prefabName);
   }
 
   update (dt) {
@@ -35,7 +35,10 @@ class Spawner extends Component {
     if (this.time > rate) {
       this.time -= this.rate;
       const {x, y, w, h} = this.deps.Position;
-      const e = Env.game.spawn(this.prefab);
+
+      //const e = Env.game.spawn(this.prefab);
+      const e = Env.game.addPrefabFromName(this.prefabName);
+
       // Set the new position in spawner area
       const pos = e.getComponent("Position");
       const xo = Math.random() * w;
