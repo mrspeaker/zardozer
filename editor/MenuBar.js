@@ -12,8 +12,9 @@ class MenuBar extends Component {
       <span>Zardozer v0.01.</span>
       &nbsp;
       <button title="toggle Play/Edit (Enter)" onClick={this.props.onTogglePlay}>{this.props.mode}</button>
-      &nbsp;
-      <button title="Pause during game (p)" onClick={this.props.onPausePlay}>Pause</button>
+      {// &nbsp;
+      //<button title="Pause during game (p)" onClick={this.props.onPausePlay}>Pause</button>
+      }
       &nbsp;
       <button title="create new entity at 50,50" onClick={this.props.onAddNewEntity}>Add Entity</button>
       &nbsp;
