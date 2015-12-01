@@ -3,6 +3,10 @@ import Position from "../components/Position";
 
 class Entity {
 
+  static find = (name) => {
+    return Env.game.entities.find(e => e.name === name);
+  }
+
   constructor (name, x = 0, y = 0, w = 32, h = 32, z = 5) {
     this.name = name;
     this.components = [];

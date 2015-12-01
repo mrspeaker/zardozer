@@ -58,11 +58,8 @@ class EntityComponent extends Component {
       case "Boolean":
         return <input type="checkbox" checked={val} onChange={() =>
           component[field] = !component[field]} />;
+
       case "Instance":
-        if (!val) {
-          console.log("what nonsense is this?");
-          return null;
-        }
         return <Input value={val.name} onChange={v => {
           const e = Env.game.getEntityByName(v);
           if (e) {
@@ -101,6 +98,7 @@ class EntityComponent extends Component {
           })}>select</button>
           <Input value={val} onChange={() => {}} />;
         </span>;
+
       default:
         return <Input value={val} onChange={v => {
           const newVal = type === "Number" ? parseFloat(v, 10) :  v;
@@ -109,6 +107,7 @@ class EntityComponent extends Component {
       }
     };
 
+    // Pull "enabled" elements out so we can show them on the right.
     const hasEnabled = propertiesDef.find(p => p[0] === "enabled");
     let enabledBox = null;
     if (hasEnabled) {

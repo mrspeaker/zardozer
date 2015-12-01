@@ -7,6 +7,7 @@ import SideBar from "./SideBar";
 
 import Game from "../Game";
 import Env from "../Env";
+import Entity from "../entities/Entity";
 import Entities from "../entities/Entities";
 import Keys from "../controls/Keys";
 import GameData from "../game/demoGame";
@@ -52,9 +53,11 @@ class Editor extends Component {
 
   componentDidMount () {
     this.createGame();
+
+    // Tick the editor render
     setInterval(() => {
       this.forceUpdate();
-    }, 500);
+    }, 300);
 
     requestAnimationFrame(this.tick);
   }
@@ -122,7 +125,7 @@ class Editor extends Component {
   }
 
   onEntityDown (e) {
-    this.onSelectEntity(Env.game.getEntityByName(e.target.getAttribute("data-entity")));
+    this.onSelectEntity(Entity.find(e.target.getAttribute("data-entity")));
     this.setState({
       mouseDown: true
     });

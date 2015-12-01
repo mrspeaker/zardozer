@@ -194,7 +194,7 @@ class Game {
   }
 
   getEntityByName (name) {
-    return this.entities.find(e => e.name === name);
+    return Entity.find(name);
   }
 
   positionEntity (e, x, y) {
@@ -210,6 +210,9 @@ class Game {
     this.componentStartsToAdd.push(f);
   }
 
+
+  // Move Entity creation functions to Entity static methods
+  
   createPrefabFromName (name) {
     const data = this.gameData.entities.find(e => e.name === name);
     const entity = Entities.make(data);

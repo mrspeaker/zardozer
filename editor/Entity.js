@@ -10,12 +10,7 @@ const {
 
 class Entity extends Component {
 
-  constructor () {
-    super();
-    this.onAdd = this.onAdd.bind(this);
-  }
-
-  onAdd (compDef) {
+  onAdd = (compDef) => {
     const {entity} = this.props;
     const parsed = eval(compDef);
     if (parsed instanceof Array) {
@@ -23,7 +18,7 @@ class Entity extends Component {
     }
   }
 
-  onNameChange = name => {
+  onNameChange = (name) => {
     //TODO: hmm... is it safe to rename entities?
     const {entity} = this.props;
     /*if (entity.prefab && entity.prefab.name) {
