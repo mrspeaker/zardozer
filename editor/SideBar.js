@@ -37,8 +37,8 @@ class SideBar extends Component {
           <strong>Active entities: {entities.length}</strong>
           {entities.map((e, i) => {
             return e === selected ?
-              <strong><div key={i} onClick={() => this.onEntitySelect(e)}>{e.name}</div></strong>:
-              <div key={i} onClick={() => this.onEntitySelect(e)}>{e.name}</div>;
+              <strong key={"sel-" + i} ><div onClick={() => this.onEntitySelect(e)}>{e.name}</div></strong>:
+              <div key={"sel-" + i} onClick={() => this.onEntitySelect(e)}>{e.name}</div>;
           })}
         </div>}
       </div>

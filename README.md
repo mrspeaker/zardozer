@@ -100,7 +100,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 ### To figure out
 
-* Figure out "game" API (getEntityByName, spawn etc...)
+* Figure out global API (getEntityByName, spawn etc...)
 * Create new games from scratch (moving out game-specific components and files)
 * - how to split core components & game specific
 * drag n drop assets (general filesystem access (or at least base64 encode))

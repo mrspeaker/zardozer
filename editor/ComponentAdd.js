@@ -78,8 +78,8 @@ class ComponentAdd extends Component {
     return <div>
       component: <select onChange={this.onChange} value={this.state.selected}>
         <option value="">--</option>
-        {comps.map(c => {
-          return <option value={c}>{c}</option>;
+        {comps.map((c, i) => {
+          return <option key={i} value={c}>{c}</option>;
         })}
       </select>
       <div>params: {this.state.hint}</div>
