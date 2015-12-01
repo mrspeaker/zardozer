@@ -30,6 +30,9 @@ class Spawner extends Component {
     if (this.time > rate) {
       this.time -= this.rate;
       const {x, y, w, h} = this.deps.Position;
+      if (!this.prefab) {
+        console.error("omg, no pref", this)
+      }
       const e = Env.game.addPrefabFromInstance(this.prefab);
 
       // Set the new position in spawner area

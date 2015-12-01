@@ -7,6 +7,9 @@ const make = (data, needsSerializing = false) => {
   entity.prefab = data;
   if (needsSerializing) {
     entity.serialize = true;
+    if (data.prefab) {
+      entity.isPrefab = true;
+    }
   }
   data.comps.forEach(c => addComponent(entity, c));
   return entity;
@@ -17,28 +20,41 @@ const addComponent = (e, comp) => {
   e.addComponent(new CompFunc());
 };
 
-// Duplicated codeish - same is done in editor.serialzieEntity!
 const serialize = (e) => {
-  const {name} = e;
-  const {x, y, w, h, z} = e.getComponent("Position");
-  const pos = [x | 0, y | 0, w, h, z];
-  const comps = e.components.reduce((ac, c) => {
-    if (c.name === "Position") {
-      return ac;
-    }
-    const comp = [c.name];
-    const props = c.constructor.propTypes;
-    if (props) {
-      for (let p in props) {
-        if (p === "enabled") { continue; }
-        const type = props[p];
-        const propVal = type === "Instance" ? c[p].name : c[p];
-        comp.push(propVal);
+  const {name, components, isPrefab} = e;
+  const pos = e.getComponent("Position");
+  const {x, y, w, h, z} = pos;
+  const comps = components
+    .filter(c => c.name !== "Position")
+    .map(serializeComponent);
+
+  return {
+    name,
+    prefab: isPrefab,
+    pos: [x, y, w, h, z],
+    comps
+  };
+};
+
+const serializeComponent = (c) => {
+  const {name} = c;
+  const {propTypes} = c.constructor;
+  const res = [name];
+  for (let val in propTypes) {
+    if (val === "enabled") { continue; }
+    const type = propTypes[val];
+    if (type === "Instance") {
+      res.push(c[val].name);
+    } else {
+      // HACK! just handle's gridit case of array of instances... recurse this!
+      if (typeof c[val] === "object") {
+        res.push(c[val].map(v => v.name));
+      } else {
+        res.push(c[val]);
       }
     }
-    return [...ac, comp];
-  }, []);
-  return {name, pos, comps};
+  }
+  return res;
 };
 
 const instanciate = (e) => {

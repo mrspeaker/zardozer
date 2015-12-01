@@ -17,6 +17,7 @@ export default {
       {
         name: "bullet",
         pos: [0, -20, 18, 18, 6],
+        prefab: true,
         comps: [
           ["FlyRight"],
           ["Life", 2],
@@ -26,6 +27,7 @@ export default {
       {
         name: "ghost",
         pos: [320, 160, 69, 71, 5],
+        prefab: true,
         comps: [
           ["ClickRegener", 10],
           ["Damage"],
@@ -39,6 +41,7 @@ export default {
       // Ghost spawner
       {
         name: "spawner",
+        prefab: true,
         pos: [290, 120, 32, 32, 1],
         comps: [
           ["Damage", 6],
@@ -62,6 +65,7 @@ export default {
       // Tile prefabs.
       {
         name: "box1",
+        prefab: true,
         pos:[0, -70, 70, 70, 0],
         comps: [
           ["Renderer", "", "castleCenter.png"]
@@ -69,6 +73,7 @@ export default {
       },
       {
         name: "box2",
+        prefab: true,
         pos:[70, -70, 70, 70, 0],
         comps: [
           ["Renderer", "", "sandCenter.png"]
@@ -76,6 +81,7 @@ export default {
       },
       {
         name: "box3",
+        prefab: true,
         pos:[140, -70, 70, 70, 0],
         comps: [
           ["Renderer", "", "snowCenter.png"]

@@ -32,7 +32,8 @@ class Component {
   onCollision () {}
 
   updatePrefab (fieldName, entityName) {
-    this[fieldName] = Env.game.getEntityByName(entityName);
+    const e = Env.game.getEntityByName(entityName);
+    this[fieldName] = e;
   }
 
   // Helper for getting other components on entity

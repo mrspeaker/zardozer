@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "Mr Speaker",
-  "license": "MIT",
+  "license": "GPLv3",
   "dependencies": {
     "babelify": "^7.2.0",
     "events": "^1.1.0",

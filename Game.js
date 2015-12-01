@@ -60,6 +60,13 @@ class Game {
   }
 
   loadScene (data) {
+    const prefabs = data.entities.filter(e => e.prefab);
+
+    prefabs.map(p => {
+      const [,, w, h, z] = p.pos;
+      p.pos = [w, h, w, h, z];
+    });
+
     data.entities
       .map(data => Entities.make(data, true))
       .map(e => this.addEntity(e));
@@ -91,6 +98,9 @@ class Game {
 
     // Update all entity's components
     this.entities.forEach(e => {
+      if (e.isPrefab) {
+        return;
+      }
       e.components.forEach(c => {
         c.update(dt);
       });
@@ -166,6 +176,7 @@ class Game {
       const aPos = a.getComponent("Position");
       for (let j = i + 1; j < this.entities.length; j++) {
         const b = this.entities[j];
+        if (a.isPrefab || b.isPrefab) continue;
         const bPos = b.getComponent("Position");
         if (aPos.x + aPos.w >= bPos.x &&
           aPos.x <= bPos.x + bPos.w &&

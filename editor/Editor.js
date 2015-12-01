@@ -7,6 +7,7 @@ import SideBar from "./SideBar";
 
 import Game from "../Game";
 import Env from "../Env";
+import Entities from "../entities/Entities";
 import Keys from "../controls/Keys";
 import GameData from "../game/demoGame";
 
@@ -179,15 +180,31 @@ class Editor extends Component {
   }
 
   handleKeys () {
+    const {game, selected} = this.state;
+
+    if (!selected) {
+      return;
+    }
+
     if (Keys.pressed(68)) {
       this.onDuplicate();
     }
 
     if (Keys.pressed(8)) {
-      const {game, selected} = this.state;
-      if (game && selected ) {
-        game.removeEntity(selected);
-      }
+      game.removeEntity(selected);
+    }
+
+    if (Keys.isDown(37)) {
+      selected.getComponent("Position").x -= 1;
+    }
+    if (Keys.isDown(39)) {
+      selected.getComponent("Position").x += 1;
+    }
+    if (Keys.isDown(38)) {
+      selected.getComponent("Position").y -= 1;
+    }
+    if (Keys.isDown(40)) {
+      selected.getComponent("Position").y += 1;
     }
   }
 
@@ -196,44 +213,8 @@ class Editor extends Component {
     const game = Env.game;
     const {entities} = game;
     const serializeable = entities.filter(e => e.serialize);
-    const serializedData = serializeable.map(e => this.serializeEntity(e));
+    const serializedData = serializeable.map(Entities.serialize);
     GameData.scenes["scene 1"].entities = serializedData;
-  }
-
-  serializeEntity (e) {
-    const {name, components} = e;
-    const pos = e.getComponent("Position");
-    const {x, y, w, h, z} = pos;
-    const comps = components
-      .filter(c => c.name !== "Position")
-      .map(c => this.serializeComponent(c));
-
-    return {
-      name,
-      pos: [x, y, w, h, z],
-      comps
-    };
-  }
-
-  serializeComponent (c) {
-    const {name} = c;
-    const {propTypes} = c.constructor;
-    const res = [name];
-    for (let val in propTypes) {
-      if (val === "enabled") { continue; }
-      const type = propTypes[val];
-      if (type === "Instance") {
-        res.push(c[val].name);
-      } else {
-        // HACK! just handle's gridit case of array of instances... recurse this!
-        if (typeof c[val] === "object") {
-          res.push(c[val].map(v => v.name));
-        } else {
-          res.push(c[val]);
-        }
-      }
-    }
-    return res;
   }
 
   onAddNewEntity () {
