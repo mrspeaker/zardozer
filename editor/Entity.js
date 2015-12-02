@@ -10,6 +10,10 @@ const {
 
 class Entity extends Component {
 
+  constructor () {
+    super();
+  }
+
   onAdd = (compDef) => {
     const {entity} = this.props;
     const parsed = eval(compDef);

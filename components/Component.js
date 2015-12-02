@@ -1,4 +1,4 @@
-import Env from "../Env";
+import Entity from "../entities/Entity";
 
 class Component {
 
@@ -32,7 +32,7 @@ class Component {
   onCollision () {}
 
   updatePrefab (fieldName, entityName) {
-    const e = Env.game.getEntityByName(entityName);
+    const e = Entity.find(entityName);
     this[fieldName] = e;
   }
 
