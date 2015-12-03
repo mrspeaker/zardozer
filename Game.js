@@ -63,12 +63,12 @@ class Game {
   }
 
   loadScene (data) {
-    const prefabs = data.entities.filter(e => e.prefab);
+    /*const prefabs = data.entities.filter(e => e.prefab);
 
     prefabs.map(p => {
       const [,, w, h, z] = p.pos;
       p.pos = [w, h, w, h, z];
-    });
+    });*/
 
     data.entities
       .map(data => Entities.make(data, true))
