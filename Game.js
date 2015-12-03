@@ -63,13 +63,6 @@ class Game {
   }
 
   loadScene (data) {
-    /*const prefabs = data.entities.filter(e => e.prefab);
-
-    prefabs.map(p => {
-      const [,, w, h, z] = p.pos;
-      p.pos = [w, h, w, h, z];
-    });*/
-
     data.entities
       .map(data => Entities.make(data, true))
       .map(e => this.addEntity(e));
@@ -103,9 +96,7 @@ class Game {
 
     // Update all entity's components
     this.entities.forEach(e => {
-      if (e.isPrefab) {
-        return;
-      }
+      if (e.isPrefab) { return; }
       e.components.forEach(c => {
         c.update(dt);
       });
@@ -152,16 +143,24 @@ class Game {
     Keys.update(dt);
     Mouse.update(dt);
 
-    // Do any entity removal
+    // Do any entity removal & post updates
     this.entities = this.entities.filter(e => {
+
       if (!e.remove) {
+        // Store last frame position for collision purposes.
+        const pos = e.getComponent("Position");
+        pos._lastX = pos.x;
+        pos._lastY = pos.y;
+
         return true;
       }
+
       // Remove the components
       e.components = e.components.filter(c => {
         e.removeComponent(c);
         return false;
       });
+
       return false;
     });
 
@@ -184,7 +183,6 @@ class Game {
 
   checkCollisions () {
     // TODO: smarter collisions. Collision layers
-    // Naive collisions... check everything, tell everyone.
     for (let i = 0; i < this.entities.length - 1; i++) {
       const a = this.entities[i];
       const aPos = a.getComponent("Position");

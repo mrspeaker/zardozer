@@ -14,6 +14,7 @@ import MoveSine from "../components/MoveSine";
 import FlyRight from "../components/FlyRight";
 import Player from "../components/Player";
 import GridIt from "../components/GridIt";
+import MapCollider from "../components/MapCollider";
 
 export default {
   KeyController,
@@ -31,5 +32,6 @@ export default {
   MoveSine,
   FlyRight,
   Player,
-  GridIt
+  GridIt,
+  MapCollider
 };

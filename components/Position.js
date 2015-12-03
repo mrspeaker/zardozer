@@ -10,6 +10,9 @@ class Position extends Component {
     z: "Number"
   };
 
+  _lastX;
+  _lastY;
+
   constructor (x = 0, y = 0, w = 32, h = 32, z = 5) {
     super();
     this.x = x;

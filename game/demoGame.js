@@ -59,7 +59,8 @@ export default {
           ["MoveSine", "x", 0.7, 4],
           ["MoveSine", "y", 0.3, 2],
           ["MoveSine", "y", 0.4, 2],
-          ["MoveTowards", "player", 1]
+          ["MoveTowards", "player", 1],
+          ["MapCollider", "level"]
         ]
       },
       // Tile prefabs.
