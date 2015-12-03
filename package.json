@@ -1,7 +1,7 @@
 {
   "name": "Zardozer",
   "version": "0.0.1",
-  "description": "A Unity-style component system for game dev",
+  "description": "A Unity-style component system and editor for game dev",
   "main": "index.js",
   "scripts": {
     "start": "budo index.js --live -- -t [ babelify --presets [ es2015 react ] --plugins [ transform-class-properties ]  ]"

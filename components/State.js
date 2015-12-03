@@ -15,14 +15,19 @@ class State extends Component {
     this.lastState = this.state;
     this.state = state;
     this.time = 0;
+    this.frame = 0;
     this.first = true;
   }
 
   update (dt) {
-    if (this.time !== 0) {
+    if (this.frame++ === 1) {
       this.first = false;
     }
     this.stateTime += dt;
+  }
+
+  is (state) {
+    return this.state === state;
   }
 }
 

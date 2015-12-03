@@ -16,7 +16,7 @@ export default {
       },
       {
         name: "bullet",
-        pos: [0, -20, 18, 18, 6],
+        pos: [20, 20, 18, 18, 6],
         prefab: true,
         comps: [
           ["FlyRight"],
@@ -55,7 +55,7 @@ export default {
         pos: [150, 50, 70, 70, 11],
         comps: [
           ["Spawner", "spawner", 1.9],
-          ["Renderer", "", "tochLit.png", true],
+          ["Renderer", "", "tochLit.png", true, 0.7],
           ["MoveSine", "x", 0.7, 4],
           ["MoveSine", "y", 0.3, 2],
           ["MoveSine", "y", 0.4, 2],

@@ -25,9 +25,6 @@ class Entity extends Component {
   onNameChange = (name) => {
     //TODO: hmm... is it safe to rename entities?
     const {entity} = this.props;
-    /*if (entity.prefab && entity.prefab.name) {
-      entity.prefab.name = name;
-    }*/
     entity.name = name;
   }
 
@@ -39,12 +36,15 @@ class Entity extends Component {
     return <div>
       <strong>Name:<Input value={name} onChange={this.onNameChange} /></strong>&nbsp;
       <span>({id})</span>
+      <br/>
+      <span>is prefab: <input type="checkbox" checked={entity.isPrefab} onChange={() =>
+        entity.isPrefab = !entity.isPrefab} /></span>
       <hr/>
       <EntityComponents components={components} />
       <hr/>
       <ComponentAdd onAdd={this.onAdd} />
       <br/>
-      <button title="Duplicate selected entityt (d)" onClick={this.props.onDuplicate}>Duplicate</button>
+      <button title="Duplicate selected entity (d)" onClick={this.props.onDuplicate}>Duplicate</button>
     </div>;
   }
 }

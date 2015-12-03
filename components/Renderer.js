@@ -8,7 +8,8 @@ class Renderer extends Component {
     enabled: "Boolean",
     color: "Color",
     image: "Image",
-    shadow: "Boolean"
+    shadow: "Boolean",
+    opacity: Number
   };
 
   _lastColor;
@@ -16,13 +17,15 @@ class Renderer extends Component {
   _lastH;
   _lastImage = null;
   _lastEnabled;
+  _lastOpacity;
 
-  constructor (color = "#800", image, shadow = false) {
+  constructor (color = "#800", image, shadow = false, opacity = 1) {
     super();
     this.enabled = true;
     this.color = color;
     this.image = image ? image : "";
     this.shadow = shadow;
+    this.opacity = opacity;
   }
 
   start () {
@@ -36,7 +39,8 @@ class Renderer extends Component {
   }
 
   update () {
-    const {dom, color, image, enabled, _lastColor, _lastImage, _lastEnabled, _lastW, _lastH} = this;
+    const {dom, color, image, enabled, opacity} = this;
+    const {_lastColor, _lastImage, _lastEnabled, _lastOpacity, _lastW, _lastH} = this;
     const pos = this.deps.Position;
 
     if (!dom) {
@@ -67,7 +71,13 @@ class Renderer extends Component {
     }
     if (_lastEnabled != enabled) {
       dom.style.display = enabled ? "block" : "none";
+      this._lastEnabled = enabled;
     }
+    if (_lastOpacity != opacity) {
+      dom.style.opacity = opacity;
+      this._lastOpacity = opacity;
+    }
+
     dom.style.left = x + "px";
     dom.style.top = y + "px";
 

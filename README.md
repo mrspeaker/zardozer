@@ -108,14 +108,21 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 ### TODOs
 
-* fix react warnings
+* stopping resets entities, so selection is sidebar is invalid
 * Array params... how should they work in editor?
 * dump game to json / allow import from json / localstorage
+* tick/first frame is weird (hiding prefabs on frame==2)
+-- need to figure out real lifecycle.
+* changing instances in editor not reflected on next play (need to play twice)
+
+### Bigger
+
 * scene graph for entities
 * integrate pixi.js
 
 ### Ideas
 
+* nothing can directly alter component state except component? React game engine?
 * should be very easy to add images/sprite sheets/atlases
 * some kind of animation system
 * edit pixels directly in the game

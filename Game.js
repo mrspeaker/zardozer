@@ -3,6 +3,7 @@ import Keys from "./controls/Keys";
 import Entities from "./entities/Entities";
 import Entity from "./entities/Entity";
 import Env from "./Env";
+import State from "./components/State";
 
 class Game {
 
@@ -57,6 +58,8 @@ class Game {
     if (this._resetDoesReload) {
       this.loadScene(this.gameData);
     }
+
+    this.state = new State("INIT");
   }
 
   loadScene (data) {
@@ -88,6 +91,8 @@ class Game {
   update (dt) {
     dt /= 1000; // Let's work in seconds.
 
+    this.state.update(dt);
+
     // Add any new entities
     this.entitiesToAdd = this.entitiesToAdd.filter(e => {
       this.entities.push(e);
@@ -106,9 +111,18 @@ class Game {
       });
     });
 
+    if (this.state.frame === 2) {
+      this.entities.forEach(e => {
+        if (e.isPrefab) {
+          const rend = e.getComponent("Renderer");
+          rend.enabled = false;
+          rend.update(0);
+        }
+      });
+    }
+
     this.checkCollisions();
     this.updatePost(dt);
-
   }
 
   // Just visual refresh, for editor.
@@ -125,7 +139,7 @@ class Game {
     // Don't know a nice way to do this... mark render-only components somehow?
     this.entities.forEach(e => {
       e.components.forEach(c => {
-        if (c.name.indexOf("enderer") > -1) {
+        if (c.name.indexOf("Renderer") > -1) {
           c.update(dt);
         }
       });
@@ -176,6 +190,7 @@ class Game {
       const aPos = a.getComponent("Position");
       for (let j = i + 1; j < this.entities.length; j++) {
         const b = this.entities[j];
+        // HACKKK... prefabs should be compeltely out of system.
         if (a.isPrefab || b.isPrefab) continue;
         const bPos = b.getComponent("Position");
         if (aPos.x + aPos.w >= bPos.x &&
@@ -212,7 +227,7 @@ class Game {
 
 
   // Move Entity creation functions to Entity static methods
-  
+
   createPrefabFromName (name) {
     const data = this.gameData.entities.find(e => e.name === name);
     const entity = Entities.make(data);
