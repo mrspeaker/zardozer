@@ -26,15 +26,37 @@ class MapCollider extends Component {
     if (!this.enabled) { return; }
     const pos = this.deps.Position;
     const {x, y, w, h, previousX, previousY} = pos;
-    const tiles = [
-      this.grid.getTileFromPixel(x, y),
-      this.grid.getTileFromPixel(x + w, y),
-      this.grid.getTileFromPixel(x, y + h),
-      this.grid.getTileFromPixel(x + w, y + h)];
-    if (tiles.some(t => t === 0)) {
-      pos.x = previousX;
-      pos.y = previousY;
+
+    const dx = x - previousX;
+    const dy = y - previousY;
+
+    let xo = previousX;
+    let yo = y;
+    if (dy) {
+      const tiles = [
+        this.grid.getTileFromPixel(xo, yo),
+        this.grid.getTileFromPixel(xo + w, yo),
+        this.grid.getTileFromPixel(xo, yo + h),
+        this.grid.getTileFromPixel(xo + w, yo + h)];
+      if (tiles.some(t => t === 0)) {
+        yo = previousY;
+      }
     }
+    xo = x;
+    if (dx) {
+      const tiles = [
+        this.grid.getTileFromPixel(xo, yo),
+        this.grid.getTileFromPixel(xo + w, yo),
+        this.grid.getTileFromPixel(xo, yo + h),
+        this.grid.getTileFromPixel(xo + w, yo + h)];
+      if (tiles.some(t => t === 0)) {
+        xo = previousX;
+      }
+    }
+
+    pos.x = xo;
+    pos.y = yo;
+
   }
 
 }
