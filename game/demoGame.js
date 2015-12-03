@@ -52,7 +52,7 @@ export default {
       // Flying boss spawner-dropper
       {
         name: "spawnerBoss",
-        pos: [150, 50, 70, 70, 11],
+        pos: [150, 80, 70, 70, 11],
         comps: [
           ["Spawner", "spawner", 1.9],
           ["Renderer", "", "tochLit.png", true, 0.7],
@@ -69,7 +69,7 @@ export default {
         prefab: true,
         pos:[0, -70, 70, 70, 0],
         comps: [
-          ["Renderer", "", "castleCenter.png"]
+          ["Renderer", "", "sandCenter.png"]
         ]
       },
       {
@@ -77,7 +77,7 @@ export default {
         prefab: true,
         pos:[70, -70, 70, 70, 0],
         comps: [
-          ["Renderer", "", "sandCenter.png"]
+          ["Renderer", "", "castleCenter.png"]
         ]
       },
       {

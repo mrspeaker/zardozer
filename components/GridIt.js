@@ -24,7 +24,10 @@ class GridIt extends Component {
     this.map = [];
     for (let j = 0; j < yTiles; j++) {
       for (let i = 0; i < xTiles; i++) {
-        const prefabIndex = Math.random() * this.prefabs.length | 0;
+        let prefabIndex = (Math.random() * this.prefabs.length - 1 | 0) + 1;
+        if (j == 0 || i == 0 || j == yTiles - 1 || i == xTiles - 1) {
+          prefabIndex = 0;
+        }
         const prefab = this.prefabs[prefabIndex];
         // Could do this by name, not instance! What's better?
         Env.game.addPrefabFromInstance(prefab, x + (i * tileW), y + (j * tileH));

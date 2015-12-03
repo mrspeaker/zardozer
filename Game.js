@@ -149,8 +149,8 @@ class Game {
       if (!e.remove) {
         // Store last frame position for collision purposes.
         const pos = e.getComponent("Position");
-        pos._lastX = pos.x;
-        pos._lastY = pos.y;
+        pos.previousX = pos.x;
+        pos.previousY = pos.y;
 
         return true;
       }
