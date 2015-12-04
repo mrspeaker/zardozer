@@ -91,7 +91,34 @@ class Game {
     dt /= 1000; // Let's work in seconds.
 
     this.state.update(dt);
+    const state = this.state.state;
+    switch(state) {
+    case "INIT":
+      this.state.setState("RUNNING");
+      break;
+    case "LOADING":
+      // load level
+      this.state.setState("RESET");
+      break;
+    case "RESET":
+      // Reset logic
+      this.state.setState("RUNNING");
+      break;
+    case "EDITING":
+      this.updateRenderOnly(dt);
+      this.updatePost(dt);
+      break;
+    case "RUNNING":
+      this.updateRunning(dt);
+      this.updatePost(dt);
+      break;
+    default:
+      console.error("Bad state:", state);
+      break;
+    }
+  }
 
+  updateRunning (dt) {
     // Add any new entities
     this.entitiesToAdd = this.entitiesToAdd.filter(e => {
       this.entities.push(e);
@@ -119,7 +146,6 @@ class Game {
     }
 
     this.checkCollisions();
-    this.updatePost(dt);
   }
 
   // Just visual refresh, for editor.
@@ -142,7 +168,6 @@ class Game {
       });
     });
 
-    this.updatePost(dt);
   }
 
   updatePost (dt) {

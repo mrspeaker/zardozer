@@ -172,6 +172,7 @@ class Editor extends Component {
   tick (time) {
     const rawDt = this.lastTime ? time - this.lastTime : 1000 / 60;
     const dt = Math.min(1000/30, rawDt);
+    const {game} = this.state;
 
     this.lastTime = time;
 
@@ -187,10 +188,11 @@ class Editor extends Component {
 
     if (this.state.mode === "PLAY") {
       // Normal game tick.
-      this.state.game.update(dt);
+      game.update(dt);
     } else {
       this.handleKeys();
-      this.state.game.updateRenderOnly(dt);
+      game.updateRenderOnly(dt);
+      game.updatePost(dt);
     }
     requestAnimationFrame(this.tick);
   }

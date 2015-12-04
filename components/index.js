@@ -1,12 +1,14 @@
 import KeyController from "../components/KeyController";
 import KeyShooter from "../components/KeyShooter";
 import State from "../components/State";
+import Move from "../components/Move";
 import Wander from "../components/Wander";
 import MoveTowards from "../components/MoveTowards";
 import Renderer from "./Renderer";
 import Life from "../components/Life";
 import Damage from "../components/Damage";
 import LifeRenderer from "../components/LifeRenderer";
+import BorderRenderer from "../components/BorderRenderer";
 import ClickRegener from "../components/ClickRegener";
 import Spawner from "../components/Spawner";
 import ColorChange from "../components/ColorChange";
@@ -20,11 +22,13 @@ export default {
   KeyController,
   KeyShooter,
   State,
+  Move,
   Wander,
   MoveTowards,
   Renderer,
   Life,
   LifeRenderer,
+  BorderRenderer,
   Damage,
   ClickRegener,
   Spawner,

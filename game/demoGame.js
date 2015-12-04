@@ -12,7 +12,8 @@ export default {
           ["KeyShooter", "bullet", 0.15],
           ["Player"],
           ["Renderer", "", "p1_jump.png", true],
-          ["MapCollider", "level"]
+          ["MapCollider", "level"],
+          ["BorderRenderer"]
         ]
       },
       {
@@ -20,7 +21,7 @@ export default {
         pos: [20, 20, 18, 18, 6],
         prefab: true,
         comps: [
-          ["FlyRight"],
+          ["Move"],
           ["Life", 2],
           ["Renderer", "#ffff00", "", true]
         ]
@@ -36,7 +37,8 @@ export default {
           ["LifeRenderer"],
           ["Wander", 2],
           ["MoveTowards", "player", 1],
-          ["Renderer", "", "p3_duck.png", true]
+          ["Renderer", "", "p3_duck.png", true],
+          ["BorderRenderer"]
         ]
       },
       // Ghost spawner
