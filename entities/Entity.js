@@ -7,11 +7,19 @@ class Entity {
     return Env.game.entities.find(e => e.name === name);
   }
 
+  static position (e, x, y) {
+    if (x === null) { return; }
+    const pos = e.getComponent("Position");
+    pos.x = x;
+    pos.y = y;
+    return e;
+  }
+
   constructor (name, x = 0, y = 0, w = 32, h = 32, z = 5) {
     this.name = name;
     this.components = [];
 
-    // Adding Position by default... not sure that's a good idea.
+    // Adding Position by default.
     // not all entities need a position (but it could be good for displaying
     // in a game editor)
     this.addComponent(new Position(x, y, w, h, z));

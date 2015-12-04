@@ -25,6 +25,7 @@ class Editor extends Component {
 
     this.state = {
       game: null,
+      gameData: GameData,
       selected: null,
       mode: "PLAY",
       sidebarTab: "ents",
@@ -49,6 +50,16 @@ class Editor extends Component {
       this.state.game.update(0);
       this.onTogglePlay();
     });
+  }
+
+  onLoadGame = (name) => {
+    fetch(`./game/${name}.json`)
+      .then(r => r.json())
+      .then(json => {
+        Env.game.gameData = json.scenes[json.initial];
+        Env.game.loadScene(json.scenes[json.initial]);
+      })
+      .catch(err => console.warn(err));
   }
 
   componentDidMount () {
@@ -159,7 +170,9 @@ class Editor extends Component {
   }
 
   tick (time) {
-    const dt = this.lastTime ? time - this.lastTime : 1000 / 60;
+    const rawDt = this.lastTime ? time - this.lastTime : 1000 / 60;
+    const dt = Math.min(1000/30, rawDt);
+
     this.lastTime = time;
 
     // Enter to toggle play mode.
@@ -230,10 +243,11 @@ class Editor extends Component {
     const {game, selected} = this.state;
     const newEntity = game.addPrefabFromInstance(selected);
     newEntity.serialize = true; //TODO: better seriealize=true!
-    const newPos = newEntity.getComponent("Position");
     const pos = selected.getComponent("Position");
-    newPos.x = pos.x + pos.w;
-    newPos.y = pos.y - (pos.h / 2) | 0;
+    Entity.position(
+      newEntity,
+      pos.x + pos.w,
+      pos.y - (pos.h / 2) | 0);
 
     this.onSelectEntity(newEntity);
   }
@@ -261,7 +275,8 @@ class Editor extends Component {
         onNewGame={this.onNewGame}
         onTogglePlay={this.onTogglePlay}
         onPausePlay={this.onPausePlay}
-        onAddNewEntity={this.onAddNewEntity} />
+        onAddNewEntity={this.onAddNewEntity}
+        onLoadGame={this.onLoadGame} />
 
       <div className="main">
         <SideBar

@@ -23,6 +23,7 @@ class Game {
 
     this.container = container;
     this.entities = [];
+    this.running = false;
     this.tick = this.tick.bind(this);
   }
 
@@ -69,7 +70,12 @@ class Game {
   }
 
   start () {
+    this.running = true;
     requestAnimationFrame(this.tick);
+  }
+
+  stop () {
+    this.running = false;
   }
 
   tick (time) {
@@ -210,14 +216,6 @@ class Game {
     return Entity.find(name);
   }
 
-  positionEntity (e, x, y) {
-    if (x === null) { return; }
-    const pos = e.getComponent("Position");
-    pos.x = x;
-    pos.y = y;
-    return e;
-  }
-
   // Called from Entity constructor to push component start functions
   addStartFunction (f) {
     this.componentStartsToAdd.push(f);
@@ -235,7 +233,7 @@ class Game {
   // Used in components to create from game data (see KeyShooter -> "bullet")
   addPrefabFromName (name, x, y) {
     const entity = this.createPrefabFromName(name);
-    return this.positionEntity(
+    return Entity.position(
       this.addEntity(entity),
       x,
       y);
@@ -243,7 +241,7 @@ class Game {
 
   addPrefabFromInstance (e, x, y) {
     const entity = Entities.instanciate(e);
-    return this.positionEntity(
+    return Entity.position(
       this.addEntity(entity),
       x,
       y);
