@@ -43,6 +43,7 @@ class GridIt extends Component {
   }
 
   getTileFromPixel (x, y) {
+    // FIXME: not considering this elements offset
     return this.map[(y / this.tileH | 0) * this.w + (x / this.tileW | 0)];
   }
 

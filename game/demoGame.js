@@ -6,12 +6,13 @@ export default {
       name: "scene 1",
       entities: [{
         name: "player",
-        pos: [50, 150, 67, 94, 10],
+        pos: [71, 150, 67, 94, 10],
         comps: [
           ["KeyController"],
           ["KeyShooter", "bullet", 0.15],
           ["Player"],
-          ["Renderer", "", "p1_jump.png", true]
+          ["Renderer", "", "p1_jump.png", true],
+          ["MapCollider", "level"]
         ]
       },
       {
@@ -67,7 +68,7 @@ export default {
       {
         name: "box1",
         prefab: true,
-        pos:[0, -70, 70, 70, 0],
+        pos:[0, -70, 32, 32, 0],
         comps: [
           ["Renderer", "", "sandCenter.png"]
         ]
@@ -75,7 +76,7 @@ export default {
       {
         name: "box2",
         prefab: true,
-        pos:[70, -70, 70, 70, 0],
+        pos:[70, -70, 32, 32, 0],
         comps: [
           ["Renderer", "", "castleCenter.png"]
         ]
@@ -83,7 +84,7 @@ export default {
       {
         name: "box3",
         prefab: true,
-        pos:[140, -70, 70, 70, 0],
+        pos:[140, -70, 32, 32, 0],
         comps: [
           ["Renderer", "", "snowCenter.png"]
         ]
@@ -93,7 +94,7 @@ export default {
         name: "level",
         pos:[0, 0, 770, 420, 0],
         comps: [
-          ["GridIt", ["box1", "box2", "box3"], 11, 6]
+          ["GridIt", ["box1", "box2", "box3"]]
         ]
       }]
     }
