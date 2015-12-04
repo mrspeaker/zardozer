@@ -13,7 +13,7 @@ export default {
           ["Player"],
           ["Renderer", "", "p1_jump.png", true],
           ["MapCollider", "level"],
-          ["BorderRenderer"]
+          //["BorderRenderer"]
         ]
       },
       {
@@ -38,7 +38,7 @@ export default {
           ["Wander", 2],
           ["MoveTowards", "player", 1],
           ["Renderer", "", "p3_duck.png", true],
-          ["BorderRenderer"]
+          //["BorderRenderer"]
         ]
       },
       // Ghost spawner

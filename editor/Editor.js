@@ -185,15 +185,15 @@ class Editor extends Component {
       this.onPausePlay();
     }
 
-
     if (this.state.mode === "PLAY") {
       // Normal game tick.
       game.update(dt);
     } else {
       this.handleKeys();
       game.updateRenderOnly(dt);
-      game.updatePost(dt);
+      game.updatePost(dt, Keys.pressed(13));
     }
+
     requestAnimationFrame(this.tick);
   }
 

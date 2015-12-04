@@ -12,7 +12,8 @@ class KeyShooter extends Component {
     repeat: "Number"
   };
 
-  direction = 1;
+  xDir = 1;
+  yDir = 0;
 
   constructor (bullet, repeat = 0.1) {
     super();
@@ -26,10 +27,17 @@ class KeyShooter extends Component {
     if (!this.enabled) { return; }
     this.time += dt;
 
-    if (Keys.isDown(37)) { this.direction = 0; }
-    if (Keys.isDown(39)) { this.direction = 1; }
-    if (Keys.isDown(38)) { this.direction = 2; }
-    if (Keys.isDown(40)) { this.direction = 3; }
+    let xo = 0;
+    let yo = 0;
+    if (Keys.isDown(37)) { xo = -1; }
+    if (Keys.isDown(39)) { xo = 1; }
+    if (Keys.isDown(38)) { yo = -1; }
+    if (Keys.isDown(40)) { yo = 1; }
+
+    if (xo || yo) {
+      this.xDir = xo;
+      this.yDir = yo;
+    }
 
     if (!Keys.isDown(32) || this.time < this.repeat) {
       return;
@@ -37,16 +45,14 @@ class KeyShooter extends Component {
     this.time = 0;
 
     const {x, y, w, h} = this.deps.Position;
-    const dir = this.direction;
+    const {xDir, yDir} = this;
     const b = Env.game.addPrefabFromInstance(this.bullet);
     const bPos = b.getComponent("Position");
     const bMove = b.getComponent("Move");
-    if (dir < 2) {
-      bMove.xSpeed = (dir === 0 ? -1 : 1) * 5;
-    } else {
-      bMove.ySpeed = (dir === 2 ? -1 : 1) * 5;
-    }
-    bPos.x = x + (this.direction * ((w / 2) - bPos.w));
+    bMove.xSpeed = xDir * 5;
+    bMove.ySpeed = yDir * 5;
+
+    bPos.x = x + (this.xDir * ((w / 2) - bPos.w));
     bPos.y = y + (h / 2) - (h / 2);
   }
 

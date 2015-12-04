@@ -9,7 +9,7 @@ class Renderer extends Component {
     color: "Color",
     image: "Image",
     shadow: "Boolean",
-    opacity: Number
+    opacity: "Number"
   };
 
   _lastColor;
@@ -43,10 +43,6 @@ class Renderer extends Component {
     const {_lastColor, _lastImage, _lastEnabled, _lastOpacity, _lastW, _lastH} = this;
     const pos = this.deps.Position;
 
-    if (!dom) {
-      console.warn("no dom", this.entity);
-      return;
-    }
     const {x, y, w, h, z} = pos;
     if (_lastColor !== color) {
       dom.style.backgroundColor = color;

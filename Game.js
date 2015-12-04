@@ -95,6 +95,7 @@ class Game {
     switch(state) {
     case "INIT":
       this.state.setState("RUNNING");
+      this.updatePost(dt); // TODO: break out key handling!
       break;
     case "LOADING":
       // load level
