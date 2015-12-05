@@ -1,5 +1,6 @@
 import KeyController from "../components/KeyController";
 import KeyShooter from "../components/KeyShooter";
+import KeyTwinStickShooter from "../components/KeyTwinStickShooter";
 import State from "../components/State";
 import Move from "../components/Move";
 import Wander from "../components/Wander";
@@ -21,6 +22,7 @@ import MapCollider from "../components/MapCollider";
 export default {
   KeyController,
   KeyShooter,
+  KeyTwinStickShooter,
   State,
   Move,
   Wander,

@@ -9,7 +9,7 @@ export default {
         pos: [71, 150, 67, 94, 10],
         comps: [
           ["KeyController"],
-          ["KeyShooter", "bullet", 0.15],
+          ["KeyTwinStickShooter", "bullet", 0.15],
           ["Player"],
           ["Renderer", "", "p1_jump.png", true],
           ["MapCollider", "level"],
