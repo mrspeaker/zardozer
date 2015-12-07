@@ -13,7 +13,7 @@ class Keys {
   init () {
     $(Env.game.container).on("keydown", e => {
       const {which} = e;
-      if (which === 8) {
+      if ([8, 37, 38, 39, 40, 32].indexOf(which) !== -1) {
         e.preventDefault();
       }
 

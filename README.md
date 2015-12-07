@@ -108,6 +108,7 @@ Deserializing is done by Game.js in `loadScene` (loads everything in GameData.js
 
 ### TODOs
 
+* creating a blank entity without img gets selection messed up.
 * stopping resets entities, so selection is sidebar is invalid
 * Array params... how should they work in editor?
 * dump game to json / allow import from json / localstorage

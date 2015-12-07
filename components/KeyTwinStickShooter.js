@@ -30,7 +30,7 @@ class KeyTwinStickShooter extends Component {
     let xo = 0;
     let yo = 0;
     if (Keys.isDown(65)) { xo = -1; }
-    if (Keys.isDown(68)) { xo = 1; }
+    if (Keys.isDown(68) || Keys.isDown(32)) { xo = 1; }
     if (Keys.isDown(87)) { yo = -1; }
     if (Keys.isDown(83)) { yo = 1; }
 
