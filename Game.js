@@ -289,6 +289,10 @@ class Game {
       e.name += "-" + e.id;
     }
     this.entitiesToAdd.push(e);
+
+    e.children.forEach(c => {
+      this.addEntity(c)
+    });
     return e;
   }
 

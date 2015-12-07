@@ -13,7 +13,16 @@ export default {
           ["Player"],
           ["Renderer", "", "p1_jump.png", true],
           ["MapCollider", "level"],
-          //["BorderRenderer"]
+        ],
+        children: [{
+          name: "bulletkid",
+          pos: [120, 120, 18, 18, 6],
+          comps: [
+            ["Move"],
+            ["Life", 2],
+            ["Renderer", "#ff0f0f", "", true],
+            ["BorderRenderer"]
+          ]}
         ]
       },
       {

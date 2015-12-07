@@ -3,6 +3,10 @@ import Position from "../components/Position";
 
 class Entity {
 
+  parent = null;
+  children = [];
+  components = [];
+
   static find = (name) => {
     return Env.game.entities.find(e => e.name === name);
   }
@@ -15,14 +19,28 @@ class Entity {
     return e;
   }
 
+  add (e) {
+    e.parent = this;
+    this.children.push(e);
+  }
+
+  remove (e) {
+    e.parent = null;
+    this.children = this.children.filter(c => c === e);
+  }
+
+  position (x, y) {
+    Entity.position(this, x, y);
+  }
+
   constructor (name, x = 0, y = 0, w = 32, h = 32, z = 5) {
     this.name = name;
-    this.components = [];
 
     // Adding Position by default.
     // not all entities need a position (but it could be good for displaying
     // in a game editor)
     this.addComponent(new Position(x, y, w, h, z));
+    this.position(x, y);
 
     this.remove = false;
   }

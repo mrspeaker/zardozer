@@ -59,7 +59,7 @@ class Renderer extends Component {
       if (!image) {
         dom.style.backgroundImage = "";
       } else if (Env.images.find(i => i === image)) {
-        dom.style.backgroundImage = `url(../assets/images/${image})`;
+        dom.style.backgroundImage = `url(../../assets/images/${image})`;
       }
       this._lastImage = image;
       // Circl-y if no image.

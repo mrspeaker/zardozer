@@ -1,25 +1,28 @@
-import KeyController from "../components/KeyController";
-import KeyShooter from "../components/KeyShooter";
-import KeyTwinStickShooter from "../components/KeyTwinStickShooter";
-import State from "../components/State";
-import Move from "../components/Move";
-import Wander from "../components/Wander";
-import MoveTowards from "../components/MoveTowards";
 import Renderer from "./Renderer";
-import Life from "../components/Life";
-import Damage from "../components/Damage";
-import LifeRenderer from "../components/LifeRenderer";
-import BorderRenderer from "../components/BorderRenderer";
-import ClickRegener from "../components/ClickRegener";
-import Spawner from "../components/Spawner";
-import ColorChange from "../components/ColorChange";
-import MoveSine from "../components/MoveSine";
-import FlyRight from "../components/FlyRight";
-import Player from "../components/Player";
-import GridIt from "../components/GridIt";
-import MapCollider from "../components/MapCollider";
+import LifeRenderer from "./LifeRenderer";
+import BorderRenderer from "./BorderRenderer";
+import KeyController from "./KeyController";
+import KeyShooter from "./KeyShooter";
+import KeyTwinStickShooter from "./KeyTwinStickShooter";
+import State from "./State";
+import Move from "./Move";
+import Wander from "./Wander";
+import MoveTowards from "./MoveTowards";
+import Life from "./Life";
+import Damage from "./Damage";
+import ClickRegener from "./ClickRegener";
+import Spawner from "./Spawner";
+import ColorChange from "./ColorChange";
+import MoveSine from "./MoveSine";
+import FlyRight from "./FlyRight";
+import Player from "./Player";
+import GridIt from "./GridIt";
+import MapCollider from "./MapCollider";
 
 export default {
+  Renderer,
+  BorderRenderer,
+  LifeRenderer,
   KeyController,
   KeyShooter,
   KeyTwinStickShooter,
@@ -27,10 +30,7 @@ export default {
   Move,
   Wander,
   MoveTowards,
-  Renderer,
   Life,
-  LifeRenderer,
-  BorderRenderer,
   Damage,
   ClickRegener,
   Spawner,

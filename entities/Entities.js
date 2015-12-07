@@ -12,6 +12,14 @@ const make = (data, needsSerializing = false) => {
     }
   }
   data.comps.forEach(c => addComponent(entity, c));
+
+  // Add any children
+  if (data.children) {
+    entity.children = data.children.map(c => {
+      return make(c, needsSerializing);
+    });
+  }
+
   return entity;
 };
 
