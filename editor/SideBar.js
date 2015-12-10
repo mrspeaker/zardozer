@@ -1,5 +1,6 @@
 import React from "react";
 import Entity from "./Entity";
+import Entities from "./Entities";
 
 const {
   Component
@@ -33,14 +34,7 @@ class SideBar extends Component {
       </div>
       <div className="sidebarContent">
         {tab === "ent" && <Entity entity={selected} onDuplicate={this.props.onDuplicate} />}
-        {tab === "ents" && <div>
-          <strong>Active entities: {entities.length}</strong>
-          {entities.map((e, i) => {
-            return e === selected ?
-              <strong key={"sel-" + i} ><div onClick={() => this.onEntitySelect(e)}>{e.name}</div></strong>:
-              <div key={"sel-" + i} onClick={() => this.onEntitySelect(e)}>{e.name}</div>;
-          })}
-        </div>}
+        {tab === "ents" && <Entities entities={entities} selected={selected} />}
       </div>
     </div>;
   }

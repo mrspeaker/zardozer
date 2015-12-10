@@ -1,4 +1,5 @@
 import Renderer from "./Renderer";
+import WebGLRenderer from "./WebGLRenderer";
 import LifeRenderer from "./LifeRenderer";
 import BorderRenderer from "./BorderRenderer";
 import KeyController from "./KeyController";
@@ -21,6 +22,7 @@ import MapCollider from "./MapCollider";
 
 export default {
   Renderer,
+  WebGLRenderer,
   BorderRenderer,
   LifeRenderer,
   KeyController,

@@ -5,6 +5,8 @@ import Entity from "./entities/Entity";
 import Env from "./Env";
 import State from "./components/State";
 
+import WebGLRenderer from "./systems/WebGLRenderer";
+
 class Game {
 
   _resetGame = false;
@@ -25,6 +27,8 @@ class Game {
     this.entities = [];
     this.running = false;
     this.tick = this.tick.bind(this);
+
+    this.renderer = new WebGLRenderer();
   }
 
   init (gameData) {
@@ -67,6 +71,10 @@ class Game {
     data.entities
       .map(data => Entities.make(data, true))
       .map(e => this.addEntity(e));
+
+    this.renderer.onLoad(res => {
+      console.log("Loaded res:", res);
+    });
   }
 
   start () {
@@ -117,6 +125,8 @@ class Game {
       console.error("Bad state:", state);
       break;
     }
+
+    this.renderer.update(dt);
   }
 
   updateRunning (dt) {

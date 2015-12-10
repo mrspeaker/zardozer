@@ -12,6 +12,7 @@ export default {
           ["KeyTwinStickShooter", "bullet", 0.15],
           ["Player"],
           ["Renderer", "", "p1_jump.png", true],
+          ["WebGLRenderer", "gree", "jump", "p1_jump.png", true],
           ["MapCollider", "level"],
         ],
         children: [{
