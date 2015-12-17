@@ -152,7 +152,8 @@ class Game {
     if (this.state.frame === 2) {
       this.entities.forEach(e => {
         if (e.isPrefab) {
-          const rend = e.getComponent("Renderer");
+          // TODO: fix render system to have same api.
+          const rend = e.getComponent("DOMRenderer") || e.getComponent("Renderer");
           rend.enabled = false;
           rend.update(0);
         }
@@ -304,7 +305,7 @@ class Game {
     this.entitiesToAdd.push(e);
 
     e.children.forEach(c => {
-      this.addEntity(c)
+      this.addEntity(c);
     });
     return e;
   }

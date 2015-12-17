@@ -2,12 +2,12 @@ import Component from "./Component";
 
 class LifeRenderer extends Component {
 
-  static deps = ["Renderer", "Life"];
+  static deps = ["documentRenderer", "Life"];
 
   update () {
-    const {Renderer, Life} = this.deps;
-    if (!Renderer) { return; }
-    Renderer.dom.textContent = Math.floor(Life.time * 10);
+    const {DOMRenderer, Life} = this.deps;
+    if (!DOMRenderer) { return; }
+    DOMRenderer.dom.textContent = Math.floor(Life.time * 10);
   }
 
 }

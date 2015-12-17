@@ -11,8 +11,8 @@ export default {
           ["KeyController"],
           ["KeyTwinStickShooter", "bullet", 0.15],
           ["Player"],
-          ["Renderer", "", "p1_jump.png", true],
-          ["WebGLRenderer", "", "jump", "p1_jump.png", 1],
+          ["DOMRenderer", "", "p1_jump.png", true],
+          ["Renderer", "", "jump", "p1_jump.png", 1],
           ["MapCollider", "level"],
         ],
         children: [{
@@ -21,7 +21,7 @@ export default {
           comps: [
             ["Move"],
             ["Life", 2],
-            ["Renderer", "#ff0f0f", "", true],
+            ["DOMRenderer", "#ff0f0f", "", true],
             ["BorderRenderer"]
           ]}
         ]
@@ -33,8 +33,8 @@ export default {
         comps: [
           ["Move"],
           ["Life", 2],
-          ["Renderer", "#ffff00", "", true],
-          ["WebGLRenderer", "", "bullet", "spaceMonster1.png", 1]
+          ["DOMRenderer", "#ffff00", "", true],
+          ["Renderer", "", "bullet", "spaceMonster1.png", 1]
         ]
       },
       {
@@ -48,8 +48,8 @@ export default {
           ["LifeRenderer"],
           ["Wander", 2],
           ["MoveTowards", "player", 1],
-          ["Renderer", "", "p3_duck.png", true],
-          ["WebGLRenderer", "", "ghost", "p3_duck.png", 1]
+          ["DOMRenderer", "", "p3_duck.png", true],
+          ["Renderer", "", "ghost", "p3_duck.png", 1]
           //["BorderRenderer"]
         ]
       },
@@ -60,7 +60,7 @@ export default {
         pos: [290, 120, 32, 32, 1],
         comps: [
           ["Damage", 6],
-          ["Renderer", "#222222", "", true],
+          ["DOMRenderer", "#222222", "", true],
           ["Spawner", "ghost", 0.9, 1]
         ]
       },
@@ -70,8 +70,8 @@ export default {
         pos: [150, 80, 70, 70, 11],
         comps: [
           ["Spawner", "spawner", 1.9],
-          ["Renderer", "", "tochLit.png", true, 0.7],
-          ["WebGLRenderer", "", "torch", "tochLit.png", 1],
+          ["DOMRenderer", "", "tochLit.png", true, 0.7],
+          ["Renderer", "", "torch", "tochLit.png", 1],
           ["MoveSine", "x", 0.7, 4],
           ["MoveSine", "y", 0.3, 2],
           ["MoveSine", "y", 0.4, 2],
@@ -85,8 +85,8 @@ export default {
         prefab: true,
         pos:[0, -70, 32, 32, 0],
         comps: [
-          ["Renderer", "", "sandCenter.png"],
-          ["WebGLRenderer", "", "box1", "sandCenter.png", 1]
+          ["DOMRenderer", "", "sandCenter.png"],
+          ["Renderer", "", "box1", "sandCenter.png", 1]
         ]
       },
       {
@@ -94,8 +94,8 @@ export default {
         prefab: true,
         pos:[70, -70, 32, 32, 0],
         comps: [
-          ["Renderer", "", "castleCenter.png"],
-          ["WebGLRenderer", "", "box2", "castleCenter.png", 1]
+          ["DOMRenderer", "", "castleCenter.png"],
+          ["Renderer", "", "box2", "castleCenter.png", 1]
         ]
       },
       {
@@ -103,8 +103,8 @@ export default {
         prefab: true,
         pos:[140, -70, 32, 32, 0],
         comps: [
-          ["Renderer", "", "snowCenter.png"],
-          //["WebGLRenderer", "", "box3", "snowCenter.png", 1]
+          ["DOMRenderer", "", "snowCenter.png"],
+          //["Renderer", "", "box3", "snowCenter.png", 1]
         ]
       },
       // Background - uses the box prefabs to make a grid
