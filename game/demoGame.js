@@ -12,7 +12,7 @@ export default {
           ["KeyTwinStickShooter", "bullet", 0.15],
           ["Player"],
           ["Renderer", "", "p1_jump.png", true],
-          ["WebGLRenderer", "gree", "jump", "p1_jump.png", true],
+          ["WebGLRenderer", "", "jump", "p1_jump.png", 1],
           ["MapCollider", "level"],
         ],
         children: [{
@@ -33,7 +33,8 @@ export default {
         comps: [
           ["Move"],
           ["Life", 2],
-          ["Renderer", "#ffff00", "", true]
+          ["Renderer", "#ffff00", "", true],
+          ["WebGLRenderer", "", "bullet", "spaceMonster1.png", 1]
         ]
       },
       {
@@ -48,6 +49,7 @@ export default {
           ["Wander", 2],
           ["MoveTowards", "player", 1],
           ["Renderer", "", "p3_duck.png", true],
+          ["WebGLRenderer", "", "ghost", "p3_duck.png", 1]
           //["BorderRenderer"]
         ]
       },
@@ -69,6 +71,7 @@ export default {
         comps: [
           ["Spawner", "spawner", 1.9],
           ["Renderer", "", "tochLit.png", true, 0.7],
+          ["WebGLRenderer", "", "torch", "tochLit.png", 1],
           ["MoveSine", "x", 0.7, 4],
           ["MoveSine", "y", 0.3, 2],
           ["MoveSine", "y", 0.4, 2],
@@ -82,7 +85,8 @@ export default {
         prefab: true,
         pos:[0, -70, 32, 32, 0],
         comps: [
-          ["Renderer", "", "sandCenter.png"]
+          ["Renderer", "", "sandCenter.png"],
+          ["WebGLRenderer", "", "box1", "sandCenter.png", 1]
         ]
       },
       {
@@ -90,7 +94,8 @@ export default {
         prefab: true,
         pos:[70, -70, 32, 32, 0],
         comps: [
-          ["Renderer", "", "castleCenter.png"]
+          ["Renderer", "", "castleCenter.png"],
+          ["WebGLRenderer", "", "box2", "castleCenter.png", 1]
         ]
       },
       {
@@ -98,7 +103,8 @@ export default {
         prefab: true,
         pos:[140, -70, 32, 32, 0],
         comps: [
-          ["Renderer", "", "snowCenter.png"]
+          ["Renderer", "", "snowCenter.png"],
+          //["WebGLRenderer", "", "box3", "snowCenter.png", 1]
         ]
       },
       // Background - uses the box prefabs to make a grid

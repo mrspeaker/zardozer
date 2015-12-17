@@ -3,27 +3,12 @@ const {PIXI} = window;
 
 class WebGLRenderer extends SystemComponent {
 
-  initLoadComplete = false;
-
   constructor () {
     super();
 
     this.renderer = new PIXI.WebGLRenderer(800, 600);
     this.stage = new PIXI.Container();
     document.body.appendChild(this.renderer.view);
-
-    // Load assets?
-    /*
-    PIXI.loader
-      .add('bunny', 'assets/images/grass.png')
-      .load((loader, resources) => {
-        const bunny = new PIXI.Sprite(resources.bunny.texture);
-
-        bunny.position.x = 400;
-        bunny.position.y = 300;
-
-        this.stage.addChild(bunny);
-      });*/
   }
 
   onLoad (cb) {
@@ -36,6 +21,10 @@ class WebGLRenderer extends SystemComponent {
 
   add (e) {
     this.stage.addChild(e);
+  }
+
+  remove (e) {
+    this.stage.removeChild(e);
   }
 
   update () {

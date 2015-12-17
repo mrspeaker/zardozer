@@ -73,7 +73,7 @@ class Game {
       .map(e => this.addEntity(e));
 
     this.renderer.onLoad(res => {
-      console.log("Loaded res:", res);
+      this.renderer.update(0);
     });
   }
 
@@ -118,6 +118,9 @@ class Game {
       this.updatePost(dt);
       break;
     case "RUNNING":
+      if (this.state.first) {
+        //
+      }
       this.updateRunning(dt);
       this.updatePost(dt);
       break;
