@@ -17,8 +17,15 @@ class WebGLRenderer extends SystemComponent {
     PIXI.loader.load((loader, resources) => cb(resources));
   }
 
-  load (name, path) {
-    PIXI.loader.add(name, path);
+  loadAsset (name, path) {
+    if (PIXI.loader.resources[name]) {
+      return;
+    }
+    PIXI.loader.add(name, `../../assets/images/${path}`);
+  }
+
+  loadAssets (assetMap) {
+    assetMap.forEach((path, name) => this.loadAsset(name, path));
   }
 
   add (e) {
@@ -49,6 +56,15 @@ class WebGLRenderer extends SystemComponent {
       s.position.y = y;
     });
     this.renderer.render(this.stage);
+  }
+
+  zSort () {
+    console.log("zsort. sprite len:", this.sprites.length);
+    this.stage.children.sort((a, b) => {
+      const z1 = a._entity.deps.Position.z;
+      const z2 = b._entity.deps.Position.z;
+      return z1 - z2;
+    });
   }
 }
 
