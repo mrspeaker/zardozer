@@ -68,22 +68,35 @@ class Game {
   }
 
   loadScene (data) {
-    // Load assets...
-    const assets = data.entities.reduce((a, e) => {
-      e.comps
-        .filter(c => c[0] === "Renderer")
-        .map(i => [i[2], i[3]])
-        .forEach(([name, path]) => a.set(name, path));
-      return a;
-    }, new Map());
-    this.renderer.loadAssets(assets);
-    this.renderer.onLoad(() => {
-      this.renderer.update(0);
-    });
 
-    data.entities
-      .map(data => Entities.make(data, true))
-      .map(e => this.addEntity(e));
+    const loadEntities = (es, parent) => {
+      // Load assets...
+      const assets = es.reduce((a, e) => {
+        e.comps
+          .filter(c => c[0] === "Renderer")
+          .map(i => [i[2], i[3]])
+          .forEach(([name, path]) => a.set(name, path));
+        return a;
+      }, new Map());
+      this.renderer.loadAssets(assets);
+
+      es
+        .map(data => {
+          const e = Entities.make(data, true);
+          if (data.children) {
+            console.log("now kids", data.children);
+            loadEntities(data.children, e);
+          }
+          return e;
+        })
+        .map(e => this.addEntity(e));
+
+      this.renderer.onLoad(() => {
+        this.renderer.update(0);
+      });
+    };
+
+    loadEntities(data.entities);
   }
 
   start () {

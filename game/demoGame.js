@@ -5,6 +5,18 @@ export default {
     "scene 1": {
       name: "scene 1",
       entities: [{
+        name: "background",
+        pos:[0, 0, 0, 0, 10],
+        comps: [],
+        children: [{
+          name: "bulleto",
+          pos: [420, 120, 18, 18, 6],
+          comps: [
+            ["DOMRenderer", "#f00f00", "", true],
+            ["Renderer", "", "bullet", "spaceMonster1.png", 1]
+          ]
+        }]},
+      {
         name: "player",
         pos: [71, 150, 67, 94, 10],
         comps: [
