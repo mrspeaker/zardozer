@@ -26,7 +26,7 @@ class Renderer extends Component {
 
   start () {
     super.start();
-    this.ref = this.renderer.add(this);
+    this.ref = this.renderer.add(this, this.entity.parent);
   }
 
   remove () {

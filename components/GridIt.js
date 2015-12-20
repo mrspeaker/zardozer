@@ -30,7 +30,8 @@ class GridIt extends Component {
         }
         const prefab = this.prefabs[prefabIndex];
         // Could do this by name, not instance! What's better?
-        Env.game.addPrefabFromInstance(prefab, x + (i * tileW), y + (j * tileH));
+        const e = Env.game.addPrefabFromInstance(prefab, x + (i * tileW), y + (j * tileH));
+        e.parent = this.entity.parent;
         this.map.push(prefabIndex);
       }
     }

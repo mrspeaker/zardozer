@@ -68,23 +68,21 @@ class Game {
   }
 
   loadScene (data) {
-
-    const loadEntities = (es, parent) => {
-      // Load assets...
-      const assets = es.reduce((a, e) => {
+    const loadEntities = (ents, parent) => {
+      const assets = ents.reduce((a, e) => {
         e.comps
           .filter(c => c[0] === "Renderer")
+          .filter(i => !!i[2]) // filter out containers
           .map(i => [i[2], i[3]])
           .forEach(([name, path]) => a.set(name, path));
         return a;
       }, new Map());
       this.renderer.loadAssets(assets);
 
-      es
+      ents
         .map(data => {
-          const e = Entities.make(data, true);
+          const e = Entities.make(data, true, parent);
           if (data.children) {
-            console.log("now kids", data.children);
             loadEntities(data.children, e);
           }
           return e;
@@ -141,7 +139,7 @@ class Game {
       break;
     case "RUNNING":
       if (this.state.first) {
-        this.renderer.zSort();
+        //this.renderer.zSort();
       }
       this.updateRunning(dt);
       this.updatePost(dt);
@@ -286,6 +284,7 @@ class Game {
 
   // Move Entity creation functions to Entity static methods
 
+  // todo: parent?
   createPrefabFromName (name) {
     const data = this.gameData.entities.find(e => e.name === name);
     const entity = Entities.make(data);
@@ -293,6 +292,7 @@ class Game {
   }
 
   // Used in components to create from game data (see KeyShooter -> "bullet")
+  // todo: parent?
   addPrefabFromName (name, x, y) {
     const entity = this.createPrefabFromName(name);
     return Entity.position(
@@ -301,6 +301,7 @@ class Game {
       y);
   }
 
+  // todo: parent?
   addPrefabFromInstance (e, x, y) {
     const entity = Entities.instanciate(e);
     return Entity.position(
@@ -309,6 +310,7 @@ class Game {
       y);
   }
 
+  // todo: parent?
   addBlankEntity () {
     // Should use helper method / data style. Always force this?
     const e = new Entity("entity", 50, 50, 69, 71, 5);
@@ -316,6 +318,7 @@ class Game {
     return this.addEntity(e);
   }
 
+  // todo: parent?
   addEntity (e) {
     if (!e.id) {
       e.id = this.entityId++;

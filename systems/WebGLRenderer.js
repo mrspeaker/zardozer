@@ -28,14 +28,29 @@ class WebGLRenderer extends SystemComponent {
     assetMap.forEach((path, name) => this.loadAsset(name, path));
   }
 
-  add (e) {
-    const sprite = new PIXI.Sprite(PIXI.loader.resources[e.assetName].texture);
-    sprite.position.x = Math.random() * 50;
-    sprite.position.y = Math.random() * 20;
+  add (e, parent) {
+    let sprite;
+    if (e.assetName) {
+      sprite = new PIXI.Sprite(PIXI.loader.resources[e.assetName].texture);
+    } else {
+      sprite = new PIXI.Container();
+      sprite.position.x = 20;
+      sprite.position.y = 80;
+    }
 
     sprite._entity = e;
     this.sprites.push(sprite);
-    this.stage.addChild(sprite);
+
+    if (!parent) {
+      // Add to stage
+      sprite._parent = null;
+      this.stage.addChild(sprite);
+    } else {
+      // Add to parent sprite
+      const renderer = parent.getComponent("Renderer");
+      renderer.ref.addChild(sprite);
+      sprite._parent = renderer.ref;
+    }
     return sprite;
   }
 
@@ -44,7 +59,8 @@ class WebGLRenderer extends SystemComponent {
     if (idx >= 0) {
       this.sprites.splice(idx, 1);
     }
-    this.stage.removeChild(e);
+    const parent = e._parent || this.stage;
+    parent.removeChild(e);
   }
 
   update () {
@@ -59,7 +75,6 @@ class WebGLRenderer extends SystemComponent {
   }
 
   zSort () {
-    console.log("zsort. sprite len:", this.sprites.length);
     this.stage.children.sort((a, b) => {
       const z1 = a._entity.deps.Position.z;
       const z2 = b._entity.deps.Position.z;

@@ -1,10 +1,11 @@
 import Entity from "./Entity";
 import components from "../components/";
 
-const make = (data, needsSerializing = false) => {
+const make = (data, needsSerializing = false, parent = null) => {
   const EntityFunc = Function.prototype.bind.call(Entity, null, data.name, ...data.pos);
   const entity = new EntityFunc();
   entity.prefab = data;
+  entity.parent = parent;
   if (needsSerializing) {
     entity.serialize = true;
     if (data.prefab) {
@@ -16,7 +17,7 @@ const make = (data, needsSerializing = false) => {
   // Add any children
   if (data.children) {
     entity.children = data.children.map(c => {
-      return make(c, needsSerializing);
+      return make(c, needsSerializing, entity);
     });
   }
 
