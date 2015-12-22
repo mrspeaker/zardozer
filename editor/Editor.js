@@ -12,6 +12,8 @@ import Entities from "../entities/Entities";
 import Keys from "../controls/Keys";
 import GameData from "../game/demoGame";
 
+import DebugRenderer from "./DebugRenderer";
+
 const {
   Component
 } = React;
@@ -44,6 +46,8 @@ class Editor extends Component {
     this.onEntityDown = this.onEntityDown.bind(this);
     this.onEntityDrag = this.onEntityDrag.bind(this);
     this.onEntityUp = this.onEntityUp.bind(this);
+
+    this.debug = new DebugRenderer(800, 600, document.body);
 
     // Hack: tick one frame of game to start in edit mode.
     requestAnimationFrame(() => {

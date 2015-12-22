@@ -1,5 +1,5 @@
+/* global PIXI:false */
 import SystemComponent from "./SystemComponent";
-const {PIXI} = window;
 
 class WebGLRenderer extends SystemComponent {
 
