@@ -6,6 +6,7 @@ import Env from "./Env";
 import State from "./components/State";
 
 import WebGLRenderer from "./systems/WebGLRenderer";
+import DebugRenderer from "./systems/DebugRenderer";
 
 class Game {
 
@@ -16,6 +17,7 @@ class Game {
   entitiesToAdd;
   componentStarts;
   componentStartsToAdd;
+  systems;
 
   entityId = 1;
   lastTime = 0;
@@ -28,7 +30,10 @@ class Game {
     this.running = false;
     this.tick = this.tick.bind(this);
 
-    this.renderer = new WebGLRenderer();
+    this.systems = {
+      renderer: new WebGLRenderer(800, 350, container),
+      debug: new DebugRenderer(800, 350, container)
+    };
   }
 
   init (gameData) {
@@ -46,13 +51,22 @@ class Game {
   }
   _reset () {
     // Remove all entities and components
-    this.entities = this.entities.filter(e => {
-      e.components = e.components.filter(c => {
-        e.removeComponent(c);
-        return false;
+    const removeEntities = (ents) => {
+      ents.forEach(e => {
+        console.log(e);
+        e.components.forEach(c => {
+          e.removeComponent(c);
+        });
+        e.components.length = 0;
+
+        if (e.children) {
+          removeEntities(e.children);
+        }
       });
-      return false;
-    });
+      ents.length = 0;
+    };
+
+    removeEntities(this.entities);
 
     this.entitiesToAdd = [];
     this.componentStarts = [];
@@ -68,6 +82,7 @@ class Game {
   }
 
   loadScene (data) {
+    const {renderer} = this.systems;
     const loadEntities = (ents, parent) => {
       const assets = ents.reduce((a, e) => {
         e.comps
@@ -77,10 +92,11 @@ class Game {
           .forEach(([name, path]) => a.set(name, path));
         return a;
       }, new Map());
-      this.renderer.loadAssets(assets);
+      renderer.loadAssets(assets);
 
       ents
         .map(data => {
+          console.log(data.name)
           const e = Entities.make(data, true, parent);
           if (data.children) {
             loadEntities(data.children, e);
@@ -89,8 +105,8 @@ class Game {
         })
         .map(e => this.addEntity(e));
 
-      this.renderer.onLoad(() => {
-        this.renderer.update(0);
+      renderer.onLoad(() => {
+        renderer.update(0);
       });
     };
 
@@ -149,7 +165,8 @@ class Game {
       break;
     }
 
-    this.renderer.update(dt);
+    this.systems["renderer"].update(dt);
+    this.systems["debug"].update(dt);
   }
 
   updateRunning (dt) {

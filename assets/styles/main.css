@@ -99,7 +99,7 @@ button {
 .sidebar button.tabNon {
 }
 
-@media screen and (min-width: 600px) {
+/*@media screen and (min-width: 600px) {*/
   .main {
     flex-direction: row-reverse;
     height: 400px;
@@ -116,11 +116,23 @@ button {
     outline: none;
   }
 
+  #game canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #domRenderer {
+    position: relative;
+    width: 800px;
+    height: 600px;
+  }
+
   .sidebar {
     width: 180px;
 
   }
-}
+/*}*/
 
 .entityWithShadow {
   filter: drop-shadow(8px 8px 5px #444);
@@ -150,4 +162,9 @@ button {
   width: 32px;
   height: 32px;
   border:1px solid red;
+}
+
+.debugRenderer {
+  position: absolute;
+  top: 0;
 }

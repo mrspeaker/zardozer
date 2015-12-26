@@ -36,7 +36,8 @@ class DOMRenderer extends Component {
     dom.className = "entity" + (this.shadow ? " entityWithShadow" : "");
     dom.style.position = "absolute";
     dom.setAttribute("data-entity", this.entity.name);
-    Env.game.container.appendChild(dom);
+    //Env.game.container.appendChild(dom);
+    document.querySelector("#domRenderer").appendChild(dom);
     this.dom = dom;
   }
 
@@ -83,7 +84,8 @@ class DOMRenderer extends Component {
 
   remove () {
     if (this.dom) {
-      Env.game.container.removeChild(this.dom);
+      //Env.game.container.removeChild(this.dom);
+      document.querySelector("#domRenderer").removeChild(this.dom);
     }
   }
 

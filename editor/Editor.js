@@ -12,8 +12,6 @@ import Entities from "../entities/Entities";
 import Keys from "../controls/Keys";
 import GameData from "../game/demoGame";
 
-import DebugRenderer from "./DebugRenderer";
-
 const {
   Component
 } = React;
@@ -35,10 +33,6 @@ class Editor extends Component {
     };
 
     this.tick = this.tick.bind(this);
-    this.onNewGame = this.onNewGame.bind(this);
-    this.onTogglePlay = this.onTogglePlay.bind(this);
-    this.onPausePlay = this.onPausePlay.bind(this);
-    this.onAddNewEntity = this.onAddNewEntity.bind(this);
     this.onDuplicate = this.onDuplicate.bind(this);
     this.onSelectEntity = this.onSelectEntity.bind(this);
     this.onSelectTab = this.onSelectTab.bind(this);
@@ -46,8 +40,6 @@ class Editor extends Component {
     this.onEntityDown = this.onEntityDown.bind(this);
     this.onEntityDrag = this.onEntityDrag.bind(this);
     this.onEntityUp = this.onEntityUp.bind(this);
-
-    this.debug = new DebugRenderer(800, 600, document.body);
 
     // Hack: tick one frame of game to start in edit mode.
     requestAnimationFrame(() => {
@@ -83,7 +75,7 @@ class Editor extends Component {
     this.setState({game});
   }
 
-  onTogglePlay () {
+  onTogglePlay = () => {
     const curMode = this.state.mode;
 
     if (curMode === "EDIT") {
@@ -107,7 +99,7 @@ class Editor extends Component {
 
   }
 
-  onPausePlay () {
+  onPausePlay = () => {
     const curMode = this.state.mode;
 
     if (curMode === "PLAY") {
@@ -166,7 +158,7 @@ class Editor extends Component {
     pos.y = e.clientY - (pos.h);
   }
 
-  onNewGame () {
+  onNewGame = () => {
     Env.game.reset(false);
     requestAnimationFrame(() => {
       this.state.game.update(0);
@@ -239,7 +231,7 @@ class Editor extends Component {
     GameData.scenes["scene 1"].entities = serializedData;
   }
 
-  onAddNewEntity () {
+  onAddNewEntity = () => {
     const ent = Env.game.addBlankEntity();
     ent.serialize = true; //TODO: better seriealize=true!
     this.onSelectEntity(ent);

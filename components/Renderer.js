@@ -16,7 +16,7 @@ class Renderer extends Component {
 
   constructor (color = "#800", assetName, image = "", opacity = 1) {
     super();
-    this.renderer = Env.game.renderer;
+    this.renderer = Env.game.systems["renderer"];
     this.enabled = true;
     this.color = color;
     this.assetName = assetName;

@@ -5,12 +5,12 @@ class WebGLRenderer extends SystemComponent {
 
   sprites = [];
 
-  constructor () {
+  constructor (w, h, container) {
     super();
 
-    this.renderer = new PIXI.WebGLRenderer(800, 600);
+    this.renderer = new PIXI.WebGLRenderer(w, h);
     this.stage = new PIXI.Container();
-    document.body.appendChild(this.renderer.view);
+    container.appendChild(this.renderer.view);
   }
 
   onLoad (cb) {
