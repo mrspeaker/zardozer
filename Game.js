@@ -8,6 +8,8 @@ import State from "./components/State";
 import WebGLRenderer from "./systems/WebGLRenderer";
 import DebugRenderer from "./systems/DebugRenderer";
 
+window.Env = Env;
+
 class Game {
 
   _resetGame = false;
@@ -53,7 +55,6 @@ class Game {
     // Remove all entities and components
     const removeEntities = (ents) => {
       ents.forEach(e => {
-        console.log(e);
         e.components.forEach(c => {
           e.removeComponent(c);
         });
@@ -82,35 +83,37 @@ class Game {
   }
 
   loadScene (data) {
-    const {renderer} = this.systems;
-    const loadEntities = (ents, parent) => {
-      const assets = ents.reduce((a, e) => {
+    const { renderer } = this.systems;
+    const allAssets = new Map();
+    const loadAssets = (ents) => {
+      ents.reduce((a, e) => {
         e.comps
           .filter(c => c[0] === "Renderer")
           .filter(i => !!i[2]) // filter out containers
           .map(i => [i[2], i[3]])
           .forEach(([name, path]) => a.set(name, path));
         return a;
-      }, new Map());
-      renderer.loadAssets(assets);
+      }, allAssets);
 
       ents
         .map(data => {
-          console.log(data.name)
-          const e = Entities.make(data, true, parent);
           if (data.children) {
-            loadEntities(data.children, e);
+            loadAssets(data.children);
           }
-          return e;
-        })
-        .map(e => this.addEntity(e));
-
-      renderer.onLoad(() => {
-        renderer.update(0);
-      });
+        });
     };
 
-    loadEntities(data.entities);
+    // Load any img assets in the data
+    loadAssets(data.entities);
+    renderer.loadAssets(allAssets);
+    renderer.onLoad(() => {
+      renderer.update(0);
+    });
+
+    // Make and add entities to the game
+    data.entities
+      .map(data => Entities.make(data, true))
+      .map(e => this.addEntity(e));
   }
 
   start () {
@@ -186,6 +189,7 @@ class Game {
       });
     });
 
+    // TODO: nope... update prefabs on toggle.
     if (this.state.frame === 2) {
       this.entities.forEach(e => {
         if (e.isPrefab) {
@@ -344,6 +348,7 @@ class Game {
     if (sameName) {
       e.name += "-" + e.id;
     }
+    console.log("adding?", e.id, e.name, e.children.length);
     this.entitiesToAdd.push(e);
 
     e.children.forEach(c => {
