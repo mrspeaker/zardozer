@@ -1,4 +1,4 @@
-import $ from "jQuery";
+import $ from "jquery";
 import Env from "../Env";
 
 // Could be regular ol' component?

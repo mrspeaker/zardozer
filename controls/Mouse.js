@@ -1,4 +1,4 @@
-import $ from "jQuery";
+import $ from "jquery";
 
 // Could be regular ol' component?
 

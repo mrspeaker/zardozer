@@ -1,4 +1,4 @@
-import {EventEmitter} from "Events";
+import {EventEmitter} from "events";
 import images from "./assets/images";
 
 const events = new EventEmitter();
